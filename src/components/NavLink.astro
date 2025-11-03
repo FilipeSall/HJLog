@@ -1,0 +1,15 @@
+---
+import type { NavLinkProps } from "../types/components";
+
+export type Props = NavLinkProps;
+
+const { label, path } = Astro.props as Props;
+
+---
+<a href={path}>
+    {
+        typeof label === "string"
+            ? label
+            : <img src={label.src} alt={label.alt} />
+    }
+</a>
