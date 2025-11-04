@@ -1,5 +1,10 @@
 ---
 import Header from "../components/Header.astro";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/open-sans/400.css";
+import "../styles/tema.css";
 ---
 
 <html lang="pt-br">
@@ -25,8 +30,12 @@ import Header from "../components/Header.astro";
     padding: 0;
     width: 100%;
     height: 100%;
+    background-color: var(--tema-fundo-base-claro);
+    color: var(--tema-texto-primario-claro);
+    font-family: var(--tipografia-fonte-primaria);
+    line-height: var(--altura-linha-conforto);
+    letter-spacing: var(--espacamento-letras-padrao);
   }
-
   *,
   *:before,
   *:after {
