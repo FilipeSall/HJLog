@@ -1,10 +1,74 @@
 ---
 import Image from "astro/components/Image.astro";
 import logo from "../images/logo.png";
+import { externalLinks, internalLinks } from "../data/navigation";
+import NavLink from "./NavLink.astro";
 ---
 
 <header class="site-header">
-    <div class="site-header__inner">
-        <Image src={logo} alt="Logo" />
-    </div>
+  <div class="site-header__inner">
+    <Image src={logo} alt="Logo" class="site-header__logo" />
+    <nav class="site-header__nav site-header__nav--primary">
+      {
+        internalLinks.map((link) => (
+          <NavLink path={link.path} label={link.label} />
+        ))
+      }
+    </nav>
+
+    <nav class="site-header__nav site-header__nav--secondary">
+      {
+        externalLinks.map((link) => (
+          <NavLink path={link.path} label={link.label} />
+        ))
+      }
+    </nav>
+  </div>
 </header>
+
+<style>
+  .site-header {
+    width: 100%;
+    background-color: var(--tema-fundo-header);
+    color: var(--tema-texto-primario-claro);
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-header__inner {
+    width: 100%;
+    max-width: 1336px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 5vw, 3rem);
+    box-sizing: border-box;
+  }
+
+  .site-header__logo {
+    max-width: clamp(6rem, 11vw, 8.5rem);
+    height: auto;
+    justify-self: start;
+  }
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(0.75rem, 2.5vw, 2.75rem);
+  }
+
+  .site-header__nav--primary {
+    justify-content: space-evenly;
+    min-width: 0;
+  }
+
+  .site-header__nav--secondary {
+    justify-content: flex-end;
+    gap: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
+  .site-header__nav a:hover {
+    opacity: 0.75;
+  }
+</style>
