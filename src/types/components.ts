@@ -8,4 +8,5 @@ export type NavLinkLabel =
 export interface NavLinkProps {
   label: NavLinkLabel;
   path: string;
+  target?: string;
 }

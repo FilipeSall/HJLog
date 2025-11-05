@@ -14,11 +14,11 @@ export const internalLinks: NavLinkProps[] = [
   },
   {
     label: "Serviços",
-    path: "/servicos",
+    path: "#servicos",
   },
   {
     label: "Contato",
-    path: "/contato",
+    path: "#contato",
   },
 ];
 
@@ -28,20 +28,23 @@ export const externalLinks: NavLinkProps[] = [
       src: fb.src,
       alt: "facebook",
     },
-    path: "/",
+    path: "https://www.facebook.com/HJLogtransportes",
+    target: "_blank",
   },
   {
     label: {
       src: wpp.src,
       alt: "WhatsApp",
     },
-    path: "/",
+    path: "https://wa.me/5511982217679",
+    target: "_blank",
   },
   {
     label: {
       src: insta.src,
       alt: "instagram",
     },
-    path: "/",
+    path: "https://www.instagram.com/hjlogtransportes",
+    target: "_blank",
   },
 ];

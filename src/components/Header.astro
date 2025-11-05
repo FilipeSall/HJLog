@@ -20,7 +20,7 @@ import NavLink from "./NavLink.astro";
     <nav class="site-header__nav site-header__nav--secondary">
       {
         externalLinks.map((link) => (
-          <NavLink path={link.path} label={link.label} />
+          <NavLink path={link.path} label={link.label} target="_blank" />
         ))
       }
     </nav>
@@ -46,20 +46,12 @@ import NavLink from "./NavLink.astro";
     padding-block: 1rem;
     padding-inline: clamp(1.5rem, 6vw, 8.75rem);
   }
-  .site-header__logo {
-    height: auto;
-    justify-self: start;
-  }
+
   .site-header__nav {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-  }
-  .site-header__nav--primary {
-    justify-content: space-around;
-  }
-  .site-header__nav--secondary {
-    justify-content: flex-end;
     gap: clamp(0.75rem, 1.125rem + 0.5vw, 1.5rem);
+    justify-content: space-around;
   }
 </style>
