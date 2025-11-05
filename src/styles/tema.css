@@ -6,6 +6,7 @@
   --paleta-branco-off-white: #eeecec;
   --paleta-laranja-queimado: #ff6b00;
   --paleta-cinza-aco: #8c8c8c;
+  --paleta-branco-absoluto: #ffffff;
 
   /* Tokens de uso */
   --tema-fundo-base-escuro: var(--paleta-preto-carvao);
@@ -13,9 +14,14 @@
   --tema-fundo-base-claro: var(--paleta-branco-gelo);
   --tema-fundo-header: var(--paleta-branco-off-white);
   --tema-fundo-footer: var(--paleta-branco-off-white);
-  --tema-texto-primario-claro: var(--paleta-preto-carvao);
+
+  --tema-texto-escuro-primario: var(--paleta-preto-carvao);
+  --tema-texto-claro-primario: var(--paleta-branco-gelo);
+  --tema-texto-claro-secundario: var(--paleta-branco-absoluto);
   --tema-texto-secundario: var(--paleta-cinza-aco);
+
   --tema-acao-destaque: var(--paleta-laranja-queimado);
+
   --tema-borda-sutil: var(--paleta-cinza-aco);
 
   /* Tipografia */
