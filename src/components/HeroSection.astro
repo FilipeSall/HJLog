@@ -1,0 +1,83 @@
+---
+import Image from "astro/components/Image.astro";
+import caminhaoImg from "../images/caminhao-hero.png";
+import { stepsFlowsData } from "../data/hero-section";
+import StepItem from "./StepItem.astro";
+---
+
+<section class="hero-section">
+  <div class="inner-hero-section">
+    <div class="hero-section--content">
+      <div class="text-wrapper">
+        <h1>Movemos o que faz o espetáculo acontecer</h1>
+        <p>
+          Há anos conectamos empresas e pessoas com soluções logísticas
+          completas, oferecendo eficiência, segurança e comprometimento em cada
+          transporte.
+        </p>
+        <button>Fale conosco</button>
+      </div>
+      <div class="image-wrapper">
+        <Image src={caminhaoImg} alt="Caminhão grande imagem" />
+      </div>
+    </div>
+    <div class="WorkflowSteps">
+      {stepsFlowsData?.map((step, i) => <StepItem label={step.label} i={i} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    color: var(--tema-texto-claro-primario);
+    height: 85dvh;
+    border: 1px solid red;
+  }
+
+  .inner-hero-section {
+    width: 100%;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    margin: 0 auto;
+  }
+
+  .hero-section--content {
+    display: flex;
+    border: 1px solid red;
+    width: 100%;
+    height: 75dvh;
+    overflow: visible;
+  }
+
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+    width: 45%;
+    padding: 6rem 0 4rem 0;
+  }
+
+  .image-wrapper {
+    border: 1px solid purple;
+    position: relative;
+    z-index: 1000;
+    flex-grow: 1;
+  }
+
+  .image-wrapper > img {
+    position: absolute;
+    margin-left: -14%;
+    margin-top: 10%;
+    width: 120%;
+    object-fit: contain;
+  }
+
+  .WorkflowSteps {
+    border: 1px solid blue;
+    display: flex;
+    height: 10dvh;
+  }
+</style>
+

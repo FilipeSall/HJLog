@@ -1,0 +1,12 @@
+---
+import type { StepsItemProps } from "../types/components";
+
+export type props = StepsItemProps;
+
+const { label, i } = Astro.props as props;
+---
+
+<div>
+  <h3>{i}</h3>
+  <p>{label}</p>
+</div>
