@@ -2,12 +2,12 @@ import type { StepsItemProps } from "../types/components";
 
 export const stepsFlowsData: StepsItemProps[] = [
   {
-    label: "Planejamento da rota"
+    label: "PLANEJAMENTO DA ROTA"
   },
   {
-    label: "Carga e monitoramento"
+    label: "CARGA E MONITARAMENTO"
   },
   {
-    label: "Carga e monitoramento"
+    label: "ENTREGA COM RESPONSABILIDADE"
   }
 ]
