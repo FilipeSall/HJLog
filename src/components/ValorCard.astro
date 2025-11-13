@@ -1,0 +1,38 @@
+---
+import type { ValueItemProps } from "../types/components";
+
+export type props = ValueItemProps;
+
+const { icon, text, title } = Astro.props as props;
+const iconSrc = typeof icon === "string" ? icon : icon.src;
+---
+
+<div class="card-container">
+  <div class="title-wrapper">
+    <img src={iconSrc} alt={title} class="icon" />
+    <h5>{title}</h5>
+  </div>
+
+  <p>{text}</p>
+</div>
+
+<style>
+  .card-container {
+    border: 0.0625rem solid red;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-start;
+  }
+
+  .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.9375rem;
+  }
+
+  .icon {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+</style>

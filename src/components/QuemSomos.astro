@@ -1,5 +1,6 @@
 ---
-
+import { nossosValoresData } from "../data/quem-somos";
+import ValorCard from "./ValorCard.astro";
 ---
 
 <section class="quem-somos" id="quemsomos">
@@ -11,7 +12,13 @@
       > em cada trajeto.
     </p>
 
-    
+    <div class="cards-wrapper">
+      {
+        nossosValoresData?.map((card) => (
+          <ValorCard icon={card.icon} text={card.text} title={card.title} />
+        ))
+      }
+    </div>
   </div>
 </section>
 
@@ -20,13 +27,13 @@
     width: 100%;
     left: calc((100% - 100vw) / 2);
     background: #1e1e1e80;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(0.875rem);
+    -webkit-backdrop-filter: blur(0.875rem);
     z-index: -1;
   }
   .quem-somos__content {
     width: 100%;
-    max-width: 1336px;
+    max-width: 83.5rem;
     margin: 0 auto;
     text-align: center;
     color: var(--tema-texto-claro-primario);
@@ -34,10 +41,16 @@
 
   .quem-somos__content-title {
     font-size: var(--tamanho-fonte-subtitulo);
-    padding: 43px 0px;
+    padding: 2.6875rem 0;
   }
 
   .quem-somos__content-title > span {
     font-weight: bolder;
+  }
+
+  .cards-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 </style>
