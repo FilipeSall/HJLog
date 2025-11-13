@@ -2,26 +2,32 @@
 
 ---
 
-<section class="quem-somos">
+<section class="quem-somos" id="quemsomos">
   <div class="quem-somos__content">
-    <h2>
+    <p class="quem-somos__content-title">
       A <span>HJLog Transportes</span> conecta empresas com soluções logísticas completas.
       Vai além do simples ato de entregar, movemos <span>
         confiança, experiência e excelência</span
       > em cada trajeto.
-    </h2>
+    </p>
   </div>
 </section>
 
 <style>
-  .quem-somos {
-    width: 100%;
-  }
-
   .quem-somos__content {
     width: 100%;
     max-width: 1336px;
     margin: 0 auto;
     text-align: center;
+    color: var(--tema-texto-claro-primario);
+  }
+
+  .quem-somos__content-title {
+    font-size: var(--tamanho-fonte-subtitulo);
+    padding: 43px 8px;
+  }
+
+  .quem-somos__content-title > span {
+    font-weight: bolder;
   }
 </style>

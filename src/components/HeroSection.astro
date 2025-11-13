@@ -87,6 +87,7 @@ const wppNumero = wppObject?.path;
     object-fit: cover;
     width: 100%;
     overflow: visible;
+    filter: drop-shadow(0 4px 4px #00000040);
   }
 
   .WorkflowSteps {
@@ -95,5 +96,23 @@ const wppNumero = wppObject?.path;
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
+    border-radius: 24px;
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+  }
+
+  .WorkflowSteps::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    background: #1e1e1e80;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: -1;
   }
 </style>
