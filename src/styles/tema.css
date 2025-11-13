@@ -23,6 +23,7 @@
   --tema-texto-secundario: var(--paleta-cinza-aco);
 
   --tema-acao-destaque: var(--paleta-laranja-queimado);
+  --tema-acao-destaque-suave: rgb(255 107 0 / 0.28);
 
   --tema-borda-sutil: var(--paleta-cinza-aco);
 
