@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export type NavLinkLabel =
   | string
   | {
@@ -14,4 +16,10 @@ export interface NavLinkProps {
 export interface StepsItemProps {
   label: string;
   i?: number;
+}
+
+export interface ValueItemProps {
+  icon: string | ImageMetadata;
+  title: string;
+  text: string;
 }
