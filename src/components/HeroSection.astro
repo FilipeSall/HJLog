@@ -1,10 +1,11 @@
 ---
 import Image from "astro/components/Image.astro";
-import caminhaoImg from "../images/caminhao-hero.png";
-import { stepsFlowsData } from "../data/hero-section";
-import StepItem from "./StepItem.astro";
+
 import CtaBtn from "./CtaBtn.astro";
+import StepItem from "./StepItem.astro";
+import { stepsFlowsData } from "../data/hero-section";
 import { externalLinks } from "../data/navigation";
+import caminhaoImg from "../images/caminhao-hero.png";
 
 const wppObject = externalLinks.find((link) => link.path.includes("wa.me"));
 const wppNumero = wppObject?.path;
