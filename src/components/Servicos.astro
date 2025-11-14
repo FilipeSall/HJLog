@@ -1,0 +1,57 @@
+---
+import Image from "astro/components/Image.astro";
+import { servicosData } from "../data/servicos";
+import ServicoItem from "./ServicoItem.astro";
+
+import mainImg from "../images/servicos/main.png";
+---
+
+<section class="nossos-servicos" id="servicos">
+  <div class="nossos-servicos__inner">
+    <h2 class="title">Serviços</h2>
+    <div class="servicos-content">
+      <Image src={mainImg} alt="Caminhao estacionado" />
+      <div class="servicos-wrapper">
+        {servicosData.map((servico) => (
+          <ServicoItem {...servico} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nossos-servicos {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--tema-texto-claro-primario);
+    margin: 29px 0;
+    border: 1px solid red;
+  }
+
+  .nossos-servicos__inner {
+    width: 100%;
+    border: 1px solid blue;
+    max-width: 83.5rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title {
+    font-size: var(--tamanho-fonte-titulo-principal);
+  }
+
+  .servicos-content{
+    display: flex;
+  }
+
+  .servicos-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid yellow;
+    gap: 63px;
+  }
+</style>

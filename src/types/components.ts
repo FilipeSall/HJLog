@@ -23,3 +23,8 @@ export interface ValueItemProps {
   title: string;
   text: string;
 }
+
+export interface ServiceItemProps {
+  title: string;
+  text: string;
+}

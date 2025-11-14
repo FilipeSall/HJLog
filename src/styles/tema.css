@@ -8,6 +8,7 @@
   --paleta-laranja-queimado: #ff6b00;
   --paleta-cinza-aco: #8c8c8c;
   --paleta-branco-absoluto: #ffffff;
+  --paleta-cinza-nevoa: #c2c0c0;
 
   /* Tokens de uso */
   --tema-fundo-base-escuro: var(--paleta-preto-carvao);
@@ -21,6 +22,7 @@
   --tema-texto-claro-primario: var(--paleta-branco-gelo);
   --tema-texto-claro-secundario: var(--paleta-branco-absoluto);
   --tema-texto-secundario: var(--paleta-cinza-aco);
+  --tema-texto-claro-terciario: var(--paleta-cinza-nevoa);
 
   --tema-acao-destaque: var(--paleta-laranja-queimado);
   --tema-acao-destaque-suave: rgb(255 107 0 / 0.28);
