@@ -35,6 +35,7 @@
 
   /* Tamanhos de fonte (rem) */
   --tamanho-fonte-titulo-principal: 2.4375rem; /* 39px */
+  --tamanho-fonte-titulo-secundario: 1.9375rem; /* 31px */
   --tamanho-fonte-subtitulo: 1.5625rem; /* 25px */
   --tamanho-fonte-texto-apoio: 1.25rem; /* 20px */
   --tamanho-fonte-texto-base: 1rem; /* 16px */

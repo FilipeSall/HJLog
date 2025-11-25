@@ -6,7 +6,35 @@ export type Props = ServiceItemProps;
 const { title, text } = Astro.props as Props;
 ---
 
-<div>
+<div class="servico-item--card">
   <h3>{title}</h3>
   <p>{text}</p>
 </div>
+
+<style>
+  .servico-item--card {
+    position: relative;
+    padding: 0 22px;
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    gap: 10px;
+    font-family: var(--tipografia-fonte-primaria);
+  }
+
+  .servico-item--card::before {
+    content: "";
+    position: absolute;
+    margin-left: -3%;
+    margin-top: 7.5%;
+    transform: translateY(-50%);
+    height: 75%;
+    width: 0.05rem;
+    background-color: var(--tema-texto-claro-secundario);
+  }
+
+  .servico-item--card h3 {
+    text-transform: uppercase;
+    font-size: var(--tamanho-fonte-titulo-secundario);
+  }
+</style>
