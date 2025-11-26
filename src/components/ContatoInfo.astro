@@ -20,9 +20,16 @@ const { icon: Icon, label } = Astro.props as Props;
   .container {
     display: flex;
     align-items: center;
+    gap: 11px;
+  }
+
+  .icon {
+    width: 20px;
   }
 
   .container > p {
     color: var(--tema-texto-claro-terciario);
+    font-size: var(--tamanho-fonte-texto-apoio);
+    max-width: 75%;
   }
 </style>
