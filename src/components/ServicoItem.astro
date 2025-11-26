@@ -16,7 +16,7 @@ const { title, text } = Astro.props as Props;
     position: relative;
     padding: 0 22px;
     display: flex;
-    width: 75%;
+    width: 100%;
     flex-direction: column;
     gap: 10px;
     font-family: var(--tipografia-fonte-primaria);
@@ -25,10 +25,10 @@ const { title, text } = Astro.props as Props;
   .servico-item--card::before {
     content: "";
     position: absolute;
-    margin-left: -3%;
-    margin-top: 7.5%;
+    margin-left: -2.2%;
+    margin-top: 5%;
     transform: translateY(-50%);
-    height: 75%;
+    height: 90%;
     width: 0.05rem;
     background-color: var(--tema-texto-claro-secundario);
   }
@@ -36,5 +36,10 @@ const { title, text } = Astro.props as Props;
   .servico-item--card h3 {
     text-transform: uppercase;
     font-size: var(--tamanho-fonte-titulo-secundario);
+  }
+
+  .servico-item--card p {
+    font-size: var(--tamanho-fonte-texto-apoio);
+    color: var(--tema-texto-claro-terciario);
   }
 </style>
