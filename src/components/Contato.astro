@@ -1,22 +1,43 @@
 ---
-
+import { contatoInfo } from "../data/contato";
+import ContatoInfo from "./ContatoInfo.astro";
 ---
 
 <section id="contato" class="contato-section">
-  <div class="title-wrapper">
-    <h2>Contato</h2>
-    <p>Precisa de transporte confiável? Fale com a HJLog Transporte</p>
-  </div>
-
-  <div class="contato-info--wrapper">
-    
+  <div class="contato-section--in">
+    <div class="wrapper">
+      <div class="title-wrapper">
+        <h2>Contato</h2>
+        <p>
+          Precisa de transporte confiável? <br />Fale com a <span
+            >HJLog Transporte</span>
+        </p>
+      </div>
+      <div class="contato-info--wrapper">
+        {
+          contatoInfo?.map((info) => (
+            <ContatoInfo label={info.label} icon={info.icon} />
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
-  .contato-section{
+  .contato-section {
     margin: 29px 0;
     max-width: 83.5rem;
     margin: 0 auto;
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: var(--tema-texto-claro-primario);
+  }
+
+  .title-wrapper > p {
+    color: var(--tema-texto-claro-terciario);
   }
 </style>

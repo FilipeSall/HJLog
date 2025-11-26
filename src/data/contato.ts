@@ -1,7 +1,7 @@
 import type { ContatoInfoProps } from "../components/ContatoInfo.astro";
-import emailIcon from "../images/contato/email-icon.svg";
-import localIcon from "../images/contato/local-icon.svg";
-import phoneIcon from "../images/contato/phone-icon.svg";
+import emailIcon from "../images/icons/email.svg";
+import localIcon from "../images/icons/local.svg";
+import phoneIcon from "../images/icons/tel.svg";
 
 export const contatoInfo: ContatoInfoProps[] = [
   {
