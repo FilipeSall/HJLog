@@ -6,7 +6,7 @@ import insta from "../images/icons/instagram.svg";
 export const internalLinks: NavLinkProps[] = [
   {
     label: "Início",
-    path: "/",
+    path: "#inicio",
   },
   {
     label: "Quem somos",
