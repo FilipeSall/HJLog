@@ -1,10 +1,11 @@
 ---
-import Header from "../components/Header.astro";
+import HeaderNew from "../components/HeaderNew.astro";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/open-sans/400.css";
 import "../styles/tema.css";
+import "../styles/utils.css";
 ---
 
 <html lang="pt-br">
@@ -13,12 +14,15 @@ import "../styles/tema.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>HJLog</title>
+    <title>HJLOG Transportes - Soluções Logísticas</title>
+
+    <!-- Material Symbols Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   </head>
 
   <body>
+    <HeaderNew />
     <main>
-      <Header />
       <slot />
     </main>
   </body>

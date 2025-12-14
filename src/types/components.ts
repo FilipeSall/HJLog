@@ -27,4 +27,31 @@ export interface ValueItemProps {
 export interface ServiceItemProps {
   title: string;
   text: string;
+  icon?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+export interface TestimonialProps {
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  avatar?: string;
+}
+
+export interface StatItemProps {
+  value: string;
+  label: string;
+}
+
+export interface FeatureItemProps {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TrustBrandProps {
+  name: string;
+  icon: string;
 }

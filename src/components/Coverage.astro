@@ -1,0 +1,329 @@
+---
+import { stats } from "../data/stats";
+---
+
+<section class="coverage-section">
+  <div class="coverage-background">
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGdOkrjw7jLVvzZSBGn_cAmgvaaL4wLnl68H12TOkN0fQfJaVSrig8PliXzHbQppTWK03jkb8nCs8Wq1DxD5As6Aj9pF7Qy6c_7_PdM52Ityv9I9wzucK-5_7zk1BnDRIjBc4iv9GsMEz_qBjCtjahWizYXZJT86Cq6awynVvsPeworeCN98O8pAmZMgxXSfvwaMLzhytdjUcNaoIyLloEj7fgcIzQjN6-VprCXqr1djOCbMz7Z1XSaAWtP7bBbK58Qtg8_Xt1VBY"
+      alt="Mapa do Brasil representando cobertura nacional"
+      class="background-map"
+    />
+  </div>
+
+  <div class="container coverage-content">
+    <div class="content-side">
+      <div class="coverage-badge">
+        <span class="material-symbols-outlined">public</span>
+        <span class="badge-text">Cobertura Nacional</span>
+      </div>
+
+      <h2 class="coverage-title">Levamos sua carga a qualquer lugar do Brasil</h2>
+
+      <p class="coverage-description">
+        Com filiais estratégicas e uma rede de parceiros homologados, garantimos presença em todos os estados brasileiros. Do Oiapoque ao Chuí, a HJLOG está presente.
+      </p>
+
+      <div class="stats-grid">
+        {stats.map(stat => (
+          <div class="stat-item">
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <button class="btn btn-primary btn-large">
+        Consultar rotas disponíveis
+      </button>
+    </div>
+
+    <div class="visual-side">
+      <div class="route-card">
+        <div class="route-blur"></div>
+        <div class="route-content">
+          <div class="route-point route-origin">
+            <div class="route-icon">
+              <span class="material-symbols-outlined">share_location</span>
+            </div>
+            <div class="route-info">
+              <div class="route-label">Origem</div>
+              <div class="route-city">São Paulo, SP</div>
+            </div>
+          </div>
+
+          <div class="route-line">
+            <div class="route-indicator">
+              <span class="material-symbols-outlined spinning">sync</span>
+            </div>
+          </div>
+
+          <div class="route-point route-destination">
+            <div class="route-icon route-icon-primary">
+              <span class="material-symbols-outlined">location_on</span>
+            </div>
+            <div class="route-info">
+              <div class="route-label">Destino</div>
+              <div class="route-city">Manaus, AM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .coverage-section {
+    position: relative;
+    width: 100%;
+    padding: 5rem 0;
+    background-color: var(--tema-fundo-base-escuro);
+    color: var(--tema-texto-claro-primario);
+    overflow: hidden;
+  }
+
+  .coverage-background {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .background-map {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
+    mix-blend-mode: overlay;
+  }
+
+  .coverage-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .coverage-content {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .content-side {
+    flex: 1;
+  }
+
+  .coverage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: fit-content;
+    margin-bottom: 1.5rem;
+  }
+
+  .coverage-badge .material-symbols-outlined {
+    color: var(--tema-acao-destaque);
+    font-size: 1rem;
+  }
+
+  .badge-text {
+    color: var(--paleta-branco-absoluto);
+    font-size: 0.75rem;
+    font-weight: var(--peso-fonte-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .coverage-title {
+    font-size: 1.875rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .coverage-title {
+      font-size: 3rem;
+    }
+  }
+
+  .coverage-description {
+    color: #d4d4d4;
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    max-width: 32rem;
+    line-height: 1.6;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 2.25rem;
+    font-weight: var(--peso-fonte-bold);
+    color: var(--tema-acao-destaque);
+  }
+
+  .stat-label {
+    color: #a3a3a3;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .btn-large {
+    height: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .visual-side {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .visual-side {
+      justify-content: flex-end;
+    }
+  }
+
+  .route-card {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    aspect-ratio: 1;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .route-blur {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12rem;
+    height: 12rem;
+    background-color: rgba(255, 107, 0, 0.2);
+    filter: blur(80px);
+    border-radius: 50%;
+  }
+
+  .route-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .route-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .route-destination {
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    padding-bottom: 0;
+  }
+
+  .route-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .route-icon .material-symbols-outlined {
+    color: var(--tema-acao-destaque);
+  }
+
+  .route-icon-primary {
+    background-color: var(--tema-acao-destaque);
+  }
+
+  .route-icon-primary .material-symbols-outlined {
+    color: var(--paleta-preto-carvao);
+  }
+
+  .route-label {
+    font-size: 0.875rem;
+    color: #a3a3a3;
+  }
+
+  .route-city {
+    font-weight: var(--peso-fonte-bold);
+    color: var(--paleta-branco-absoluto);
+  }
+
+  .route-line {
+    flex: 1;
+    border-left: 2px dashed rgba(255, 255, 255, 0.2);
+    margin-left: 1.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .route-indicator {
+    position: absolute;
+    top: 50%;
+    left: -0.75rem;
+    background-color: var(--tema-fundo-base-escuro);
+    padding: 0.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--tema-acao-destaque);
+  }
+
+  .route-indicator .material-symbols-outlined {
+    color: var(--tema-acao-destaque);
+    font-size: 1rem;
+    display: block;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinning {
+    animation: spin 3s linear infinite;
+  }
+</style>

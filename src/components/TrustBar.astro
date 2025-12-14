@@ -1,0 +1,73 @@
+---
+import { trustBrands } from "../data/trust-brands";
+---
+
+<section class="trust-bar">
+  <div class="container">
+    <p class="trust-title">Empresas que confiam na HJLOG</p>
+    <div class="brands-grid">
+      {trustBrands.map(brand => (
+        <div class="brand-item">
+          <span class="material-symbols-outlined">{brand.icon}</span>
+          <span class="brand-name">{brand.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    width: 100%;
+    background-color: var(--paleta-branco-absoluto);
+    border-bottom: 1px solid #e5e5e5;
+    padding: 2rem 0;
+    overflow: hidden;
+  }
+
+  .trust-title {
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: var(--peso-fonte-semibold);
+    color: var(--tema-texto-secundario);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .brands-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0.6;
+    transition: all 0.5s ease;
+  }
+
+  @media (min-width: 768px) {
+    .brands-grid {
+      gap: 4rem;
+    }
+  }
+
+  .brands-grid:hover {
+    opacity: 1;
+  }
+
+  .brand-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: var(--peso-fonte-bold);
+    color: var(--tema-texto-escuro-primario);
+  }
+
+  .brand-item .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+
+  .brand-name {
+    font-family: var(--tipografia-fonte-primaria);
+  }
+</style>
