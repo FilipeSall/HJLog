@@ -3,12 +3,12 @@ import heroImage from "../images/gemini-2_5-flash-image_A_cinematic_ultra-high-r
 export const hero = {
   tagline: "Transporte e Logística",
   title: {
-    line1: "CONFIANÇA E",
-    line2: "SEGURANÇA",
-    line3: "NA ESTRADA",
+    line1: "Movemos o que faz",
+    line2: "o espetáculo",
+    line3: "acontecer.",
   },
   description:
-    "Soluções premium de transporte rodoviário para uma nação conectada. Movemos o seu negócio com precisão, segurança e rotas eficientes.",
+    "Há anos conectamos empresas e pessoas com soluções logísticas completas, oferecendo eficiência, segurança e comprometimento em cada transporte.",
   cta: {
     primary: {
       label: "Fale Conosco",

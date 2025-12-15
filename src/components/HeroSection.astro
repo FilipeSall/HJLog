@@ -30,7 +30,12 @@ import { hero } from "../data/hero";
       </p>
 
       <div class="hero-cta-group">
-        <a class="hero-cta-primary" href={hero.cta.primary.href}>
+        <a
+          class="hero-cta-primary"
+          href={hero.cta.primary.href}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {hero.cta.primary.label}
         </a>
         <a class="hero-cta-secondary" href={hero.cta.secondary.href}>
