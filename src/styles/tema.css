@@ -1,45 +1,45 @@
 /* ===================================
    HJLOG - Design System
-   Based on Spline Sans font family
-   Primary color: #f9f506 (yellow)
+   Based on Inter and Open Sans fonts
+   Primary color: #FF6B00 (burnt orange)
    =================================== */
 
 :root {
   /* ========== COLORS ========== */
   /* Primary */
-  --primary: #f9f506;
-  --primary-hover: #e6e305;
-  --primary-light: rgba(249, 245, 6, 0.2);
-  --primary-border: rgba(249, 245, 6, 0.3);
+  --primary: #FF6B00;
+  --primary-hover: #ffffff;
+  --primary-light: rgba(255, 107, 0, 0.2);
+  --primary-border: rgba(255, 107, 0, 0.3);
 
   /* Background */
-  --background-light: #f8f8f5;
-  --background-dark: #23220f;
+  --background-light: #F2F2F2;
+  --background-dark: #111111;
 
   /* Surface */
   --surface-light: #ffffff;
-  --surface-dark: #2c2b14;
+  --surface-dark: #2A2A2A;
 
   /* Text Colors */
-  --text-primary-light: #0f172a;
-  --text-secondary-light: #475569;
+  --text-primary-light: #111111;
+  --text-secondary-light: #8C8C8C;
   --text-tertiary-light: #64748b;
 
-  --text-primary-dark: #f8fafc;
-  --text-secondary-dark: #cbd5e1;
-  --text-tertiary-dark: #94a3b8;
+  --text-primary-dark: #F2F2F2;
+  --text-secondary-dark: #8C8C8C;
+  --text-tertiary-dark: #666666;
 
   /* Border Colors */
-  --border-light: #e7e5e4;
-  --border-dark: #292524;
+  --border-light: #e5e5e5;
+  --border-dark: #2A2A2A;
 
   /* Utility Colors */
   --white: #ffffff;
-  --black: #000000;
+  --black: #111111;
 
   /* ========== TYPOGRAPHY ========== */
-  --font-display: "Spline Sans", sans-serif;
-  --font-body: "Spline Sans", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-body: "Open Sans", sans-serif;
 
   /* Font Sizes */
   --text-xs: 0.75rem; /* 12px */
@@ -121,27 +121,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #111111;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
+  background: #2A2A2A;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* ========== DARK MODE ========== */
-.dark ::-webkit-scrollbar-track {
-  background: var(--background-dark);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #404040;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #525252;
+  background: #FF6B00;
 }

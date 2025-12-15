@@ -2,23 +2,31 @@
 import "../styles/tema.css";
 ---
 
-<html class="light" lang="pt-BR">
+<html class="dark" lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HJLOG Transportes - Soluções Logísticas</title>
+    <title>HJLOG - Excelência na Estrada</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Symbols Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <slot />
+    <div class="layout-root">
+      <slot />
+    </div>
   </body>
 </html>
 
@@ -35,19 +43,26 @@ import "../styles/tema.css";
 
   body {
     font-family: var(--font-body);
-    background-color: var(--background-light);
-    color: var(--text-primary-light);
-    transition: background-color var(--transition-base), color var(--transition-base);
-  }
-
-  body.dark {
     background-color: var(--background-dark);
     color: var(--text-primary-dark);
+    overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  body::selection {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button,
+  nav,
+  .font-display {
     font-family: var(--font-display);
-    margin: 0;
   }
 
   p {
@@ -70,5 +85,13 @@ import "../styles/tema.css";
     max-width: 100%;
     height: auto;
     display: block;
+  }
+
+  .layout-root {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 </style>

@@ -1,310 +1,270 @@
 ---
-// Services Section Component
+import { services } from "../data/services";
 ---
 
-<section id="services" class="services">
-  <div class="container">
-    <div class="header">
-      <div class="title-wrapper">
-        <h2>Nossas Soluções Logísticas</h2>
-        <p class="subtitle">Oferecemos um portfólio completo de serviços para atender as necessidades específicas da sua cadeia de suprimentos.</p>
+<section class="services-section" id="services">
+  <div class="services-container">
+    <div class="services-header">
+      <div>
+        <h2 class="services-tagline">
+          {services.heading.tagline}
+        </h2>
+        <h3 class="services-title">
+          {services.heading.title}
+        </h3>
       </div>
-      <a href="#" class="view-all">
-        Ver todos os serviços <span class="material-symbols-outlined">arrow_forward</span>
+      <a class="services-cta" href={services.heading.ctaHref}>
+        {services.heading.ctaLabel}
+        <span class="material-symbols-outlined services-cta-icon"
+          >arrow_forward</span
+        >
       </a>
     </div>
 
     <div class="services-grid">
-      <!-- Service Card 1 -->
-      <div class="service-card">
-        <div class="image-wrapper">
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuArLas8TstNyGbtVcY2cdjisNYLhlZxvYjdIdWkIYtqgEFJDKuBSjw3uxEbJ7yHUTOUAwcEoYkWCrMPQmTryyrBwUWwgtwHMEnYb38yvHRGlQ8sJStaj17Djaj6q5oytPjy0MumwCH6RgiwdzOuV5DqM1RS7JhqI9vxZF3apqnweIUkW8xpCETwQDkWpcDEET5SYRDRnW6e9ZiYT34FcxfoR1J3N257fWVTO66b78OUzLPdVpsBmiFU7idx0ZTwlE2EX1_iYRkWj78"
-            alt="Heavy truck on road"
-          />
-          <div class="icon-badge">
-            <span class="material-symbols-outlined">local_shipping</span>
-          </div>
-        </div>
-        <div class="card-content">
-          <h3>Transporte Rodoviário</h3>
-          <p>Cargas fracionadas (LTL) e lotação completa (FTL) para todo o território nacional com segurança.</p>
-          <a href="#" class="learn-more">
-            Saiba mais <span class="material-symbols-outlined">chevron_right</span>
-          </a>
-        </div>
-      </div>
+      {
+        services.items.map((service, index) => {
+          const isTopRow = index < 2;
+          const isLeftCol = index % 2 === 0;
 
-      <!-- Service Card 2 -->
-      <div class="service-card">
-        <div class="image-wrapper">
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI2bSB_dVTD5jDLyGa1sTpfNo3v5xfkh6NTUimCjxCFeqF_gKx5WWXaOE5nMxO-JAQLZ1Xh4dcL0HP8M2gq2ZDAWiC1rswPGqD4lNunz1Lo5qPr4JuUoOpvnWWrQAZUKpNUJumkmU8dlk1JbScAAjgOCT3_6UWUG3V5nF3ApjWz9rZ5UOcnaFmjYDPii7EcT7p5Gdi9_00_-IDDpLa_cgsPvd52vYVJRpGkhYN713hHO-qh7DSwdN0xPbJ-kuIY1IuFgzctykfPoU"
-            alt="Warehouse interior with boxes"
-          />
-          <div class="icon-badge">
-            <span class="material-symbols-outlined">inventory_2</span>
-          </div>
-        </div>
-        <div class="card-content">
-          <h3>Armazenagem e Distribuição</h3>
-          <p>Gestão de estoque inteligente e cross-docking para otimizar sua operação logística.</p>
-          <a href="#" class="learn-more">
-            Saiba mais <span class="material-symbols-outlined">chevron_right</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Service Card 3 -->
-      <div class="service-card">
-        <div class="image-wrapper">
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT4k_9QGbWB5PzptRbSDvhZgHwHNlqd2eTe8CvLrQG0utb6xLgiiebuzyY7vpGmkpRs0rEkPJ1ll1ilTTsiNpFoRhfAgXxCrLwIZWF8Uv8eaLl_sw2IMv-BEez0davX2LvDNxF6TAFdQADLgj8WuGw7loU_L5xpQhiRwhPcX3Hb_H38aXp9GIqxvS-s6Fa7pOXfmH5p-YU3PLxGPZGcuHIzsMqF0qTv9ApoZsLU7NexUXuiYigb85bfMbdPBrViG-3OfPUjzMtnWY"
-            alt="Delivery van in city"
-          />
-          <div class="icon-badge">
-            <span class="material-symbols-outlined">rocket_launch</span>
-          </div>
-        </div>
-        <div class="card-content">
-          <h3>Entrega Expressa</h3>
-          <p>Modalidade dedicada para cargas urgentes que precisam chegar ao destino no menor tempo possível.</p>
-          <a href="#" class="learn-more">
-            Saiba mais <span class="material-symbols-outlined">chevron_right</span>
-          </a>
-        </div>
-      </div>
+          return (
+            <div
+              class:list={[
+                "service-card",
+                isTopRow ? "service-card--top-row" : "",
+                isLeftCol ? "service-card--left-col" : "",
+              ]}
+            >
+              <img
+                alt={service.imageAlt}
+                class="service-card-image"
+                src={service.image}
+                style={index === 2 ? "object-position: bottom;" : ""}
+              />
+              <div class="service-card-overlay" />
+              <div class="service-card-content">
+                <div
+                  class:list={[
+                    "service-card-icon",
+                    service.featured
+                      ? "service-card-icon--featured"
+                      : "service-card-icon--default",
+                  ]}
+                >
+                  <span class="material-symbols-outlined">
+                    {service.icon}
+                  </span>
+                </div>
+                <h4 class="service-card-title">
+                  {service.title}
+                </h4>
+                <p class="service-card-description">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .services {
-    width: 100%;
-    padding: var(--space-20) 0;
-    background-color: var(--background-light);
+  .services-section {
+    padding: var(--space-24) 0;
+    background-color: rgba(42, 42, 42, 0.2);
+    position: relative;
+    border-top: 1px solid var(--surface-dark);
   }
 
-  .dark .services {
-    background-color: var(--background-dark);
-  }
-
-  .container {
-    max-width: var(--container-max-width);
+  .services-container {
+    max-width: 80rem;
     margin: 0 auto;
     padding: 0 var(--space-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
+    position: relative;
+    z-index: 10;
   }
 
-  @media (min-width: 768px) {
-    .container {
-      padding-left: var(--container-padding-tablet);
-      padding-right: var(--container-padding-tablet);
+  @media (min-width: 640px) {
+    .services-container {
+      padding: 0 var(--space-6);
     }
   }
 
   @media (min-width: 1024px) {
-    .container {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
+    .services-container {
+      padding: 0 var(--space-8);
     }
   }
 
-  .header {
+  .services-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: var(--space-16);
     gap: var(--space-6);
   }
 
   @media (min-width: 768px) {
-    .header {
+    .services-header {
       flex-direction: row;
     }
   }
 
-  .title-wrapper {
-    max-width: 600px;
-  }
-
-  h2 {
-    font-size: var(--text-3xl);
+  .services-tagline {
+    color: var(--primary);
+    font-family: var(--font-display);
     font-weight: var(--font-bold);
-    color: var(--text-primary-light);
-    letter-spacing: var(--tracking-tight);
-    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-sm);
   }
 
-  @media (min-width: 768px) {
-    h2 {
-      font-size: var(--text-4xl);
-    }
-  }
-
-  .dark h2 {
-    color: var(--white);
-  }
-
-  .subtitle {
-    color: var(--text-secondary-light);
-    font-size: var(--text-lg);
-    line-height: var(--leading-normal);
-  }
-
-  .dark .subtitle {
-    color: var(--text-tertiary-dark);
-  }
-
-  .view-all {
-    color: var(--text-primary-light);
+  .services-title {
+    font-size: var(--text-4xl);
     font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+  }
+
+  .services-cta {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
-    transition: text-decoration var(--transition-base);
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-primary-dark);
+    border-bottom: 1px solid var(--surface-dark);
+    padding-bottom: var(--space-1);
+    transition: color var(--transition-base), border-color var(--transition-base);
   }
 
-  .dark .view-all {
+  .services-cta:hover {
     color: var(--primary);
+    border-bottom-color: var(--primary);
   }
 
-  .view-all:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
+  .services-cta-icon {
+    font-size: var(--text-lg);
+    transition: transform var(--transition-base);
   }
 
-  .view-all .material-symbols-outlined {
-    font-size: 14px;
+  .services-cta:hover .services-cta-icon {
+    transform: translateX(0.25rem);
   }
 
   .services-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    gap: 0;
   }
 
   @media (min-width: 1024px) {
     .services-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
     }
   }
 
   .service-card {
     position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-xl);
-    background-color: var(--white);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow var(--transition-base);
-  }
-
-  .dark .service-card {
-    background-color: var(--surface-dark);
-    border-color: var(--border-dark);
-  }
-
-  .service-card:hover {
-    box-shadow: var(--shadow-xl), var(--shadow-primary-sm);
-  }
-
-  .image-wrapper {
-    position: relative;
-    height: 12rem;
-    width: 100%;
-    background-color: var(--border-light);
+    height: 320px;
     overflow: hidden;
   }
 
-  .dark .image-wrapper {
-    background-color: var(--border-dark);
+  .service-card--top-row {
+    border-bottom: 1px solid var(--surface-dark);
   }
 
-  .image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
+  .service-card--left-col {
+    border-right: 1px solid var(--surface-dark);
   }
 
-  .service-card:hover .image-wrapper img {
-    transform: scale(1.05);
-  }
-
-  .icon-badge {
+  .service-card-image {
     position: absolute;
-    top: var(--space-4);
-    right: var(--space-4);
-    background-color: var(--white);
-    padding: var(--space-2);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-lg);
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.4;
   }
 
-  .dark .icon-badge {
-    background-color: var(--black);
+  .service-card:hover .service-card-image {
+    transform: scale(1.1);
+    opacity: 0.6;
   }
 
-  .icon-badge .material-symbols-outlined {
-    color: var(--primary);
-    font-size: 24px;
+  .service-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      var(--background-dark),
+      rgba(17, 17, 17, 0.6),
+      transparent
+    );
   }
 
-  .card-content {
-    padding: var(--space-6);
+  .service-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: var(--space-8);
+    width: 100%;
   }
 
-  h3 {
-    font-size: var(--text-xl);
+  .service-card-icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+    font-size: var(--text-2xl);
+  }
+
+  .service-card-icon--featured {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  .service-card-icon--default {
+    background-color: var(--surface-dark);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-dark);
+  }
+
+  .service-card:hover .service-card-icon--default {
+    background-color: var(--primary);
+    color: var(--background-dark);
+    border-color: var(--primary);
+  }
+
+  .service-card-title {
+    font-size: var(--text-2xl);
     font-weight: var(--font-bold);
-    color: var(--text-primary-light);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
     margin-bottom: var(--space-2);
   }
 
-  .dark h3 {
-    color: var(--white);
-  }
-
-  .card-content p {
-    color: var(--text-secondary-light);
+  .service-card-description {
+    color: var(--text-secondary-dark);
     font-size: var(--text-sm);
-    margin-bottom: var(--space-4);
-    line-height: var(--leading-normal);
+    max-width: 28rem;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity var(--transition-base), transform var(--transition-base);
   }
 
-  .dark .card-content p {
-    color: var(--text-tertiary-dark);
-  }
-
-  .learn-more {
-    display: inline-flex;
-    align-items: center;
-    font-size: var(--text-sm);
-    font-weight: var(--font-bold);
-    color: var(--text-primary-light);
-    transition: color var(--transition-base);
-  }
-
-  .dark .learn-more {
-    color: var(--white);
-  }
-
-  .service-card:hover .learn-more {
-    color: var(--primary);
-  }
-
-  .learn-more .material-symbols-outlined {
-    font-size: 16px;
-    margin-left: var(--space-1);
+  .service-card:hover .service-card-description {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
