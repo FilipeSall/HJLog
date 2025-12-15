@@ -1,4 +1,4 @@
-import heroImage from "../images/caminhao-hero.png";
+import heroImage from "../images/gemini-2_5-flash-image_A_cinematic_ultra-high-resolution_hero_section_image_for_a_professional_logistic-0_28691be8-1ebe-45a7-8418-3cd462faa1e6.jpg";
 
 export const hero = {
   tagline: "Transporte e Logística",
