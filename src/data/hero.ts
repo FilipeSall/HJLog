@@ -1,3 +1,5 @@
+import heroImage from "../images/caminhao-hero.png";
+
 export const hero = {
   tagline: "Transporte e Logística",
   title: {
@@ -17,8 +19,7 @@ export const hero = {
       href: "#services",
     },
   },
-  heroImage:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB7LwILIk6A-JwM9CCcPHnBuqFX4cF0DW4rr8mBeE_HZbCIxYQbM6NaO89onLB_M2l1mXuKRLYAEspl6x7NLdqGkH3sUnHmOP3-0bBUlSy6KUnubSduCiDELZnMxRwbIoit0yw2L8KjIj8A7HPmK6iX39Janrc8iF1JuHZNwheBkBx_ZcxsolQorewdX7sHD7b9ze6_0jeCiQGPMaDeGhtO4ByJ0-PS6WDgjmf1VEBTuoeYx2ZCnL6yOXpOzTUgOxyf48_S73JDVvGR",
+  heroImage: heroImage.src,
   heroImageAlt: "Caminhão moderno na rodovia representando transporte rodoviário",
   steps: [
     {
