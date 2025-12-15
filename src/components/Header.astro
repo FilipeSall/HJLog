@@ -35,11 +35,36 @@ import logo from "../images/logo.png";
       >
         {navigation.cta.label}
       </a>
-      <button class="menu-button">
+      <button
+        class="menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
         <span class="material-symbols-outlined">menu</span>
       </button>
     </div>
   </nav>
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-links">
+      {
+        navigation.links.map((link, index) => (
+          <a
+            href={link.href}
+            class={index === 0 ? "nav-link nav-link-active" : "nav-link"}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <a
+      href={navigation.cta.href}
+      class="mobile-menu-cta"
+    >
+      {navigation.cta.label}
+    </a>
+  </div>
 </div>
 
 <style>
@@ -144,6 +169,52 @@ import logo from "../images/logo.png";
 
   .menu-button {
     color: var(--text-primary-dark);
+    display: inline-flex;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: rgba(17, 17, 17, 0.98);
+    border-bottom: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    animation: fadeIn var(--transition-base);
+  }
+
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mobile-menu-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background-color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--background-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .mobile-menu--open {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Media queries */
@@ -171,5 +242,26 @@ import logo from "../images/logo.png";
     .menu-button {
       display: none;
     }
+
+    .mobile-menu {
+      display: none !important;
+    }
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const menuButton = document.querySelector(".menu-button");
+    const mobileMenu = document.querySelector("#mobile-menu");
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("mobile-menu--open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        const icon = menuButton.querySelector(".material-symbols-outlined");
+        if (icon) {
+          icon.textContent = isOpen ? "close" : "menu";
+        }
+      });
+    }
+  }
+</script>
