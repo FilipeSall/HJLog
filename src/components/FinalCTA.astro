@@ -1,135 +1,152 @@
 ---
+// Final CTA Section Component
 ---
 
-<section class="final-cta-section">
+<section class="final-cta">
   <div class="container">
-    <div class="cta-card">
-      <div class="cta-pattern"></div>
-      <div class="cta-content">
-        <h2 class="cta-title">Pronto para otimizar sua logística?</h2>
-        <p class="cta-description">
-          Fale com nossos especialistas e descubra como podemos ajudar sua empresa a ir mais longe.
-        </p>
-        <div class="cta-buttons">
-          <button class="btn btn-dark btn-large">
-            Solicitar Cotação Grátis
-          </button>
-          <button class="btn btn-light btn-large">
-            Falar no WhatsApp
-          </button>
-        </div>
+    <div class="pattern"></div>
+    <div class="content">
+      <h2>Pronto para otimizar sua logística?</h2>
+      <p>Fale com nossos especialistas e descubra como podemos ajudar sua empresa a ir mais longe.</p>
+      <div class="buttons">
+        <button class="primary-button">
+          Solicitar Cotação Grátis
+        </button>
+        <button class="secondary-button">
+          Falar no WhatsApp
+        </button>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .final-cta-section {
+  .final-cta {
     width: 100%;
-    padding: 5rem 1rem;
+    padding: var(--space-20) var(--space-4);
   }
 
-  .cta-card {
-    max-width: 1440px;
+  @media (min-width: 768px) {
+    .final-cta {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
+    }
+  }
+
+  .container {
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-2xl);
     overflow: hidden;
     position: relative;
-    background-color: var(--tema-acao-destaque);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 6rem 1.5rem;
-    box-shadow: 0 25px 50px -12px rgba(255, 107, 0, 0.2);
+    padding: var(--space-24) var(--space-6);
+    box-shadow: var(--shadow-2xl), var(--shadow-primary);
   }
 
-  .cta-pattern {
+  .pattern {
     position: absolute;
     inset: 0;
     opacity: 0.1;
     pointer-events: none;
     background-image: repeating-linear-gradient(
       45deg,
-      var(--paleta-preto-carvao) 0,
-      var(--paleta-preto-carvao) 1px,
+      #000 0,
+      #000 1px,
       transparent 0,
       transparent 50%
     );
     background-size: 20px 20px;
   }
 
-  .cta-content {
+  .content {
     position: relative;
     z-index: 10;
-    max-width: 42rem;
+    max-width: 48rem;
   }
 
-  .cta-title {
-    font-size: 1.875rem;
-    font-weight: 900;
-    color: var(--paleta-preto-carvao);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-  }
-
-  @media (min-width: 768px) {
-    .cta-title {
-      font-size: 3rem;
-    }
-  }
-
-  .cta-description {
-    color: var(--paleta-cinza-grafite);
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-bottom: 2.5rem;
+  h2 {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-black);
+    color: var(--text-primary-light);
+    margin-bottom: var(--space-6);
+    letter-spacing: var(--tracking-tight);
   }
 
   @media (min-width: 768px) {
-    .cta-description {
-      font-size: 1.25rem;
+    h2 {
+      font-size: var(--text-5xl);
     }
   }
 
-  .cta-buttons {
+  p {
+    color: var(--text-primary-light);
+    font-size: var(--text-lg);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--space-10);
+    line-height: var(--leading-normal);
+  }
+
+  @media (min-width: 768px) {
+    p {
+      font-size: var(--text-xl);
+    }
+  }
+
+  .buttons {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
     justify-content: center;
   }
 
   @media (min-width: 640px) {
-    .cta-buttons {
+    .buttons {
       flex-direction: row;
     }
   }
 
-  .btn-large {
+  .primary-button {
+    display: flex;
     height: 3.5rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-    font-size: 1.125rem;
+    padding: 0 var(--space-10);
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: var(--text-primary-light);
+    color: var(--white);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
   }
 
-  .btn-dark {
-    background-color: var(--paleta-preto-carvao);
-    color: var(--paleta-branco-absoluto);
+  .primary-button:hover {
+    background-color: var(--black);
+    box-shadow: var(--shadow-xl);
   }
 
-  .btn-dark:hover {
-    background-color: #000000;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-  }
-
-  .btn-light {
+  .secondary-button {
+    display: flex;
+    height: 3.5rem;
+    padding: 0 var(--space-10);
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
     background-color: rgba(255, 255, 255, 0.5);
-    color: var(--paleta-preto-carvao);
-    border: 1px solid rgba(17, 17, 17, 0.1);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    color: var(--text-primary-light);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    transition: all var(--transition-base);
   }
 
-  .btn-light:hover {
+  .secondary-button:hover {
     background-color: rgba(255, 255, 255, 0.7);
   }
 </style>

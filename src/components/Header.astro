@@ -1,60 +1,169 @@
 ---
-import Image from "astro/components/Image.astro";
 import logo from "../images/logo.png";
-import { externalLinks, internalLinks } from "../data/navigation";
-import NavLink from "./NavLink.astro";
 ---
 
-<header class="site-header">
-  <div class="site-header__inner">
-    <Image src={logo} alt="Logo" class="site-header__logo" />
+<header>
+  <div class="container">
+    <div class="logo-wrapper">
+      <img src={logo.src} alt="HJLOG Transportes" class="logo" />
+    </div>
 
-    <nav class="site-header__nav site-header__nav--primary">
-      {
-        internalLinks.map((link) => (
-          <NavLink path={link.path} label={link.label} />
-        ))
-      }
+    <nav class="desktop-nav">
+      <a href="#home">Início</a>
+      <a href="#services">Serviços</a>
+      <a href="#how-it-works">Como Funciona</a>
+      <a href="#tracking">Rastreio</a>
     </nav>
 
-    <nav class="si  te-header__nav site-header__nav--secondary">
-      {
-        externalLinks.map((link) => (
-          <NavLink path={link.path} label={link.label} target="_blank" />
-        ))
-      }
-    </nav>
+    <div class="actions">
+      <button class="cta-button">
+        <span>Cotar Agora</span>
+      </button>
+      <button class="mobile-menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
   </div>
 </header>
 
 <style>
-  .site-header {
-    background-color: var(--tema-fundo-header);
-    color: var(--tema-texto-primario-claro);
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+  header {
     position: sticky;
     top: 0;
-    z-index: 10000;
-  }
-
-  .site-header__inner {
+    z-index: 50;
     width: 100%;
-    max-width: 83.5rem;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: clamp(1rem, 4vw, 3rem);
-    padding-block: 1rem;
-    padding-inline: clamp(1.5rem, 6vw, 8.75rem);
+    border-bottom: 1px solid var(--border-light);
+    background-color: rgba(248, 248, 245, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
-  .site-header__nav {
+  .dark header {
+    border-bottom-color: var(--border-dark);
+    background-color: rgba(35, 34, 15, 0.9);
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-4);
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: clamp(0.75rem, 1.125rem + 0.5vw, 1.5rem);
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: var(--container-padding-desktop);
+      padding-right: var(--container-padding-desktop);
+    }
+  }
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    height: 3rem;
+    width: auto;
+  }
+
+  @media (min-width: 768px) {
+    .logo {
+      height: 3.5rem;
+    }
+  }
+
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex;
+    }
+  }
+
+  .desktop-nav a {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-primary-light);
+    transition: color var(--transition-base);
+  }
+
+  .dark .desktop-nav a {
+    color: var(--text-secondary-dark);
+  }
+
+  .desktop-nav a:hover {
+    color: var(--primary);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .cta-button {
+    display: none;
+    height: 2.5rem;
+    padding: 0 var(--space-6);
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: var(--primary);
+    color: var(--black);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  @media (min-width: 640px) {
+    .cta-button {
+      display: flex;
+    }
+  }
+
+  .cta-button:hover {
+    background-color: #e6e305;
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta-button span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-menu {
+    display: flex;
+    padding: var(--space-2);
+    color: var(--text-primary-light);
+  }
+
+  .dark .mobile-menu {
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none;
+    }
+  }
+
+  .mobile-menu .material-symbols-outlined {
+    font-size: 24px;
   }
 </style>

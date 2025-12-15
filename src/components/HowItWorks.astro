@@ -1,98 +1,157 @@
 ---
-import { howItWorksDetails } from "../data/how-it-works";
+// How It Works Section Component
 ---
 
-<section id="como-funciona" class="how-it-works-section">
+<section id="how-it-works" class="how-it-works">
   <div class="container">
-    <div class="section-intro">
-      <span class="section-badge">Processo Simplificado</span>
-      <h2 class="section-title">Como enviamos sua carga</h2>
+    <div class="section-header">
+      <span class="label">Processo Simplificado</span>
+      <h2>Como enviamos sua carga</h2>
     </div>
 
-    <div class="steps-container">
-      <!-- Line connector for desktop -->
-      <div class="connector-line"></div>
+    <div class="steps-grid">
+      <div class="line-connector"></div>
 
-      {howItWorksDetails.map((step) => (
-        <div class="step-item">
-          <div class={`step-icon ${step.step === 4 ? 'step-icon-final' : ''}`}>
-            <span class="material-symbols-outlined">{step.icon}</span>
-          </div>
-          <h3 class="step-title">{step.step}. {step.title}</h3>
-          <p class="step-description">{step.description}</p>
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-icon">
+          <span class="material-symbols-outlined">request_quote</span>
         </div>
-      ))}
+        <h3>1. Cotação</h3>
+        <p>Solicite um orçamento online em segundos com base no peso e destino.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-icon">
+          <span class="material-symbols-outlined">package_2</span>
+        </div>
+        <h3>2. Coleta</h3>
+        <p>Nossa equipe realiza a coleta da mercadoria no local agendado.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-icon">
+          <span class="material-symbols-outlined">location_on</span>
+        </div>
+        <h3>3. Rastreio</h3>
+        <p>Acompanhe o trajeto da sua carga em tempo real através do nosso sistema.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="step-icon final">
+          <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <h3>4. Entrega</h3>
+        <p>Entrega finalizada com segurança e confirmação digital de recebimento.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .how-it-works-section {
+  .how-it-works {
     width: 100%;
-    padding: 5rem 0;
-    background-color: var(--paleta-branco-absoluto);
-    border-top: 1px solid #f5f5f5;
-    border-bottom: 1px solid #f5f5f5;
+    padding: var(--space-20) 0;
+    background-color: var(--white);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
   }
 
-  .section-intro {
-    text-align: center;
-    max-width: 42rem;
-    margin: 0 auto 4rem;
+  .dark .how-it-works {
+    background-color: var(--surface-dark);
+    border-top-color: var(--border-dark);
+    border-bottom-color: var(--border-dark);
   }
 
-  .section-badge {
-    color: var(--tema-acao-destaque);
-    font-weight: var(--peso-fonte-bold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.875rem;
-  }
-
-  .section-title {
-    font-size: 1.875rem;
-    font-weight: var(--peso-fonte-bold);
-    color: var(--tema-texto-escuro-primario);
-    margin-top: 0.5rem;
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
   }
 
   @media (min-width: 768px) {
-    .section-title {
-      font-size: 2.25rem;
+    .container {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
     }
   }
 
-  .steps-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: var(--container-padding-desktop);
+      padding-right: var(--container-padding-desktop);
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto var(--space-16);
+  }
+
+  .label {
+    color: var(--primary);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-sm);
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-light);
+    margin-top: var(--space-2);
   }
 
   @media (min-width: 768px) {
-    .steps-container {
+    h2 {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .dark h2 {
+    color: var(--white);
+  }
+
+  .steps-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .steps-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
 
-  .connector-line {
+  .line-connector {
     display: none;
   }
 
   @media (min-width: 768px) {
-    .connector-line {
+    .line-connector {
       display: block;
       position: absolute;
       top: 3rem;
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: #e5e5e5;
+      background-color: var(--border-light);
       z-index: 0;
+    }
+
+    .dark .line-connector {
+      background-color: var(--border-dark);
     }
   }
 
-  .step-item {
+  .step {
     position: relative;
     z-index: 10;
     display: flex;
@@ -104,40 +163,62 @@ import { howItWorksDetails } from "../data/how-it-works";
   .step-icon {
     width: 6rem;
     height: 6rem;
-    border-radius: 50%;
-    background-color: var(--tema-fundo-base-claro);
-    border: 4px solid var(--paleta-branco-absoluto);
+    border-radius: var(--radius-full);
+    background-color: var(--background-light);
+    border: 4px solid var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .dark .step-icon {
+    background-color: var(--background-dark);
+    border-color: var(--surface-dark);
+  }
+
+  .step-icon.final {
+    background-color: var(--primary);
+    border-color: var(--white);
+    box-shadow: var(--shadow-lg), var(--shadow-primary);
+  }
+
+  .dark .step-icon.final {
+    border-color: var(--surface-dark);
   }
 
   .step-icon .material-symbols-outlined {
-    font-size: 2.5rem;
-    color: var(--tema-texto-escuro-primario);
+    font-size: 36px;
+    color: var(--text-primary-light);
   }
 
-  .step-icon-final {
-    background-color: var(--tema-acao-destaque);
-    box-shadow: 0 10px 15px -3px rgba(255, 107, 0, 0.3);
+  .dark .step-icon .material-symbols-outlined {
+    color: var(--primary);
   }
 
-  .step-icon-final .material-symbols-outlined {
-    color: var(--paleta-branco-absoluto);
+  .step-icon.final .material-symbols-outlined {
+    color: var(--black);
   }
 
-  .step-title {
-    font-size: 1.125rem;
-    font-weight: var(--peso-fonte-bold);
-    color: var(--tema-texto-escuro-primario);
-    margin-bottom: 0.5rem;
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-light);
+    margin-bottom: var(--space-2);
   }
 
-  .step-description {
-    font-size: 0.875rem;
-    color: var(--tema-texto-secundario);
-    line-height: 1.6;
+  .dark h3 {
+    color: var(--white);
+  }
+
+  p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary-light);
+    line-height: var(--leading-normal);
+  }
+
+  .dark p {
+    color: var(--text-tertiary-dark);
   }
 </style>

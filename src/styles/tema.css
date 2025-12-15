@@ -1,55 +1,147 @@
+/* ===================================
+   HJLOG - Design System
+   Based on Spline Sans font family
+   Primary color: #f9f506 (yellow)
+   =================================== */
+
 :root {
-  /* Paleta principal */
-  --paleta-preto-carvao: #111111;
-  --paleta-cinza-grafite: #2a2a2a;
-  --paleta-preto-dark: #242424;
-  --paleta-branco-gelo: #f2f2f2;
-  --paleta-branco-off-white: #eeecec;
-  --paleta-laranja-queimado: #ff6b00;
-  --paleta-cinza-aco: #8c8c8c;
-  --paleta-branco-absoluto: #ffffff;
-  --paleta-cinza-nevoa: #c2c0c0;
+  /* ========== COLORS ========== */
+  /* Primary */
+  --primary: #f9f506;
+  --primary-hover: #e6e305;
+  --primary-light: rgba(249, 245, 6, 0.2);
+  --primary-border: rgba(249, 245, 6, 0.3);
 
-  /* Tokens de uso */
-  --tema-fundo-base-escuro: var(--paleta-preto-carvao);
-  --tema-fundo-superficie: var(--paleta-cinza-grafite);
-  --tema-fundo-base-claro: var(--paleta-branco-gelo);
-  --tema-fundo-header: var(--paleta-branco-off-white);
-  --tema-fundo-footer: var(--paleta-branco-off-white);
-  --tema-fundo-secundario-escuro:var(--paleta-preto-dark);
+  /* Background */
+  --background-light: #f8f8f5;
+  --background-dark: #23220f;
 
-  --tema-texto-escuro-primario: var(--paleta-preto-carvao);
-  --tema-texto-claro-primario: var(--paleta-branco-gelo);
-  --tema-texto-claro-secundario: var(--paleta-branco-absoluto);
-  --tema-texto-secundario: var(--paleta-cinza-aco);
-  --tema-texto-claro-terciario: var(--paleta-cinza-nevoa);
+  /* Surface */
+  --surface-light: #ffffff;
+  --surface-dark: #2c2b14;
 
-  --tema-acao-destaque: var(--paleta-laranja-queimado);
-  --tema-acao-destaque-suave: rgb(255 107 0 / 0.28);
+  /* Text Colors */
+  --text-primary-light: #0f172a;
+  --text-secondary-light: #475569;
+  --text-tertiary-light: #64748b;
 
-  --tema-borda-sutil: var(--paleta-cinza-aco);
+  --text-primary-dark: #f8fafc;
+  --text-secondary-dark: #cbd5e1;
+  --text-tertiary-dark: #94a3b8;
 
-  /* Tipografia */
-  --tipografia-fonte-primaria: "Inter", sans-serif;
-  --tipografia-fonte-secundaria: "Open Sans", sans-serif;
+  /* Border Colors */
+  --border-light: #e7e5e4;
+  --border-dark: #292524;
 
-  /* Tamanhos de fonte (rem) */
-  --tamanho-fonte-titulo-principal: 2.4375rem; /* 39px */
-  --tamanho-fonte-titulo-secundario: 1.9375rem; /* 31px */
-  --tamanho-fonte-subtitulo: 1.5625rem; /* 25px */
-  --tamanho-fonte-texto-apoio: 1.25rem; /* 20px */
-  --tamanho-fonte-texto-base: 1rem; /* 16px */
+  /* Utility Colors */
+  --white: #ffffff;
+  --black: #000000;
 
-  /* Pesos de fonte */
-  --peso-fonte-regular: 400;
-  --peso-fonte-semibold: 600;
-  --peso-fonte-bold: 700;
+  /* ========== TYPOGRAPHY ========== */
+  --font-display: 'Spline Sans', sans-serif;
+  --font-body: 'Spline Sans', sans-serif;
 
-  /* Alturas de linha */
-  --altura-linha-compacta: 1.2;
-  --altura-linha-conforto: 1.5;
+  /* Font Sizes */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
 
-  /* Espaçamento entre letras */
-  --espacamento-letras-titulo: 0.03125rem;
-  --espacamento-letras-padrao: 0;
+  /* Font Weights */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* Line Heights */
+  --leading-tight: 1.1;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+
+  /* ========== SPACING ========== */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ========== BORDER RADIUS ========== */
+  --radius-sm: 0.5rem;    /* 8px */
+  --radius-default: 1rem; /* 16px */
+  --radius-lg: 1.5rem;    /* 24px */
+  --radius-xl: 2rem;      /* 32px */
+  --radius-2xl: 3rem;     /* 48px */
+  --radius-full: 9999px;
+
+  /* ========== SHADOWS ========== */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-primary: 0 0 20px rgba(249, 245, 6, 0.4);
+  --shadow-primary-sm: 0 0 10px rgba(249, 245, 6, 0.2);
+
+  /* ========== TRANSITIONS ========== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========== CONTAINER ========== */
+  --container-max-width: 1440px;
+  --container-padding-mobile: 1rem;
+  --container-padding-tablet: 2.5rem;
+  --container-padding-desktop: 10rem;
+}
+
+/* ========== SCROLLBAR STYLING ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* ========== DARK MODE ========== */
+.dark ::-webkit-scrollbar-track {
+  background: var(--background-dark);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #404040;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #525252;
 }

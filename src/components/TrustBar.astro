@@ -1,17 +1,31 @@
 ---
-import { trustBrands } from "../data/trust-brands";
+// Trust Bar Component - Companies that trust HJLOG
 ---
 
 <section class="trust-bar">
   <div class="container">
-    <p class="trust-title">Empresas que confiam na HJLOG</p>
-    <div class="brands-grid">
-      {trustBrands.map(brand => (
-        <div class="brand-item">
-          <span class="material-symbols-outlined">{brand.icon}</span>
-          <span class="brand-name">{brand.name}</span>
-        </div>
-      ))}
+    <p class="title">Empresas que confiam na HJLOG</p>
+    <div class="logos">
+      <div class="logo-item">
+        <span class="material-symbols-outlined">package_2</span>
+        <span>LOGIPACK</span>
+      </div>
+      <div class="logo-item">
+        <span class="material-symbols-outlined">factory</span>
+        <span>INDÚSTRIA BR</span>
+      </div>
+      <div class="logo-item">
+        <span class="material-symbols-outlined">shopping_cart</span>
+        <span>VAREJO EXPRESS</span>
+      </div>
+      <div class="logo-item">
+        <span class="material-symbols-outlined">agriculture</span>
+        <span>AGROTECH</span>
+      </div>
+      <div class="logo-item">
+        <span class="material-symbols-outlined">medication</span>
+        <span>PHARMA FAST</span>
+      </div>
     </div>
   </div>
 </section>
@@ -19,55 +33,86 @@ import { trustBrands } from "../data/trust-brands";
 <style>
   .trust-bar {
     width: 100%;
-    background-color: var(--paleta-branco-absoluto);
-    border-bottom: 1px solid #e5e5e5;
-    padding: 2rem 0;
+    background-color: var(--surface-light);
+    border-bottom: 1px solid var(--border-light);
+    padding: var(--space-8) 0;
     overflow: hidden;
   }
 
-  .trust-title {
-    text-align: center;
-    font-size: 0.875rem;
-    font-weight: var(--peso-fonte-semibold);
-    color: var(--tema-texto-secundario);
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .dark .trust-bar {
+    background-color: var(--surface-dark);
+    border-bottom-color: var(--border-dark);
   }
 
-  .brands-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    opacity: 0.6;
-    transition: all 0.5s ease;
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
   }
 
   @media (min-width: 768px) {
-    .brands-grid {
-      gap: 4rem;
+    .container {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
     }
   }
 
-  .brands-grid:hover {
-    opacity: 1;
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: var(--container-padding-desktop);
+      padding-right: var(--container-padding-desktop);
+    }
   }
 
-  .brand-item {
+  .title {
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-tertiary-light);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+
+  .dark .title {
+    color: var(--text-tertiary-dark);
+  }
+
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8);
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: opacity var(--transition-slow), filter var(--transition-slow);
+  }
+
+  @media (min-width: 768px) {
+    .logos {
+      gap: var(--space-16);
+    }
+  }
+
+  .logos:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  .logo-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: var(--peso-fonte-bold);
-    color: var(--tema-texto-escuro-primario);
+    gap: var(--space-2);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-light);
   }
 
-  .brand-item .material-symbols-outlined {
-    font-size: 1.5rem;
+  .dark .logo-item {
+    color: var(--text-secondary-dark);
   }
 
-  .brand-name {
-    font-family: var(--tipografia-fonte-primaria);
+  .logo-item .material-symbols-outlined {
+    font-size: 24px;
   }
 </style>

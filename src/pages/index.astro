@@ -1,24 +1,28 @@
 ---
 import MainLayoult from "../layouts/MainLayoult.astro";
-import HeroSectionNew from "../components/HeroSectionNew.astro";
+import Header from "../components/Header.astro";
+import HeroSection from "../components/HeroSection.astro";
 import TrustBar from "../components/TrustBar.astro";
-import ServicosNew from "../components/ServicosNew.astro";
+import Services from "../components/Services.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import Coverage from "../components/Coverage.astro";
 import Features from "../components/Features.astro";
 import Testimonials from "../components/Testimonials.astro";
 import FinalCTA from "../components/FinalCTA.astro";
-import FooterNew from "../components/FooterNew.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <MainLayoult>
-  <HeroSectionNew />
-  <TrustBar />
-  <ServicosNew />
-  <HowItWorks />
-  <Coverage />
-  <Features />
-  <Testimonials />
-  <FinalCTA />
-  <FooterNew />
+  <Header />
+  <main>
+    <HeroSection />
+    <TrustBar />
+    <Services />
+    <HowItWorks />
+    <Coverage />
+    <Features />
+    <Testimonials />
+    <FinalCTA />
+  </main>
+  <Footer />
 </MainLayoult>
