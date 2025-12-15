@@ -68,12 +68,14 @@ import { stats } from "../data/stats";
   }
 
   .stats-header {
-    flex: 0 0 auto;
+    width: 100%;
+    text-align: left;
   }
 
   @media (min-width: 768px) {
     .stats-header {
       flex: 0 0 33.333%;
+      width: 33.333%;
     }
   }
 
@@ -106,6 +108,7 @@ import { stats } from "../data/stats";
     .stats-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       flex: 0 0 66.666%;
+      width: 66.666%;
     }
   }
 

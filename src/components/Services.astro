@@ -43,14 +43,7 @@ import { services } from "../data/services";
               />
               <div class="service-card-overlay" />
               <div class="service-card-content">
-                <div
-                  class:list={[
-                    "service-card-icon",
-                    service.featured
-                      ? "service-card-icon--featured"
-                      : "service-card-icon--default",
-                  ]}
-                >
+                <div class="service-card-icon">
                   <span class="material-symbols-outlined">
                     {service.icon}
                   </span>
@@ -225,22 +218,14 @@ import { services } from "../data/services";
     align-items: center;
     justify-content: center;
     margin-bottom: var(--space-4);
+    background-color: var(--surface-dark);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-dark);
     transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
     font-size: var(--text-2xl);
   }
 
-  .service-card-icon--featured {
-    background-color: var(--primary);
-    color: var(--background-dark);
-  }
-
-  .service-card-icon--default {
-    background-color: var(--surface-dark);
-    color: var(--text-primary-dark);
-    border: 1px solid var(--border-dark);
-  }
-
-  .service-card:hover .service-card-icon--default {
+  .service-card:hover .service-card-icon {
     background-color: var(--primary);
     color: var(--background-dark);
     border-color: var(--primary);
