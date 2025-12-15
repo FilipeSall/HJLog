@@ -13,16 +13,40 @@ import { stats } from "../data/stats";
       </div>
 
       <div class="stats-grid">
-        {
-          stats.items.map((stat) => (
+      {
+        stats.items.map((stat) => {
+          const numberMatch = stat.value.match(/(\d+(?:[.,]\d+)?)/);
+          const numberPart = numberMatch ? numberMatch[1] : null;
+          const decimals =
+            numberPart && numberPart.includes(".")
+              ? numberPart.split(".")[1].length
+              : numberPart && numberPart.includes(",")
+              ? numberPart.split(",")[1].length
+              : 0;
+          const targetValue = numberPart
+            ? parseFloat(numberPart.replace(",", "."))
+            : null;
+          const suffix = numberPart ? stat.value.replace(numberPart, "") : "";
+
+          return (
             <div class="stat-item">
-              <p class="stat-value">{stat.value}</p>
+              <p
+                class="stat-value"
+                data-target={targetValue !== null ? String(targetValue) : undefined}
+                data-decimals={
+                  targetValue !== null ? String(decimals) : undefined
+                }
+                data-suffix={suffix}
+              >
+                {stat.value}
+              </p>
               <p class="stat-label">
                 {stat.label}
               </p>
             </div>
-          ))
-        }
+          );
+        })
+      }
       </div>
     </div>
   </div>
@@ -135,3 +159,81 @@ import { stats } from "../data/stats";
     line-height: var(--leading-normal);
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    /**
+     * @param {HTMLElement} element
+     */
+    const animateCounter = (element: HTMLElement) => {
+      if (element.dataset.animated === "true") {
+        return;
+      }
+
+      const targetAttr = element.dataset.target;
+      if (!targetAttr) {
+        return;
+      }
+
+      const target = parseFloat(targetAttr);
+      if (Number.isNaN(target)) {
+        return;
+      }
+
+      const suffix = element.dataset.suffix ?? "";
+      const decimalsAttr = element.dataset.decimals;
+      const decimals = decimalsAttr ? parseInt(decimalsAttr, 10) : 0;
+      const duration = 1500;
+      const startTime = performance.now();
+
+      /**
+       * @param {number} now
+       */
+      const step = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const current = target * progress;
+        const formatted =
+          decimals > 0
+            ? current.toFixed(decimals)
+            : Math.round(current).toString();
+
+        element.textContent = `${formatted}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          element.textContent = `${target.toFixed(decimals)}${suffix}`;
+          element.dataset.animated = "true";
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      /**
+       * @param {IntersectionObserverEntry[]} entries
+       * @param {IntersectionObserver} obs
+       */
+      (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll(".stat-value");
+            counters.forEach((counter) => {
+              if (counter instanceof HTMLElement) {
+                animateCounter(counter);
+              }
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    const section = document.querySelector(".stats-section");
+    if (section) {
+      observer.observe(section);
+    }
+  }
+</script>
