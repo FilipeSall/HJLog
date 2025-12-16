@@ -9,15 +9,22 @@ interface Props {
 }
 
 const { links } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === "/" && currentPath === "/") return true;
+  if (href !== "/" && currentPath.startsWith(href)) return true;
+  return false;
+};
 ---
 
 <div id="mobile-menu" class="mobile-menu">
   <div class="mobile-menu-links">
     {
-      links.map((link, index) => (
+      links.map((link) => (
         <a
           href={link.href}
-          class={index === 0 ? "nav-link nav-link-active" : "nav-link"}
+          class={isActive(link.href) ? "nav-link nav-link-active" : "nav-link"}
         >
           {link.label}
         </a>

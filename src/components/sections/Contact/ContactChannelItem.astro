@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  icon: string;
+  title: string;
+  content: string[];
+  subtitle?: string;
+}
+
+const { icon, title, content, subtitle } = Astro.props;
+---
+
+<div class="channel-item">
+  <div class="channel-icon">
+    <Icon name={icon} size={28} />
+  </div>
+  <div class="channel-content">
+    <h3 class="channel-title">{title}</h3>
+    {content.map((line) => <p class="channel-text">{line}</p>)}
+    {subtitle && <p class="channel-subtitle">{subtitle}</p>}
+  </div>
+</div>
+
+<style>
+  .channel-item {
+    display: flex;
+    gap: var(--space-4);
+    group: hover;
+  }
+
+  .channel-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--surface-dark);
+    border: 1px solid var(--surface-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    transition: all var(--transition-base);
+  }
+
+  .channel-item:hover .channel-icon {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  .channel-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .channel-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+  }
+
+  .channel-text {
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+  }
+
+  .channel-subtitle {
+    font-size: var(--text-xs);
+    color: var(--text-secondary-dark);
+    opacity: 0.7;
+  }
+</style>

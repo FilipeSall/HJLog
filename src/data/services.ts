@@ -16,7 +16,7 @@ export const services = {
       description:
         "Transporte de caixas de som, painéis de LED, estruturas e equipamentos técnicos. Atendimento direto a produtoras e empresas do setor.",
       icon: "local_shipping",
-      image: showsEventsImage.src,
+      image: showsEventsImage,
       imageAlt: "Transporte de estruturas para eventos",
       featured: true,
     },
@@ -25,7 +25,7 @@ export const services = {
       description:
         "Instalações seguras e climatizadas para otimizar sua distribuição.",
       icon: "warehouse",
-      image: warehouseImage.src,
+      image: warehouseImage,
       imageAlt: "Estrutura de armazenagem",
       featured: false,
     },
@@ -34,7 +34,7 @@ export const services = {
       description:
         "Transferência entre Centros de Distribuição e abastecimento de lojas. Atuação com grandes redes.",
       icon: "route",
-      image: corporateLogisticsImage.src,
+      image: corporateLogisticsImage,
       imageAlt: "Operação de logística corporativa",
       featured: false,
     },
@@ -43,7 +43,7 @@ export const services = {
       description:
         "Veículos exclusivos para sua carga com monitoramento dedicado.",
       icon: "inventory_2",
-      image: dedicatedLoadImage.src,
+      image: dedicatedLoadImage,
       imageAlt: "Carga dedicada em transporte especializado",
       featured: false,
     },

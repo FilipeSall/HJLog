@@ -19,7 +19,7 @@ export const hero = {
       href: "#services",
     },
   },
-  heroImage: heroImage.src,
+  heroImage: heroImage,
   heroImageAlt: "Caminhão moderno na rodovia representando transporte rodoviário",
   steps: [
     {

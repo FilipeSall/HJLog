@@ -1,0 +1,91 @@
+---
+import MainLayoult from "../layouts/MainLayoult.astro";
+import Header from "../components/layout/Header/Header.astro";
+import Footer from "../components/layout/Footer/Footer.astro";
+import ContactHeader from "../components/sections/Contact/ContactHeader.astro";
+import ContactChannels from "../components/sections/Contact/ContactChannels.astro";
+import ContactForm from "../components/sections/Contact/ContactForm.astro";
+import ContactMap from "../components/sections/Contact/ContactMap.astro";
+import { contato } from "../data/contato";
+---
+
+<MainLayoult>
+  <Header />
+  <main>
+    <ContactHeader
+      tagline={contato.header.tagline}
+      title={contato.header.title}
+      description={contato.header.description}
+    />
+
+    <section class="contact-content-section">
+      <div class="contact-content-container">
+        <div class="contact-grid">
+          <ContactChannels
+            title={contato.channels.title}
+            description={contato.channels.description}
+            items={contato.channels.items}
+            socialMedia={contato.socialMedia}
+          />
+
+          <ContactForm
+            title={contato.form.title}
+            fields={contato.form.fields}
+            submitLabel={contato.form.submitLabel}
+          />
+        </div>
+      </div>
+    </section>
+
+    <ContactMap
+      title={contato.map.title}
+      description={contato.map.description}
+      linkLabel={contato.map.linkLabel}
+      embedUrl={contato.map.embedUrl}
+    />
+  </main>
+  <Footer />
+</MainLayoult>
+
+<style>
+  .contact-content-section {
+    padding: var(--space-16) 0;
+    background-color: var(--background-dark);
+  }
+
+  @media (min-width: 768px) {
+    .contact-content-section {
+      padding: var(--space-24) 0;
+    }
+  }
+
+  .contact-content-container {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .contact-content-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-content-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

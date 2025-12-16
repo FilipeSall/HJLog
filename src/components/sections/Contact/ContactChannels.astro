@@ -1,0 +1,80 @@
+---
+import ContactChannelItem from "./ContactChannelItem.astro";
+import ContactSocialMedia from "./ContactSocialMedia.astro";
+
+interface ChannelItem {
+  icon: string;
+  title: string;
+  content: string[];
+  subtitle?: string;
+}
+
+interface SocialLink {
+  label: string;
+  icon: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  items: ChannelItem[];
+  socialMedia: {
+    title: string;
+    links: SocialLink[];
+  };
+}
+
+const { title, description, items, socialMedia } = Astro.props;
+---
+
+<div class="contact-channels">
+  <h2 class="channels-title">{title}</h2>
+  <p class="channels-description">
+    {description}
+  </p>
+
+  <div class="channels-list">
+    {
+      items.map((item) => (
+        <ContactChannelItem
+          icon={item.icon}
+          title={item.title}
+          content={item.content}
+          subtitle={item.subtitle}
+        />
+      ))
+    }
+  </div>
+
+  <ContactSocialMedia title={socialMedia.title} links={socialMedia.links} />
+</div>
+
+<style>
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .channels-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-8);
+    border-left: 4px solid var(--primary);
+    padding-left: var(--space-4);
+  }
+
+  .channels-description {
+    color: var(--text-secondary-dark);
+    margin-bottom: var(--space-10);
+    line-height: var(--leading-relaxed);
+  }
+
+  .channels-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+</style>

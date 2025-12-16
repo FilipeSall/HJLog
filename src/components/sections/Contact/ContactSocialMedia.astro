@@ -1,0 +1,73 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface SocialLink {
+  label: string;
+  icon: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  links: SocialLink[];
+}
+
+const { title, links } = Astro.props;
+---
+
+<div class="social-media-section">
+  <h4 class="social-media-title">{title}</h4>
+  <div class="social-media-links">
+    {
+      links.map((link) => (
+        <a href={link.href} class="social-link" target="_blank" rel="noopener noreferrer">
+          <Icon name={link.icon} size={20} />
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .social-media-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-10);
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  .social-media-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--text-secondary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--space-6);
+  }
+
+  .social-media-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .social-link {
+    height: 2.5rem;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--surface-dark);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    transition: all var(--transition-base);
+  }
+
+  .social-link:hover {
+    background-color: var(--primary);
+    color: var(--background-dark);
+    border-color: var(--primary);
+  }
+</style>

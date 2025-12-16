@@ -1,16 +1,28 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 export interface HeroBackgroundProps {
-  image: string;
+  image: ImageMetadata;
   imageAlt: string;
 }
 
 const { image, imageAlt } = Astro.props;
 ---
+
 <div class="hero-background">
   <div class="hero-background-base"></div>
   <div class="hero-image-container">
     <div class="hero-image-overlay"></div>
-    <img alt={imageAlt} class="hero-image" src={image} />
+    <Image
+      src={image}
+      alt={imageAlt}
+      class="hero-image"
+      loading="eager"
+      decoding="async"
+      width={1920}
+      height={1080}
+    />
   </div>
   <div class="hero-gradient-overlay"></div>
 </div>

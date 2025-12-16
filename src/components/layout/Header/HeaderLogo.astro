@@ -1,13 +1,18 @@
 ---
 import logo from "../../../images/newlogo.webp";
+import { Image } from "astro:assets";
 ---
 
 <div class="header-logo">
-  <a href="#" class="logo-link">
-    <img
-      src={logo.src}
+  <a href="/" class="logo-link">
+    <Image
+      src={logo}
       alt="HJLOG Logo"
       class="logo-img"
+      loading="eager"
+      decoding="async"
+      width={100}
+      height={40}
     />
   </a>
 </div>
