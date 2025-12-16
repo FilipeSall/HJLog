@@ -15,7 +15,7 @@ export const services = {
       title: "Transporte de Shows e Eventos",
       description:
         "Transporte de caixas de som, painéis de LED, estruturas e equipamentos técnicos. Atendimento direto a produtoras e empresas do setor.",
-      icon: "local_shipping",
+      icon: "mdi:truck-delivery",
       image: showsEventsImage,
       imageAlt: "Transporte de estruturas para eventos",
       featured: true,
@@ -24,7 +24,7 @@ export const services = {
       title: "Armazenagem",
       description:
         "Instalações seguras e climatizadas para otimizar sua distribuição.",
-      icon: "warehouse",
+      icon: "mdi:warehouse",
       image: warehouseImage,
       imageAlt: "Estrutura de armazenagem",
       featured: false,
@@ -33,7 +33,7 @@ export const services = {
       title: "Logística Corporativa",
       description:
         "Transferência entre Centros de Distribuição e abastecimento de lojas. Atuação com grandes redes.",
-      icon: "route",
+      icon: "mdi:routes",
       image: corporateLogisticsImage,
       imageAlt: "Operação de logística corporativa",
       featured: false,
@@ -42,7 +42,7 @@ export const services = {
       title: "Carga Dedicada",
       description:
         "Veículos exclusivos para sua carga com monitoramento dedicado.",
-      icon: "inventory_2",
+      icon: "mdi:package-variant",
       image: dedicatedLoadImage,
       imageAlt: "Carga dedicada em transporte especializado",
       featured: false,

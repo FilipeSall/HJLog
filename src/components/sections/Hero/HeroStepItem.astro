@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 export interface HeroStepItemProps {
   icon: string;
   title: string;
@@ -10,7 +12,7 @@ const { icon, title, description, hasDivider } = Astro.props;
 ---
 <div class:list={["hero-step", hasDivider ? "hero-step-divider" : ""]}>
   <div class="hero-step-icon">
-    <span class="material-symbols-outlined">{icon}</span>
+    <Icon name={icon} />
   </div>
   <h3 class="hero-step-title">{title}</h3>
   <p class="hero-step-description">{description}</p>
@@ -36,10 +38,12 @@ const { icon, title, description, hasDivider } = Astro.props;
   .hero-step-icon {
     margin-bottom: var(--space-4);
     color: var(--primary);
+    font-size: var(--text-4xl);
   }
 
-  .hero-step-icon .material-symbols-outlined {
-    font-size: var(--text-4xl);
+  .hero-step-icon svg {
+    width: 1em;
+    height: 1em;
   }
 
   .hero-step-title {

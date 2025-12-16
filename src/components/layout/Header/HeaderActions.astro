@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   ctaHref: string;
   ctaLabel: string;
@@ -20,7 +22,7 @@ const { ctaHref, ctaLabel } = Astro.props;
     aria-expanded="false"
     aria-controls="mobile-menu"
   >
-    <span class="material-symbols-outlined">menu</span>
+    <Icon name="mdi:menu" />
   </button>
 </div>
 
@@ -54,6 +56,12 @@ const { ctaHref, ctaLabel } = Astro.props;
   .menu-button {
     color: var(--text-primary-dark);
     display: inline-flex;
+    font-size: 1.5rem;
+  }
+
+  .menu-button svg {
+    width: 1em;
+    height: 1em;
   }
 
   /* Media queries */

@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   tagline: string;
   title: string;
@@ -20,7 +22,7 @@ const { tagline, title, ctaLabel, ctaHref } = Astro.props;
   </div>
   <a class="services-cta" href={ctaHref}>
     {ctaLabel}
-    <span class="material-symbols-outlined services-cta-icon">arrow_forward</span>
+    <Icon name="mdi:arrow-right" class="services-cta-icon" />
   </a>
 </div>
 
@@ -81,7 +83,12 @@ const { tagline, title, ctaLabel, ctaHref } = Astro.props;
     transition: transform var(--transition-base);
   }
 
+  .services-cta-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+
   .services-cta:hover .services-cta-icon {
-    transform: translateX(0.25rem);
+    transform: translateY(-0.125rem);
   }
 </style>

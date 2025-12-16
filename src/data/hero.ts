@@ -23,17 +23,17 @@ export const hero = {
   heroImageAlt: "Caminhão moderno na rodovia representando transporte rodoviário",
   steps: [
     {
-      icon: "map",
+      icon: "mdi:map",
       title: "Planejamento da rota",
       description: "Otimização inteligente de trajetos para reduzir custos e prazos.",
     },
     {
-      icon: "local_shipping",
+      icon: "mdi:truck-delivery",
       title: "Carga e monitoramento",
       description: "Rastreamento em tempo real 24/7 de toda a sua mercadoria.",
     },
     {
-      icon: "verified_user",
+      icon: "mdi:shield-check",
       title: "Entrega responsável",
       description: "Compromisso total com prazos e integridade da carga.",
     },

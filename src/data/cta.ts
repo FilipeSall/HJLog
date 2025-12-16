@@ -8,19 +8,19 @@ export const cta = {
   partners: [
     {
       name: "NACIONAL INC",
-      icon: "public",
+      icon: "mdi:earth",
     },
     {
       name: "FAST TRACK",
-      icon: "bolt",
+      icon: "mdi:lightning-bolt",
     },
     {
       name: "BOX LOGIC",
-      icon: "package_2",
+      icon: "mdi:package-variant",
     },
     {
       name: "HIGHWAY EXP",
-      icon: "add_road",
+      icon: "mdi:highway",
     },
   ],
 };

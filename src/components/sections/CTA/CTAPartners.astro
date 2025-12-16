@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Partner {
   icon: string;
   name: string;
@@ -21,7 +23,7 @@ const { title, partners } = Astro.props;
     {
       partners.map((partner) => (
         <div class="cta-partner-item">
-          <span class="material-symbols-outlined">{partner.icon}</span>{" "}
+          <Icon name={partner.icon} />{" "}
           {partner.name}
         </div>
       ))
@@ -71,6 +73,11 @@ const { title, partners } = Astro.props;
     font-weight: var(--font-bold);
     font-size: var(--text-lg);
     font-family: var(--font-display);
+  }
+
+  .cta-partner-item svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   /* Responsive Design */

@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 export interface ButtonLinkProps {
   href: string;
   label: string;
@@ -31,7 +33,7 @@ const relValue = target === "_blank" ? rel ?? "noopener noreferrer" : rel;
 >
   <span>{label}</span>
   {icon && (
-    <span class="material-symbols-outlined button-link__icon">{icon}</span>
+    <Icon name={icon} class="button-link__icon" />
   )}
 </a>
 
@@ -96,6 +98,11 @@ const relValue = target === "_blank" ? rel ?? "noopener noreferrer" : rel;
   .button-link__icon {
     font-size: var(--text-lg);
     transition: transform var(--transition-fast);
+  }
+
+  .button-link__icon svg {
+    width: 1em;
+    height: 1em;
   }
 
   .button-link:hover .button-link__icon {
