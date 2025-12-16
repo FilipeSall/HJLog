@@ -1,0 +1,42 @@
+---
+import ButtonLink from "../../shared/buttons/ButtonLink.astro";
+
+export interface HeroCtaGroupProps {
+  primary: {
+    href: string;
+    label: string;
+  };
+  secondary: {
+    href: string;
+    label: string;
+  };
+}
+
+const { primary, secondary } = Astro.props;
+---
+<div class="hero-cta-group">
+  <ButtonLink
+    href={primary.href}
+    label={primary.label}
+    variant="primary"
+    size="lg"
+    target="_blank"
+  />
+  <ButtonLink
+    href={secondary.href}
+    label={secondary.label}
+    variant="secondary"
+    size="lg"
+    icon="arrow_outward"
+  />
+</div>
+
+<style>
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin-top: var(--space-4);
+  }
+</style>

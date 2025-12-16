@@ -1,0 +1,53 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
+  image: string;
+  imageAlt: string;
+}
+
+interface Props {
+  items: Service[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="services-grid">
+  {
+    items.map((service, index) => {
+      const isTopRow = index < 2;
+      const isLeftCol = index % 2 === 0;
+
+      return (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          icon={service.icon}
+          image={service.image}
+          imageAlt={service.imageAlt}
+          isTopRow={isTopRow}
+          isLeftCol={isLeftCol}
+          imagePosition={index === 2 ? "bottom" : "center"}
+        />
+      );
+    })
+  }
+</div>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

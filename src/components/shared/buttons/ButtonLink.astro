@@ -1,0 +1,104 @@
+---
+export interface ButtonLinkProps {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary" | "light";
+  size?: "sm" | "lg";
+  icon?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  variant = "primary",
+  size = "lg",
+  icon,
+  target,
+  rel,
+  class: className = "",
+} = Astro.props;
+
+const relValue = target === "_blank" ? rel ?? "noopener noreferrer" : rel;
+---
+<a
+  class={`button-link button-link--${variant} button-link--${size} ${className}`.trim()}
+  href={href}
+  target={target}
+  rel={relValue}
+>
+  <span>{label}</span>
+  {icon && (
+    <span class="material-symbols-outlined button-link__icon">{icon}</span>
+  )}
+</a>
+
+<style>
+  .button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-weight: var(--font-bold);
+    transition: all var(--transition-base);
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+
+  .button-link--lg {
+    height: 3.5rem;
+    min-width: 12.5rem;
+    padding: 0 var(--space-8);
+    font-size: var(--text-sm);
+  }
+
+  .button-link--sm {
+    height: 2.5rem;
+    padding: 0 var(--space-5);
+    font-size: var(--text-xs);
+    border-radius: 0.5rem;
+  }
+
+  .button-link--primary {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  .button-link--primary:hover {
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .button-link--secondary {
+    background-color: var(--background-dark);
+    border-color: var(--surface-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .button-link--secondary:hover {
+    background-color: var(--surface-dark);
+  }
+
+  .button-link--light {
+    background-color: var(--white);
+    color: var(--background-dark);
+    border-color: var(--white);
+  }
+
+  .button-link--light:hover {
+    background-color: #e5e5e5;
+  }
+
+  .button-link__icon {
+    font-size: var(--text-lg);
+    transition: transform var(--transition-fast);
+  }
+
+  .button-link:hover .button-link__icon {
+    transform: translateX(0.25rem);
+  }
+</style>

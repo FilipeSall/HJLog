@@ -1,0 +1,91 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<div id="mobile-menu" class="mobile-menu">
+  <div class="mobile-menu-links">
+    {
+      links.map((link, index) => (
+        <a
+          href={link.href}
+          class={index === 0 ? "nav-link nav-link-active" : "nav-link"}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: rgba(17, 17, 17, 0.98);
+    border-bottom: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    animation: fadeIn var(--transition-base);
+  }
+
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mobile-menu--open {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link-active {
+    color: var(--text-primary-dark);
+  }
+
+  .nav-link-active:hover {
+    color: var(--primary);
+  }
+
+  .nav-link:not(.nav-link-active) {
+    color: var(--text-secondary-dark);
+  }
+
+  .nav-link:not(.nav-link-active):hover {
+    color: var(--text-primary-dark);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Media queries */
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+</style>

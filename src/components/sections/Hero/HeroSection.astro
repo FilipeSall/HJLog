@@ -1,0 +1,31 @@
+---
+import { hero } from "../../../data/hero";
+import HeroBackground from "./HeroBackground.astro";
+import HeroContent from "./HeroContent.astro";
+import HeroSteps from "./HeroSteps.astro";
+---
+<header class="hero-header">
+  <HeroBackground image={hero.heroImage} imageAlt={hero.heroImageAlt} />
+
+  <HeroContent
+    tagline={hero.tagline}
+    title={hero.title}
+    description={hero.description}
+    cta={hero.cta}
+  />
+
+  <HeroSteps steps={hero.steps} />
+</header>
+
+<style>
+  .hero-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    overflow: hidden;
+    background-color: var(--background-dark);
+    padding-top: 8rem;
+    padding-bottom: var(--space-12);
+  }
+</style>

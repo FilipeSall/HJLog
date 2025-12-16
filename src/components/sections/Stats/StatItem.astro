@@ -1,0 +1,58 @@
+---
+interface Props {
+  value: string;
+  label: string;
+}
+
+const { value, label } = Astro.props;
+
+const numberMatch = value.match(/(\d+(?:[.,]\d+)?)/);
+const numberPart = numberMatch ? numberMatch[1] : null;
+const decimals =
+  numberPart && numberPart.includes(".")
+    ? numberPart.split(".")[1].length
+    : numberPart && numberPart.includes(",")
+    ? numberPart.split(",")[1].length
+    : 0;
+const targetValue = numberPart ? parseFloat(numberPart.replace(",", ".")) : null;
+const suffix = numberPart ? value.replace(numberPart, "") : "";
+---
+
+<div class="stat-item">
+  <p
+    class="stat-value"
+    data-target={targetValue !== null ? String(targetValue) : undefined}
+    data-decimals={targetValue !== null ? String(decimals) : undefined}
+    data-suffix={suffix}
+  >
+    {value}
+  </p>
+  <p class="stat-label">
+    {label}
+  </p>
+</div>
+
+<style>
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--primary);
+    margin-bottom: var(--space-1);
+    font-family: var(--font-display);
+    line-height: var(--leading-tight);
+  }
+
+  .stat-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--text-secondary-dark);
+    font-family: var(--font-body);
+    line-height: var(--leading-normal);
+  }
+</style>

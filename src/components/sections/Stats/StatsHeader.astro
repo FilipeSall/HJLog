@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="stats-header">
+  <h2 class="stats-title">
+    {title}
+  </h2>
+  <p class="stats-description">{description}</p>
+</div>
+
+<style>
+  .stats-header {
+    width: 100%;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .stats-header {
+      flex: 0 0 33.333%;
+      width: 33.333%;
+    }
+  }
+
+  .stats-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+    font-family: var(--font-display);
+    line-height: var(--leading-tight);
+  }
+
+  .stats-description {
+    color: var(--text-secondary-dark);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+</style>

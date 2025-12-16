@@ -1,0 +1,65 @@
+---
+import HeroStepItem from "./HeroStepItem.astro";
+
+export interface HeroStepsProps {
+  steps: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
+}
+
+const { steps } = Astro.props;
+---
+<div class="hero-steps-section">
+  <div class="hero-steps-grid">
+    {
+      steps.map((step, index) => (
+        <HeroStepItem
+          icon={step.icon}
+          title={step.title}
+          description={step.description}
+          hasDivider={index < steps.length - 1}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .hero-steps-section {
+    position: relative;
+    z-index: 30;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-4) 0;
+    margin-top: auto;
+  }
+
+  @media (min-width: 640px) {
+    .hero-steps-section {
+      padding-left: var(--space-6);
+      padding-right: var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-steps-section {
+      padding-left: var(--space-8);
+      padding-right: var(--space-8);
+    }
+  }
+
+  .hero-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  @media (min-width: 768px) {
+    .hero-steps-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

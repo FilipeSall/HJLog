@@ -1,0 +1,32 @@
+---
+export interface PrimaryButtonProps {
+  label: string;
+  type?: "button" | "submit" | "reset";
+  class?: string;
+}
+
+const { label, type = "button", class: className = "" } = Astro.props;
+---
+<button type={type} class={`primary-button ${className}`.trim()}>
+  {label}
+</button>
+
+<style>
+  .primary-button {
+    background-color: var(--primary);
+    color: var(--background-dark);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: var(--space-4) var(--space-8);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    transition: background-color var(--transition-base);
+  }
+
+  .primary-button:hover {
+    background-color: var(--white);
+  }
+</style>

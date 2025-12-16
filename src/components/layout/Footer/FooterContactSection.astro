@@ -1,0 +1,78 @@
+---
+interface Contact {
+  address: string;
+  phone: string;
+  email: string;
+}
+
+interface Props {
+  title: string;
+  contact: Contact;
+}
+
+const { title, contact } = Astro.props;
+---
+
+<div class="footer-column">
+  <h4 class="footer-section-title">
+    {title}
+  </h4>
+
+  <div class="footer-contact">
+    <p set:html={contact.address.replace(/\n/g, "<br/>")} />
+    <p class="footer-contact-phone">
+      {contact.phone}
+    </p>
+    <p class="footer-contact-email">
+      {contact.email}
+    </p>
+  </div>
+</div>
+
+<style>
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  /* Section Titles */
+  .footer-section-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    border-left: 2px solid var(--primary);
+    padding-left: var(--space-3);
+  }
+
+  /* Contact Section */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+  }
+
+  .footer-contact-phone {
+    color: var(--white);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-contact-phone:hover {
+    color: var(--primary);
+  }
+
+  .footer-contact-email {
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-contact-email:hover {
+    color: var(--primary);
+  }
+</style>

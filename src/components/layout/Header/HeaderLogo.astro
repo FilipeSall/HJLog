@@ -1,0 +1,32 @@
+---
+import logo from "../../../images/newlogo.webp";
+---
+
+<div class="header-logo">
+  <a href="#" class="logo-link">
+    <img
+      src={logo.src}
+      alt="HJLOG Logo"
+      class="logo-img"
+    />
+  </a>
+</div>
+
+<style>
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .logo-img {
+    height: 2.5rem;
+    width: auto;
+  }
+</style>

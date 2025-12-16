@@ -1,0 +1,87 @@
+---
+import { footer } from "../../../data/footer";
+import FooterLogo from "./FooterLogo.astro";
+import FooterLinksSection from "./FooterLinksSection.astro";
+import FooterContactSection from "./FooterContactSection.astro";
+import FooterBottom from "./FooterBottom.astro";
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <FooterLogo description={footer.company.description} />
+
+      {
+        footer.sections.map((section) =>
+          section.links ? (
+            <FooterLinksSection
+              title={section.title}
+              links={section.links}
+            />
+          ) : section.contact ? (
+            <FooterContactSection
+              title={section.title}
+              contact={section.contact}
+            />
+          ) : null
+        )
+      }
+    </div>
+
+    <FooterBottom
+      copyright={footer.bottom.copyright}
+      links={footer.bottom.links}
+    />
+  </div>
+</footer>
+
+<style>
+  /* Footer Container */
+  .footer {
+    background-color: var(--background-dark);
+    border-top: 1px solid var(--surface-dark);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+  }
+
+  .footer-container {
+    margin: 0 auto;
+    max-width: var(--container-max-width);
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
+  }
+
+  @media (min-width: 768px) {
+    .footer-container {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-container {
+      padding-left: var(--container-padding-desktop);
+      padding-right: var(--container-padding-desktop);
+    }
+  }
+
+  /* Footer Grid */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

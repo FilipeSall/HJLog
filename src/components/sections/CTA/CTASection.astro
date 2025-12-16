@@ -1,0 +1,48 @@
+---
+import { cta } from "../../../data/cta";
+import CTABackground from "./CTABackground.astro";
+import CTAHeader from "./CTAHeader.astro";
+import CTAForm from "./CTAForm.astro";
+import CTAPartners from "./CTAPartners.astro";
+---
+
+<section class="cta-section">
+  <CTABackground />
+
+  <div class="cta-container">
+    <CTAHeader
+      title={cta.title}
+      description={cta.description}
+    />
+
+    <CTAForm
+      emailPlaceholder={cta.emailPlaceholder}
+      ctaLabel={cta.ctaLabel}
+    />
+
+    <CTAPartners
+      title={cta.partnersTitle}
+      partners={cta.partners}
+    />
+  </div>
+</section>
+
+<style>
+  /* ===== CTA Section Container ===== */
+  .cta-section {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-dark);
+    padding: var(--space-24) 0;
+  }
+
+  /* Main container */
+  .cta-container {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+</style>

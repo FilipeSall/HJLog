@@ -1,0 +1,83 @@
+---
+interface Props {
+  emailPlaceholder: string;
+  ctaLabel: string;
+}
+
+const { emailPlaceholder, ctaLabel } = Astro.props;
+---
+
+<form class="cta-form">
+  <input
+    class="cta-input"
+    placeholder={emailPlaceholder}
+    type="email"
+  />
+  <button
+    class="cta-button"
+    type="button"
+  >
+    {ctaLabel}
+  </button>
+</form>
+
+<style>
+  /* Form */
+  .cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 32rem;
+    margin: 0 auto var(--space-16);
+    box-shadow: var(--shadow-2xl);
+  }
+
+  /* Form Input */
+  .cta-input {
+    flex: 1;
+    background-color: var(--background-light);
+    color: var(--background-dark);
+    padding: var(--space-4) var(--space-6);
+    outline: none;
+    border: none;
+    font-weight: var(--font-medium);
+    font-family: var(--font-body);
+    transition: background-color var(--transition-base);
+  }
+
+  .cta-input::placeholder {
+    color: #999999;
+  }
+
+  .cta-input:focus {
+    ring: none;
+    border: none;
+    outline: none;
+  }
+
+  /* Form Button */
+  .cta-button {
+    background-color: var(--primary);
+    color: var(--background-dark);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: var(--space-4) var(--space-8);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    transition: background-color var(--transition-base);
+  }
+
+  .cta-button:hover {
+    background-color: var(--white);
+  }
+
+  /* Responsive Design */
+  @media (min-width: 640px) {
+    .cta-form {
+      flex-direction: row;
+    }
+  }
+</style>

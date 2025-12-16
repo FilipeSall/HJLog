@@ -1,0 +1,69 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  copyright: string;
+  links: Link[];
+}
+
+const { copyright, links } = Astro.props;
+---
+
+<div class="footer-bottom">
+  <p class="footer-copyright">{copyright}</p>
+  <div class="footer-bottom-links">
+    {
+      links.map((link) => (
+        <a
+          class="footer-bottom-link"
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  /* Footer Bottom */
+  .footer-bottom {
+    border-top: 1px solid var(--surface-dark);
+    padding-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer-copyright {
+    font-size: var(--text-xs);
+    color: var(--text-secondary-dark);
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .footer-bottom-link {
+    font-size: var(--text-xs);
+    color: var(--text-secondary-dark);
+    transition: color var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .footer-bottom-link:hover {
+    color: var(--white);
+  }
+</style>

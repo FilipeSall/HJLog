@@ -1,0 +1,122 @@
+---
+import { stats } from "../../../data/stats";
+import StatsHeader from "./StatsHeader.astro";
+import StatsGrid from "./StatsGrid.astro";
+---
+
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stats-layout">
+      <StatsHeader title={stats.title} description={stats.description} />
+      <StatsGrid items={stats.items} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-section {
+    padding: var(--space-20) 0;
+    background-color: var(--background-dark);
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  .stats-container {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .stats-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .stats-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .stats-layout {
+      flex-direction: row;
+    }
+  }
+</style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const animateCounter = (element: HTMLElement) => {
+      if (element.dataset.animated === "true") {
+        return;
+      }
+
+      const targetAttr = element.dataset.target;
+      if (!targetAttr) {
+        return;
+      }
+
+      const target = parseFloat(targetAttr);
+      if (Number.isNaN(target)) {
+        return;
+      }
+
+      const suffix = element.dataset.suffix ?? "";
+      const decimalsAttr = element.dataset.decimals;
+      const decimals = decimalsAttr ? parseInt(decimalsAttr, 10) : 0;
+      const duration = 1500;
+      const startTime = performance.now();
+
+      const step = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const current = target * progress;
+        const formatted =
+          decimals > 0
+            ? current.toFixed(decimals)
+            : Math.round(current).toString();
+
+        element.textContent = `${formatted}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          element.textContent = `${target.toFixed(decimals)}${suffix}`;
+          element.dataset.animated = "true";
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll(".stat-value");
+            counters.forEach((counter) => {
+              if (counter instanceof HTMLElement) {
+                animateCounter(counter);
+              }
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    const section = document.querySelector(".stats-section");
+    if (section) {
+      observer.observe(section);
+    }
+  }
+</script>

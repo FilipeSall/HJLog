@@ -1,0 +1,47 @@
+---
+import { services } from "../../../data/services";
+import ServicesHeader from "./ServicesHeader.astro";
+import ServicesGrid from "./ServicesGrid.astro";
+---
+
+<section class="services-section" id="services">
+  <div class="services-container">
+    <ServicesHeader
+      tagline={services.heading.tagline}
+      title={services.heading.title}
+      ctaLabel={services.heading.ctaLabel}
+      ctaHref={services.heading.ctaHref}
+    />
+
+    <ServicesGrid items={services.items} />
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: var(--space-24) 0;
+    background-color: rgba(42, 42, 42, 0.2);
+    position: relative;
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  .services-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    position: relative;
+    z-index: 10;
+  }
+
+  @media (min-width: 640px) {
+    .services-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-container {
+      padding: 0 var(--space-8);
+    }
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+export interface HeroBackgroundProps {
+  image: string;
+  imageAlt: string;
+}
+
+const { image, imageAlt } = Astro.props;
+---
+<div class="hero-background">
+  <div class="hero-background-base"></div>
+  <div class="hero-image-container">
+    <div class="hero-image-overlay"></div>
+    <img alt={imageAlt} class="hero-image" src={image} />
+  </div>
+  <div class="hero-gradient-overlay"></div>
+</div>
+
+<style>
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-background-base {
+    position: absolute;
+    inset: 0;
+    background-color: var(--background-dark);
+    z-index: 0;
+  }
+
+  .hero-image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    transform: translateX(0) skewX(-6deg);
+    transform-origin: bottom right;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-image-container {
+      width: 90%;
+    }
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      270deg,
+      transparent,
+      rgba(17, 17, 17, 0.2),
+      var(--background-dark)
+    );
+    z-index: 10;
+    transform: skewX(6deg) scale(1.1);
+    pointer-events: none;
+  }
+
+  .hero-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 15% center;
+    filter: grayscale(50%);
+    opacity: 0.8;
+    transform: skewX(6deg) scale(1.1);
+  }
+
+  .hero-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(14, 14, 14, 0.95),
+        rgba(14, 14, 14, 0.5),
+        transparent 50%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(14, 14, 14, 0.9),
+        rgba(14, 14, 14, 0.45),
+        transparent 50%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(14, 14, 14, 0.9),
+        rgba(14, 14, 14, 0.4),
+        transparent 60%
+      );
+    z-index: 10;
+  }
+</style>

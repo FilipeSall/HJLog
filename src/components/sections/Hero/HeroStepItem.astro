@@ -1,0 +1,57 @@
+---
+export interface HeroStepItemProps {
+  icon: string;
+  title: string;
+  description: string;
+  hasDivider: boolean;
+}
+
+const { icon, title, description, hasDivider } = Astro.props;
+---
+<div class:list={["hero-step", hasDivider ? "hero-step-divider" : ""]}>
+  <div class="hero-step-icon">
+    <span class="material-symbols-outlined">{icon}</span>
+  </div>
+  <h3 class="hero-step-title">{title}</h3>
+  <p class="hero-step-description">{description}</p>
+</div>
+
+<style>
+  .hero-step {
+    padding: var(--space-8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background-color: rgba(17, 17, 17, 0.5);
+    transition: background-color var(--transition-base);
+  }
+
+  .hero-step:hover {
+    background-color: rgba(42, 42, 42, 0.8);
+  }
+
+  .hero-step-divider {
+    border-right: 1px solid var(--surface-dark);
+  }
+
+  .hero-step-icon {
+    margin-bottom: var(--space-4);
+    color: var(--primary);
+  }
+
+  .hero-step-icon .material-symbols-outlined {
+    font-size: var(--text-4xl);
+  }
+
+  .hero-step-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .hero-step-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+  }
+</style>

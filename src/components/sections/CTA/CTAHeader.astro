@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="cta-header">
+  <h2 class="cta-title">
+    {title}
+  </h2>
+  <p class="cta-description">
+    {description}
+  </p>
+</div>
+
+<style>
+  .cta-header {
+    margin-bottom: var(--space-10);
+  }
+
+  /* Title */
+  .cta-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    font-family: var(--font-display);
+  }
+
+  /* Description */
+  .cta-description {
+    color: var(--text-secondary-dark);
+    font-size: var(--text-lg);
+    font-weight: var(--font-light);
+    font-family: var(--font-body);
+  }
+
+  /* Responsive Design */
+  @media (min-width: 640px) {
+    .cta-title {
+      font-size: var(--text-5xl);
+    }
+  }
+</style>
