@@ -88,6 +88,12 @@ const { tagline, title, description } = Astro.props;
     opacity: 0.2;
   }
 
+  @media (max-width: 1023px) {
+    .contact-image {
+      object-position: center 1%;
+    }
+  }
+
   .background-gradient {
     position: absolute;
     inset: 0;
@@ -106,6 +112,25 @@ const { tagline, title, description } = Astro.props;
         transparent
       );
     z-index: 10;
+  }
+
+  @media (max-width: 767px) {
+    .background-gradient {
+      background:
+        linear-gradient(
+          to top,
+          var(--background-dark),
+          transparent 40%,
+          transparent 10%,
+          var(--background-dark)
+        ),
+        linear-gradient(
+          to right,
+          var(--background-dark),
+          rgba(17, 17, 17, 0.98),
+          rgba(17, 17, 17, 0.85)
+        );
+    }
   }
 
   /* Content Styles */
