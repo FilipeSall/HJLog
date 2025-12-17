@@ -1,0 +1,256 @@
+---
+import CustomSelect from "./CustomSelect.astro";
+
+interface Props {
+  tagline: string;
+  title: string;
+  description: string;
+  serviceTypes: string[];
+}
+
+const { tagline, title, description, serviceTypes } = Astro.props;
+---
+
+<section class="quote-section" id="cotacao">
+  <div class="quote-container">
+    <div class="quote-header">
+      <span class="quote-tagline">{tagline}</span>
+      <h2 class="quote-title">{title}</h2>
+      <p class="quote-description">{description}</p>
+    </div>
+    <div class="quote-form-wrapper">
+      <form class="quote-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">Nome Completo</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Seu nome"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label for="company" class="form-label">Empresa</label>
+            <input
+              type="text"
+              id="company"
+              placeholder="Nome da sua empresa"
+              class="form-input"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" class="form-label">E-mail Corporativo</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="seu@email.com"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Telefone / WhatsApp</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="(00) 00000-0000"
+              class="form-input"
+            />
+          </div>
+        </div>
+        <div class="form-row form-row--three">
+          <CustomSelect
+            id="service-type"
+            label="Tipo de Serviço"
+            options={serviceTypes}
+          />
+          <div class="form-group">
+            <label for="origin" class="form-label">Cidade de Origem</label>
+            <input
+              type="text"
+              id="origin"
+              placeholder="Cidade/UF"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label for="destination" class="form-label">Cidade de Destino</label>
+            <input
+              type="text"
+              id="destination"
+              placeholder="Cidade/UF"
+              class="form-input"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cargo-details" class="form-label"
+            >Detalhes da Carga</label
+          >
+          <textarea
+            id="cargo-details"
+            placeholder="Descreva peso, dimensões, tipo de mercadoria e observações especiais..."
+            rows="4"
+            class="form-input form-textarea"></textarea>
+        </div>
+        <button type="button" class="form-submit">
+          Enviar Solicitação de Cotação
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quote-section {
+    padding: 6rem 0;
+    background-color: rgba(42, 42, 42, 0.3);
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  .quote-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .quote-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .quote-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .quote-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .quote-tagline {
+    color: var(--primary);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+    display: block;
+  }
+
+  .quote-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+  }
+
+  .quote-description {
+    color: var(--text-secondary-dark);
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .quote-form-wrapper {
+    background-color: var(--surface-dark);
+    padding: var(--space-8);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-dark);
+    max-width: 64rem;
+    margin: 0 auto;
+    box-shadow: var(--shadow-xl);
+  }
+
+  @media (min-width: 768px) {
+    .quote-form-wrapper {
+      padding: var(--space-12);
+    }
+  }
+
+  .quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .form-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-row--three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    color: var(--text-primary-dark);
+    transition: border-color 300ms, box-shadow 300ms;
+    outline: none;
+    font-family: var(--font-body);
+  }
+
+  .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+  }
+
+  .form-input::placeholder {
+    color: var(--text-secondary-dark);
+  }
+
+  .form-textarea {
+    resize: vertical;
+  }
+
+  .form-submit {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--background-dark);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    transition: background-color 300ms, color 300ms;
+    font-size: var(--text-lg);
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-display);
+  }
+
+  .form-submit:hover {
+    background-color: var(--white);
+    color: var(--background-dark);
+  }
+</style>

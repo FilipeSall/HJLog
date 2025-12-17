@@ -1,0 +1,151 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  tagline: string;
+  title: string;
+  titleHighlight: string;
+  description: string;
+  backgroundImage: ImageMetadata;
+}
+
+const { tagline, title, titleHighlight, description, backgroundImage } =
+  Astro.props;
+---
+
+<header class="service-detail-hero">
+  <div class="hero-background">
+    <Image
+      src={backgroundImage}
+      alt="Caminhões em fila"
+      class="hero-background-image"
+      width={1920}
+      height={1080}
+    />
+    <div class="hero-background-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tagline-wrapper">
+      <div class="hero-tagline-line"></div>
+      <span class="hero-tagline">{tagline}</span>
+      <div class="hero-tagline-line"></div>
+    </div>
+    <h1 class="hero-title">
+      {title}
+      <br />
+      <span class="hero-title-highlight">{titleHighlight}</span>
+    </h1>
+    <p class="hero-description">
+      {description}
+    </p>
+  </div>
+</header>
+
+<style>
+  .service-detail-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--background-dark);
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--surface-dark);
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-background-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.2;
+  }
+
+  .hero-background-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      var(--background-dark),
+      rgba(17, 17, 17, 0.8),
+      transparent
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .hero-content {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-content {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .hero-tagline-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-tagline-line {
+    height: 0.25rem;
+    width: 3rem;
+    background-color: var(--primary);
+  }
+
+  .hero-tagline {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--primary);
+  }
+
+  .hero-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary-dark);
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: var(--text-6xl);
+    }
+  }
+
+  .hero-title-highlight {
+    color: var(--text-secondary-dark);
+  }
+
+  .hero-description {
+    max-width: 42rem;
+    margin: 0 auto;
+    font-size: var(--text-lg);
+    color: var(--text-secondary-dark);
+  }
+</style>

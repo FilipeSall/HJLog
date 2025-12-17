@@ -1,16 +1,9 @@
 ---
 import ServiceCard from "./ServiceCard.astro";
-
-interface Service {
-  title: string;
-  description: string;
-  icon: string;
-  image: string;
-  imageAlt: string;
-}
+import type { ServiceItem } from "../../../data/services";
 
 interface Props {
-  items: Service[];
+  items: ServiceItem[];
 }
 
 const { items } = Astro.props;

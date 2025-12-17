@@ -55,3 +55,28 @@ export interface TrustBrandProps {
   name: string;
   icon: string;
 }
+
+export interface ServiceDetailFeature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface ServiceDetailHighlight {
+  icon: string;
+  title: string;
+  subtitle: string;
+  fullWidth?: boolean;
+}
+
+export interface ServiceDetail {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  imagePosition: "left" | "right";
+  features: ServiceDetailFeature[];
+  highlights: ServiceDetailHighlight[];
+  ctaText: string;
+  ctaHref: string;
+}

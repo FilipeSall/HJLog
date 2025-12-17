@@ -1,0 +1,352 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="contact-section">
+  <div class="contact-container">
+    <div class="contact-grid">
+      <!-- Canais de Atendimento -->
+      <div class="contact-info">
+        <span class="contact-tagline">Fale Conosco</span>
+        <h2 class="contact-title">Canais de Atendimento</h2>
+        <p class="contact-description">
+          Nossa equipe de especialistas está pronta para atender sua demanda.
+          Entre em contato pelos canais abaixo.
+        </p>
+        <div class="contact-channels">
+          <div class="contact-channel-item">
+            <div class="contact-channel-icon">
+              <Icon name="mdi:phone" />
+            </div>
+            <div>
+              <h4 class="contact-channel-title">Telefone</h4>
+              <a href="tel:+5511982217679" class="contact-channel-link">
+                +55 (11) 98221-7679
+              </a>
+              <p class="contact-channel-hours">Seg a Sex: 08h às 18h</p>
+            </div>
+          </div>
+          <div class="contact-channel-item">
+            <div class="contact-channel-icon">
+              <Icon name="mdi:email" />
+            </div>
+            <div>
+              <h4 class="contact-channel-title">E-mail</h4>
+              <p class="contact-channel-text">comercial@hjlog.com.br</p>
+              <p class="contact-channel-text">sac@hjlog.com.br</p>
+            </div>
+          </div>
+          <div class="contact-channel-item">
+            <div class="contact-channel-icon">
+              <Icon name="mdi:map-marker" />
+            </div>
+            <div>
+              <h4 class="contact-channel-title">Matriz</h4>
+              <p class="contact-channel-text">Rua da Logística, 123</p>
+              <p class="contact-channel-text">
+                Cidade dos Transportes, SP - 00000-000
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="social-media">
+          <h5 class="social-media-title">Siga-nos</h5>
+          <div class="social-media-links">
+            <a
+              href="https://facebook.com/hjlog"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Facebook"
+            >
+              <Icon name="mdi:facebook" />
+            </a>
+            <a
+              href="https://instagram.com/hjlog"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <Icon name="mdi:instagram" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário de Mensagem Direta -->
+      <div class="contact-form-wrapper">
+        <h3 class="contact-form-title">Mensagem Direta</h3>
+        <form class="contact-form">
+          <div class="contact-form-group">
+            <label class="contact-form-label">Nome</label>
+            <input type="text" class="contact-form-input" />
+          </div>
+          <div class="contact-form-group">
+            <label class="contact-form-label">E-mail</label>
+            <input type="email" class="contact-form-input" />
+          </div>
+          <div class="contact-form-group">
+            <label class="contact-form-label">Assunto</label>
+            <input type="text" class="contact-form-input" />
+          </div>
+          <div class="contact-form-group">
+            <label class="contact-form-label">Mensagem</label>
+            <textarea rows="4" class="contact-form-input contact-form-textarea"
+            ></textarea>
+          </div>
+          <button type="button" class="contact-form-submit">
+            Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: 6rem 0;
+    background-color: var(--background-dark);
+    border-top: 1px solid var(--surface-dark);
+  }
+
+  .contact-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .contact-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Contact Info */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-tagline {
+    color: var(--primary);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+    display: block;
+  }
+
+  .contact-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-8);
+  }
+
+  .contact-description {
+    color: var(--text-secondary-dark);
+    margin-bottom: var(--space-10);
+    font-size: var(--text-lg);
+  }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .contact-channel-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .contact-channel-icon {
+    background-color: var(--surface-dark);
+    padding: var(--space-4);
+    border-radius: var(--radius-sm);
+    transition: background-color 300ms;
+    color: var(--text-primary-dark);
+    font-size: var(--text-2xl);
+  }
+
+  .contact-channel-item:hover .contact-channel-icon {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  .contact-channel-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  .contact-channel-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-channel-text {
+    color: var(--text-secondary-dark);
+  }
+
+  .contact-channel-link {
+    color: var(--text-secondary-dark);
+    transition: color 300ms;
+    display: block;
+  }
+
+  .contact-channel-link:hover {
+    color: var(--primary);
+  }
+
+  .contact-channel-hours {
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+    margin-top: var(--space-1);
+  }
+
+  /* Social Media */
+  .social-media {
+    margin-top: var(--space-12);
+  }
+
+  .social-media-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--text-secondary-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin-bottom: var(--space-4);
+  }
+
+  .social-media-links {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .social-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-dark);
+    transition: background-color 300ms, color 300ms;
+    font-size: var(--text-lg);
+  }
+
+  .social-link svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  .social-link:hover {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+
+  /* Contact Form */
+  .contact-form-wrapper {
+    background-color: rgba(42, 42, 42, 0.5);
+    padding: var(--space-8);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-dark);
+    backdrop-filter: blur(8px);
+  }
+
+  .contact-form-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-form-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    color: var(--text-secondary-dark);
+    text-transform: uppercase;
+  }
+
+  .contact-form-input {
+    width: 100%;
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    color: var(--text-primary-dark);
+    transition: border-color 300ms, box-shadow 300ms;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+  }
+
+  .contact-form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+  }
+
+  .contact-form-textarea {
+    resize: vertical;
+  }
+
+  .contact-form-submit {
+    width: 100%;
+    background-color: var(--white);
+    color: var(--background-dark);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: background-color 300ms, color 300ms;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-display);
+  }
+
+  .contact-form-submit:hover {
+    background-color: var(--primary);
+    color: var(--background-dark);
+  }
+</style>

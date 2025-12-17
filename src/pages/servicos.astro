@@ -1,0 +1,78 @@
+---
+import MainLayoult from "../layouts/MainLayoult.astro";
+import Header from "../components/layout/Header/Header.astro";
+import Footer from "../components/layout/Footer/Footer.astro";
+import ServiceDetailHero from "../components/sections/ServicesDetail/ServiceDetailHero.astro";
+import ServiceDetailSection from "../components/sections/ServicesDetail/ServiceDetailSection.astro";
+import QuoteFormSection from "../components/sections/ServicesDetail/QuoteFormSection.astro";
+import ContactSection from "../components/sections/ServicesDetail/ContactSection.astro";
+import { servicosDetalhes } from "../data/servicos-detalhes";
+---
+
+<MainLayoult>
+  <Header />
+  <main>
+    <ServiceDetailHero
+      tagline={servicosDetalhes.hero.tagline}
+      title={servicosDetalhes.hero.title}
+      titleHighlight={servicosDetalhes.hero.titleHighlight}
+      description={servicosDetalhes.hero.description}
+      backgroundImage={servicosDetalhes.hero.backgroundImage}
+    />
+
+    <section class="services-detail-content">
+      <div class="services-detail-container">
+        {
+          servicosDetalhes.services.map((service, index) => (
+            <ServiceDetailSection
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              imagePosition={service.imagePosition}
+              features={service.features}
+              highlights={service.highlights}
+              ctaText={service.ctaText}
+              ctaHref={service.ctaHref}
+              isLast={index === servicosDetalhes.services.length - 1}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <QuoteFormSection
+      tagline={servicosDetalhes.quote.tagline}
+      title={servicosDetalhes.quote.title}
+      description={servicosDetalhes.quote.description}
+      serviceTypes={servicosDetalhes.quote.serviceTypes}
+    />
+
+    <ContactSection />
+  </main>
+  <Footer />
+</MainLayoult>
+
+<style>
+  .services-detail-content {
+    padding: 6rem 0;
+    background-color: var(--background-dark);
+  }
+
+  .services-detail-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .services-detail-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-detail-container {
+      padding: 0 var(--space-8);
+    }
+  }
+</style>
