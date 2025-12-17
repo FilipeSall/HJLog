@@ -1,5 +1,4 @@
 ---
-import heroImage from "../../../images/caminhao-hero.png";
 import faleConoscoImage from "../../../images/faleconosco.jpg";
 import { Image } from "astro:assets";
 
@@ -18,29 +17,18 @@ const { tagline, title, description } = Astro.props;
 <header class="contact-header">
   <div class="contact-header-background">
     <div class="background-base"></div>
-    <div class="background-image-container">
-      <div class="background-overlay"></div>
-      <Image
-        src={heroImage}
-        alt="Background Texture"
-        class="background-image"
-        loading="eager"
-        decoding="async"
-        width={1920}
-        height={1080}
-      />
-    </div>
-    <div class="background-gradient">
+    <div class="background-contact-image">
       <Image
         src={faleConoscoImage}
         alt="Fale Conosco Background"
-        class="gradient-image"
+        class="contact-image"
         loading="eager"
         decoding="async"
         width={1920}
         height={1080}
       />
     </div>
+    <div class="background-gradient"></div>
   </div>
 
   <div class="contact-header-content">
@@ -50,7 +38,8 @@ const { tagline, title, description } = Astro.props;
     </div>
 
     <h1 class="title">
-      {title.line1} <span class="title-accent">{title.line2}</span>
+      {title.line1}
+      <span class="title-accent">{title.line2}</span>
     </h1>
 
     <p class="description">
@@ -85,67 +74,38 @@ const { tagline, title, description } = Astro.props;
     z-index: 0;
   }
 
-  .background-image-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-    transform: translateX(3rem) skewX(-6deg);
-    transform-origin: bottom right;
-    overflow: hidden;
-  }
-
-  @media (min-width: 1024px) {
-    .background-image-container {
-      width: 65%;
-      transform: translateX(0) skewX(-6deg);
-    }
-  }
-
-  .background-overlay {
+  .background-contact-image {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to left,
-      transparent,
-      rgba(17, 17, 17, 0.4),
-      var(--background-dark)
-    );
-    z-index: 10;
-    transform: skewX(6deg) scale(1.25);
+    z-index: 5;
   }
 
-  .background-image {
-    height: 100%;
+  .contact-image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    filter: grayscale(100%);
-    opacity: 0.4;
-    transform: skewX(6deg) scale(1.25);
+    object-position: center 30%;
+    opacity: 0.2;
   }
 
   .background-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to right,
-      var(--background-dark),
-      rgba(17, 17, 17, 0.95),
-      transparent
-    );
+    background:
+      linear-gradient(
+        to top,
+        var(--background-dark),
+        transparent 30%,
+        transparent 20%,
+        var(--background-dark)
+      ),
+      linear-gradient(
+        to right,
+        var(--background-dark),
+        rgba(17, 17, 17, 0.95),
+        transparent
+      );
     z-index: 10;
-  }
-
-  .gradient-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-    z-index: -1;
   }
 
   /* Content Styles */
