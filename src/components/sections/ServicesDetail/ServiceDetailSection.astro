@@ -355,13 +355,30 @@ const {
     text-transform: uppercase;
     font-size: var(--text-sm);
     letter-spacing: var(--tracking-wider);
-    transition: background-color var(--transition-base),
-      color var(--transition-base);
     border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 400ms ease;
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--primary);
+    transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  .cta-button:hover::before {
+    width: 100%;
   }
 
   .cta-button:hover {
-    background-color: var(--primary);
     color: var(--background-dark);
   }
 
