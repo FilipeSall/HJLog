@@ -1,5 +1,6 @@
 ---
 import heroImage from "../../../images/caminhao-hero.png";
+import faleConoscoImage from "../../../images/faleconosco.jpg";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -29,7 +30,17 @@ const { tagline, title, description } = Astro.props;
         height={1080}
       />
     </div>
-    <div class="background-gradient"></div>
+    <div class="background-gradient">
+      <Image
+        src={faleConoscoImage}
+        alt="Fale Conosco Background"
+        class="gradient-image"
+        loading="eager"
+        decoding="async"
+        width={1920}
+        height={1080}
+      />
+    </div>
   </div>
 
   <div class="contact-header-content">
@@ -125,6 +136,16 @@ const { tagline, title, description } = Astro.props;
       transparent
     );
     z-index: 10;
+  }
+
+  .gradient-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: -1;
   }
 
   /* Content Styles */
