@@ -111,7 +111,7 @@ export const sobre = {
       "Pessoas apaixonadas por logística que guiam a HJLOG rumo ao futuro.",
     team: [
       {
-        name: "Roberto Silva",
+        name: "Roberto Junior",
         role: "CEO & Fundador",
         image:
           "https://lh3.googleusercontent.com/aida-public/AB6AXuBt77IBsTyJAuK3XMjMQTrOmV91M1V_2FtwsB-ckq7athH8h4SFkYukL2Re46RV1wygs2HBDv9aLKyjvqW277fljgEyxpKV_aSeFtxAsSVwKQVlawFUM2ghOPWeG0u9klQDv64uDCqwchd7uA6ZBkS-KhMRhQMnzF_UnRT0uJCxNhNthqsP4q4jfew8ZSLpsraA-_FUbuFEvPkE2jDNqzv6fmoat8aZAfLvdej6gFp6o9LGiBE8VOIQqA2yvSPTVgGYLbwJKHZyXO5q",

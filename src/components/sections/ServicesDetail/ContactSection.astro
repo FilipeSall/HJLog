@@ -26,17 +26,21 @@ import { Icon } from "astro-icon/components";
               <p class="contact-channel-hours">Seg a Sex: 08h às 18h</p>
             </div>
           </a>
-          <div class="contact-channel-item">
+          <button type="button" class="contact-channel-item contact-channel-clickable" id="email-trigger">
             <div class="contact-channel-icon">
               <Icon name="mdi:email" />
             </div>
             <div>
               <h4 class="contact-channel-title">E-mail</h4>
               <p class="contact-channel-text">adm@hjlogtransportes.com.br</p>
-              <p class="contact-channel-text">comercial@hjlogtransportes.com.br</p>
             </div>
-          </div>
-          <div class="contact-channel-item">
+          </button>
+          <a
+            href="https://www.google.com/maps/place/Av.+Dep.+Emilio+Carlos,+114+-+Lim%C3%A3o,+S%C3%A3o+Paulo+-+SP,+02720-000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-channel-item contact-channel-clickable"
+          >
             <div class="contact-channel-icon">
               <Icon name="mdi:map-marker" />
             </div>
@@ -47,7 +51,7 @@ import { Icon } from "astro-icon/components";
                 Limão - São Paulo/SP - 02720-000
               </p>
             </div>
-          </div>
+          </a>
         </div>
         <div class="social-media">
           <h5 class="social-media-title">Siga-nos</h5>
@@ -110,13 +114,34 @@ import { Icon } from "astro-icon/components";
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form') as HTMLFormElement;
+    const emailTrigger = document.getElementById('email-trigger') as HTMLButtonElement;
+    const formWrapper = document.querySelector('.contact-form-wrapper') as HTMLElement;
+    const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+
+    // Funcionalidade do botão de email - focar no formulário
+    if (emailTrigger && formWrapper && nameInput) {
+      emailTrigger.addEventListener('click', () => {
+  
+        formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        formWrapper.classList.add('form-flash');
+
+        setTimeout(() => {
+          nameInput.focus();
+        }, 500);
+
+        // Remover classe de piscada após 3 s
+        setTimeout(() => {
+          formWrapper.classList.remove('form-flash');
+        }, 3000);
+      });
+    }
 
     if (!form) return;
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const nameInput = document.getElementById('contact-name') as HTMLInputElement;
       const emailInput = document.getElementById('contact-email') as HTMLInputElement;
       const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
       const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
@@ -247,6 +272,10 @@ Mensagem enviada através do formulário de contato do site HJLOG.
     cursor: pointer;
     transition: transform 0.3s ease;
     text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
   }
 
   .contact-channel-clickable:hover {
@@ -348,6 +377,27 @@ Mensagem enviada através do formulário de contato do site HJLOG.
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-dark);
     backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease;
+  }
+
+  /* Animação de piscada laranja */
+  .contact-form-wrapper.form-flash {
+    animation: flashBorder 3s ease-in-out;
+  }
+
+  @keyframes flashBorder {
+    0%, 100% {
+      border-color: var(--border-dark);
+      box-shadow: none;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+    }
+    20%, 40%, 60%, 80% {
+      border-color: var(--border-dark);
+      box-shadow: none;
+    }
   }
 
   .contact-form-title {

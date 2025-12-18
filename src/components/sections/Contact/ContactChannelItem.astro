@@ -9,24 +9,91 @@ interface Props {
 }
 
 const { icon, title, content, subtitle } = Astro.props;
+
+// Determinar se é clicável e qual o comportamento
+const isPhoneIcon = icon === "mdi:phone";
+const isEmailIcon = icon === "mdi:email";
+const isMapIcon = icon === "mdi:map-marker";
+
+// Para telefone, extrair o número e criar link tel:
+let phoneHref = "";
+if (isPhoneIcon && content[0]) {
+  // Remover formatação do telefone
+  phoneHref = `tel:+55${content[0].replace(/\D/g, "")}`;
+}
+
+// Para mapa, criar link do Google Maps
+const mapHref = isMapIcon
+  ? "https://www.google.com/maps/place/Av.+Dep.+Emilio+Carlos,+114+-+Lim%C3%A3o,+S%C3%A3o+Paulo+-+SP,+02720-000"
+  : "";
 ---
 
-<div class="channel-item">
-  <div class="channel-icon">
-    <Icon name={icon} size={28} />
+{isPhoneIcon ? (
+  <a href={phoneHref} class="channel-item channel-item-clickable">
+    <div class="channel-icon">
+      <Icon name={icon} size={28} />
+    </div>
+    <div class="channel-content">
+      <h3 class="channel-title">{title}</h3>
+      {content.map((line) => <p class="channel-text">{line}</p>)}
+      {subtitle && <p class="channel-subtitle">{subtitle}</p>}
+    </div>
+  </a>
+) : isEmailIcon ? (
+  <button type="button" class="channel-item channel-item-clickable" id="email-channel-trigger">
+    <div class="channel-icon">
+      <Icon name={icon} size={28} />
+    </div>
+    <div class="channel-content">
+      <h3 class="channel-title">{title}</h3>
+      {content.map((line) => <p class="channel-text">{line}</p>)}
+      {subtitle && <p class="channel-subtitle">{subtitle}</p>}
+    </div>
+  </button>
+) : isMapIcon ? (
+  <a href={mapHref} target="_blank" rel="noopener noreferrer" class="channel-item channel-item-clickable">
+    <div class="channel-icon">
+      <Icon name={icon} size={28} />
+    </div>
+    <div class="channel-content">
+      <h3 class="channel-title">{title}</h3>
+      {content.map((line) => <p class="channel-text">{line}</p>)}
+      {subtitle && <p class="channel-subtitle">{subtitle}</p>}
+    </div>
+  </a>
+) : (
+  <div class="channel-item">
+    <div class="channel-icon">
+      <Icon name={icon} size={28} />
+    </div>
+    <div class="channel-content">
+      <h3 class="channel-title">{title}</h3>
+      {content.map((line) => <p class="channel-text">{line}</p>)}
+      {subtitle && <p class="channel-subtitle">{subtitle}</p>}
+    </div>
   </div>
-  <div class="channel-content">
-    <h3 class="channel-title">{title}</h3>
-    {content.map((line) => <p class="channel-text">{line}</p>)}
-    {subtitle && <p class="channel-subtitle">{subtitle}</p>}
-  </div>
-</div>
+)}
 
 <style>
   .channel-item {
     display: flex;
     gap: var(--space-4);
     group: hover;
+  }
+
+  .channel-item-clickable {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+  }
+
+  .channel-item-clickable:hover {
+    transform: translateX(4px);
   }
 
   .channel-icon {
@@ -72,3 +139,27 @@ const { icon, title, content, subtitle } = Astro.props;
     opacity: 0.7;
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const emailTrigger = document.getElementById('email-channel-trigger') as HTMLButtonElement;
+    const formWrapper = document.querySelector('.contact-form-wrapper') as HTMLElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+
+    if (emailTrigger && formWrapper && nameInput) {
+      emailTrigger.addEventListener('click', () => {
+        formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        formWrapper.classList.add('form-flash');
+
+        setTimeout(() => {
+          nameInput.focus();
+        }, 500);
+
+        setTimeout(() => {
+          formWrapper.classList.remove('form-flash');
+        }, 3000);
+      });
+    }
+  });
+</script>

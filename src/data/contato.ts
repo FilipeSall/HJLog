@@ -27,7 +27,7 @@ export const contato = {
       {
         icon: "mdi:email",
         title: "E-mail",
-        content: ["adm@hjlogtransportes.com.br", "comercial@hjlogtransportes.com.br"],
+        content: ["adm@hjlogtransportes.com.br"],
       },
     ],
   },

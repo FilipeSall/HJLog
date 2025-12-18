@@ -92,6 +92,27 @@ const { title, fields, submitLabel } = Astro.props;
     border: 1px solid var(--surface-dark);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    transition: border-color 0.3s ease;
+  }
+
+  /* Animação de piscada laranja */
+  .contact-form-wrapper.form-flash {
+    animation: flashBorder 3s ease-in-out;
+  }
+
+  @keyframes flashBorder {
+    0%, 100% {
+      border-color: var(--surface-dark);
+      box-shadow: none;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+    }
+    20%, 40%, 60%, 80% {
+      border-color: var(--surface-dark);
+      box-shadow: none;
+    }
   }
 
   @media (min-width: 768px) {
@@ -206,3 +227,61 @@ const { title, fields, submitLabel } = Astro.props;
     transform: translateX(0.25rem);
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact-form') as HTMLFormElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = nameInput?.value.trim();
+      const email = emailInput?.value.trim();
+      const message = messageInput?.value.trim();
+
+      // Pegar o assunto do select customizado
+      const subjectHiddenInput = document.querySelector('input[name="subject"]') as HTMLInputElement;
+      const subject = subjectHiddenInput?.value || '';
+
+      // Validação básica
+      if (!name || !email || !subject || !message) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      // Validar formato de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Por favor, digite um e-mail válido.');
+        return;
+      }
+
+      // Montar corpo do email formatado
+      const emailBody = `
+Nome: ${name}
+E-mail: ${email}
+Assunto: ${subject}
+
+Mensagem:
+${message}
+
+---
+Mensagem enviada através do formulário de contato do site HJLOG.
+      `.trim();
+
+      // Criar link mailto
+      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`Contato Site - ${subject}`)}&body=${encodeURIComponent(emailBody)}`;
+
+      // Abrir cliente de email
+      window.location.href = mailtoLink;
+
+      // Limpar formulário após envio
+      form.reset();
+    });
+  });
+</script>

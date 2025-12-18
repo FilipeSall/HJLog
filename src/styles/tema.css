@@ -1,26 +1,26 @@
 /* ===================================
-   HJLOG - Design System
-   Based on Inter and Open Sans fonts
-   Primary color: #FF6B00 (burnt orange)
+   HJLOG - Sistema de Design
+   Baseado nas fontes Inter e Open Sans
+   Cor primária: #FF6B00 (laranja queimado)
    =================================== */
 
 :root {
-  /* ========== COLORS ========== */
-  /* Primary */
+  /* ========== CORES ========== */
+  /* Primária */
   --primary: #FF6B00;
   --primary-hover: #ffffff;
   --primary-light: rgba(255, 107, 0, 0.2);
   --primary-border: rgba(255, 107, 0, 0.3);
 
-  /* Background */
+  /* Fundo */
   --background-light: #F2F2F2;
   --background-dark: #111111;
 
-  /* Surface */
+  /* Superfície */
   --surface-light: #ffffff;
   --surface-dark: #2A2A2A;
 
-  /* Text Colors */
+  /* Cores do texto */
   --text-primary-light: #111111;
   --text-secondary-light: #8C8C8C;
   --text-tertiary-light: #64748b;
@@ -29,19 +29,19 @@
   --text-secondary-dark: #8C8C8C;
   --text-tertiary-dark: #666666;
 
-  /* Border Colors */
+  /* Cores das bordas */
   --border-light: #e5e5e5;
   --border-dark: #2A2A2A;
 
-  /* Utility Colors */
+  /* Cores utilitárias */
   --white: #ffffff;
   --black: #111111;
 
-  /* ========== TYPOGRAPHY ========== */
+  /* ========== TIPOGRAFIA ========== */
   --font-display: "Inter", sans-serif;
   --font-body: "Open Sans", sans-serif;
 
-  /* Font Sizes */
+  /* Tamanhos de fonte */
   --text-xs: 0.75rem; /* 12px */
   --text-sm: 0.875rem; /* 14px */
   --text-base: 1rem; /* 16px */
@@ -53,7 +53,7 @@
   --text-5xl: 3rem; /* 48px */
   --text-6xl: 3.75rem; /* 60px */
 
-  /* Font Weights */
+  /* Pesos de fonte */
   --font-light: 300;
   --font-normal: 400;
   --font-medium: 500;
@@ -61,18 +61,18 @@
   --font-bold: 700;
   --font-black: 900;
 
-  /* Line Heights */
+  /* Alturas de linha */
   --leading-tight: 1.1;
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
 
-  /* Letter Spacing */
+  /* Espaçamento entre letras */
   --tracking-tight: -0.015em;
   --tracking-normal: 0em;
   --tracking-wide: 0.025em;
   --tracking-wider: 0.05em;
 
-  /* ========== SPACING ========== */
+  /* ========== ESPAÇAMENTOS ========== */
   --space-1: 0.25rem; /* 4px */
   --space-2: 0.5rem; /* 8px */
   --space-3: 0.75rem; /* 12px */
@@ -86,7 +86,7 @@
   --space-20: 5rem; /* 80px */
   --space-24: 6rem; /* 96px */
 
-  /* ========== BORDER RADIUS ========== */
+  /* ========== RAIO DE BORDAS ========== */
   --radius-sm: 0.5rem; /* 8px */
   --radius-default: 1rem; /* 16px */
   --radius-lg: 1.5rem; /* 24px */
@@ -94,7 +94,7 @@
   --radius-2xl: 3rem; /* 48px */
   --radius-full: 9999px;
 
-  /* ========== SHADOWS ========== */
+  /* ========== SOMBRAS ========== */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -103,19 +103,19 @@
   --shadow-primary: 0 0 20px rgba(249, 245, 6, 0.4);
   --shadow-primary-sm: 0 0 10px rgba(249, 245, 6, 0.2);
 
-  /* ========== TRANSITIONS ========== */
+  /* ========== TRANSIÇÕES ========== */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ========== CONTAINER ========== */
+  /* ========== CONTÊINER ========== */
   --container-max-width: 1440px;
   --container-padding-mobile: 1rem;
   --container-padding-tablet: 2.5rem;
   --container-padding-desktop: 10rem;
 }
 
-/* ========== SCROLLBAR STYLING ========== */
+/* ========== ESTILIZAÇÃO DA BARRA DE ROLAGEM ========== */
 ::-webkit-scrollbar {
   width: 8px;
 }
