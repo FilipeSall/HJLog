@@ -1,3 +1,5 @@
+import { getStatsByContext } from "./stats";
+
 export const sobre = {
   hero: {
     tagline: "Institucional",
@@ -72,24 +74,7 @@ export const sobre = {
     ],
   },
   stats: {
-    items: [
-      {
-        value: "+500",
-        label: "Clientes Ativos",
-      },
-      {
-        value: "+10M",
-        label: "KM Rodados",
-      },
-      {
-        value: "+150",
-        label: "Caminhões",
-      },
-      {
-        value: "99%",
-        label: "Pontualidade",
-      },
-    ],
+    items: getStatsByContext("about"),
   },
   leadership: {
     title: "Liderança",

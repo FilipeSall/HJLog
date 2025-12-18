@@ -1,23 +1,49 @@
+type StatContext = "homepage" | "about";
+
+interface StatItem {
+  id: string;
+  value: string;
+  label: string;
+  contexts: StatContext[];
+}
+
 export const stats = {
   title: "Números que movem o Brasil",
   description:
     "Nossa experiência traduzida em dados que comprovam nossa eficiência.",
   items: [
     {
-      value: "2M+",
-      label: "Km Rodados",
+      id: "clients",
+      value: "+500",
+      label: "Clientes Ativos",
+      contexts: ["about"],
     },
     {
+      id: "km",
+      value: "2M+",
+      label: "KM Rodados",
+      contexts: ["about", "homepage"],
+    },
+    {
+      id: "fleet",
+      value: "100+",
+      label: "Caminhões",
+      contexts: ["about", "homepage"],
+    },
+    {
+      id: "punctuality",
       value: "99%",
       label: "Pontualidade",
+      contexts: ["about", "homepage"],
     },
     {
-      value: "500+",
-      label: "Veículos",
-    },
-    {
+      id: "support",
       value: "24/7",
       label: "Suporte",
+      contexts: ["homepage"],
     },
-  ],
+  ] as StatItem[],
 };
+
+export const getStatsByContext = (context: StatContext) =>
+  stats.items.filter((item) => item.contexts.includes(context));

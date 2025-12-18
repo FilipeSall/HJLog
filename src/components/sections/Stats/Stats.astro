@@ -1,14 +1,16 @@
 ---
-import { stats } from "../../../data/stats";
+import { stats, getStatsByContext } from "../../../data/stats";
 import StatsHeader from "./StatsHeader.astro";
 import StatsGrid from "./StatsGrid.astro";
+
+const homepageStats = getStatsByContext("homepage");
 ---
 
 <section class="stats-section">
   <div class="stats-container">
     <div class="stats-layout">
       <StatsHeader title={stats.title} description={stats.description} />
-      <StatsGrid items={stats.items} />
+      <StatsGrid items={homepageStats} />
     </div>
   </div>
 </section>
