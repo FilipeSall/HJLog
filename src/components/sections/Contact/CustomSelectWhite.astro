@@ -57,7 +57,7 @@ const { id, label, options } = Astro.props;
     width: 100%;
     background-color: var(--background-light);
     color: #374151;
-    border: none;
+    border: 2px solid transparent;
     padding: var(--space-3) var(--space-4);
     outline: none;
     font-weight: var(--font-medium);
@@ -80,6 +80,18 @@ const { id, label, options } = Astro.props;
     ring: 2px;
     ring-color: var(--primary);
     border-color: transparent;
+  }
+
+  /* Estado de erro - borda vermelha */
+  .custom-select.error .custom-select-trigger {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 1px #ef4444;
+  }
+
+  .custom-select.error .custom-select-trigger:focus,
+  .custom-select.error.open .custom-select-trigger {
+    border-color: #ef4444;
+    ring-color: #ef4444;
   }
 
   .custom-select-value {
@@ -221,6 +233,9 @@ const { id, label, options } = Astro.props;
             });
             option.classList.add('selected');
             option.setAttribute('aria-selected', 'true');
+
+            // Remover erro se houver
+            selectElement.classList.remove('error');
 
             // Fechar dropdown
             selectElement.classList.remove('open');

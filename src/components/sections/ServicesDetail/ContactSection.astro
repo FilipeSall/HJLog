@@ -121,7 +121,7 @@ import { Icon } from "astro-icon/components";
     // Funcionalidade do botão de email - focar no formulário
     if (emailTrigger && formWrapper && nameInput) {
       emailTrigger.addEventListener('click', () => {
-  
+
         formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         formWrapper.classList.add('form-flash');
@@ -139,30 +139,71 @@ import { Icon } from "astro-icon/components";
 
     if (!form) return;
 
+    const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+    const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
+    const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+
+    // Função para validar um campo individual
+    const validateField = (input: HTMLInputElement | HTMLTextAreaElement): boolean => {
+      const value = input.value.trim();
+
+      // Validar se está vazio
+      if (!value) {
+        input.classList.add('error');
+        return false;
+      }
+
+      // Validação específica para email
+      if (input.type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          input.classList.add('error');
+          return false;
+        }
+      }
+
+      input.classList.remove('error');
+      return true;
+    };
+
+    // Adicionar evento blur para remover erro quando campo for preenchido corretamente
+    const addBlurValidation = (input: HTMLInputElement | HTMLTextAreaElement) => {
+      input.addEventListener('blur', () => {
+        validateField(input);
+      });
+
+      // Também remover erro ao digitar
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error') && input.value.trim()) {
+          validateField(input);
+        }
+      });
+    };
+
+    // Adicionar validação em todos os campos
+    if (nameInput) addBlurValidation(nameInput);
+    if (emailInput) addBlurValidation(emailInput);
+    if (subjectInput) addBlurValidation(subjectInput);
+    if (messageInput) addBlurValidation(messageInput);
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const emailInput = document.getElementById('contact-email') as HTMLInputElement;
-      const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
-      const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+      // Validar todos os campos
+      const isNameValid = validateField(nameInput);
+      const isEmailValid = validateField(emailInput);
+      const isSubjectValid = validateField(subjectInput);
+      const isMessageValid = validateField(messageInput);
 
-      const name = nameInput?.value.trim();
-      const email = emailInput?.value.trim();
-      const subject = subjectInput?.value.trim();
-      const message = messageInput?.value.trim();
-
-      // Validação básica
-      if (!name || !email || !subject || !message) {
-        alert('Por favor, preencha todos os campos.');
+      // Se algum campo estiver inválido, não enviar
+      if (!isNameValid || !isEmailValid || !isSubjectValid || !isMessageValid) {
         return;
       }
 
-      // Validar formato de email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert('Por favor, digite um e-mail válido.');
-        return;
-      }
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const subject = subjectInput.value.trim();
+      const message = messageInput.value.trim();
 
       // Montar corpo do email formatado
       const emailBody = `
@@ -185,6 +226,12 @@ Mensagem enviada através do formulário de contato do site HJLOG.
 
       // Limpar formulário após envio
       form.reset();
+
+      // Remover classes de erro após reset
+      nameInput.classList.remove('error');
+      emailInput.classList.remove('error');
+      subjectInput.classList.remove('error');
+      messageInput.classList.remove('error');
     });
   });
 </script>
@@ -430,7 +477,7 @@ Mensagem enviada através do formulário de contato do site HJLOG.
   .contact-form-input {
     width: 100%;
     background-color: var(--background-dark);
-    border: 1px solid var(--border-dark);
+    border: 2px solid var(--border-dark);
     border-radius: var(--radius-sm);
     padding: var(--space-3);
     color: var(--text-primary-dark);
@@ -443,6 +490,17 @@ Mensagem enviada através do formulário de contato do site HJLOG.
   .contact-form-input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 1px var(--primary);
+  }
+
+  /* Estado de erro - borda vermelha */
+  .contact-form-input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 1px #ef4444;
+  }
+
+  .contact-form-input.error:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 1px #ef4444;
   }
 
   .contact-form-textarea {
