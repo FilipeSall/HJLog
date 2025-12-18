@@ -41,7 +41,7 @@ export const sobre = {
         year: "2010",
         title: "Fundação",
         description:
-          "Início das operações com uma pequena frota e o sonho de conectar o sul do país com eficiência.",
+          "Início das operações focada em logística para eventos.",
         icon: "flag",
         isHighlight: true,
       },
@@ -54,10 +54,10 @@ export const sobre = {
         isHighlight: false,
       },
       {
-        year: "2019",
-        title: "Inovação Tecnológica",
+        year: "2020",
+        title: "Pivô Estratégico",
         description:
-          "Implementação de rastreamento via satélite em 100% da frota e sistema de gestão integrado.",
+          "Durante a pandemia, a empresa redirecionou seu foco para o mercado de varejo, adaptando-se às novas demandas do e-commerce.",
         icon: null,
         isHighlight: false,
       },
@@ -65,7 +65,7 @@ export const sobre = {
         year: "2023",
         title: "Liderança Regional",
         description:
-          "Consolidação como líder no transporte de cargas fracionadas na região Sudeste, com reconhecimento nacional.",
+          "Consolidação como líder de entregas pela Magalu e em eventos em SP.",
         icon: "trophy",
         isHighlight: true,
       },

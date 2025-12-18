@@ -7,9 +7,10 @@ interface Props {
   description: string;
   icon: string | null;
   isHighlight: boolean;
+  index: number;
 }
 
-const { year, title, description, icon, isHighlight } = Astro.props;
+const { year, title, description, icon, isHighlight, index } = Astro.props;
 ---
 
 <!-- Timeline Marker Column -->
@@ -18,18 +19,14 @@ const { year, title, description, icon, isHighlight } = Astro.props;
     isHighlight && icon ? (
       // Highlight event with icon (first and last)
       <>
-        {year === "2010" && (
-          <div class="marker-line-connector" />
-        )}
-        <div class={`marker-icon ${year === "2023" ? "marker-icon-trophy" : ""}`}>
+        {year === "2023" && <div class="marker-line-top-gradient" />}
+        {year === "2010" && <div class="marker-line-connector" />}
+        <div
+          class={`marker-icon ${year === "2023" ? "marker-icon-trophy" : ""}`}
+        >
           <Icon name={`mdi:${icon}`} class="icon" />
         </div>
-        {year === "2010" && (
-          <div class="marker-line-gradient" />
-        )}
-        {year === "2023" && (
-          <div class="marker-line-top-gradient" />
-        )}
+        {year === "2010" && <div class="marker-line-gradient" />}
       </>
     ) : (
       // Regular event without icon (middle events)
@@ -45,7 +42,11 @@ const { year, title, description, icon, isHighlight } = Astro.props;
 </div>
 
 <!-- Timeline Content Column -->
-<div class="timeline-content-col">
+<div
+  class="timeline-content-col timeline-content"
+  style={`--delay: ${index * 350}ms;`}
+  data-timeline-item
+>
   <div class="content-header">
     <span class={`year ${isHighlight ? "highlight" : ""}`}>{year}</span>
     <h3 class={`event-title ${isHighlight ? "highlight" : ""}`}>{title}</h3>
@@ -115,9 +116,8 @@ const { year, title, description, icon, isHighlight } = Astro.props;
   .marker-line-top-gradient {
     width: 2px;
     background: linear-gradient(to bottom, var(--surface-dark), var(--primary));
-    height: 2rem;
-    margin-bottom: -2rem;
-    order: -1;
+    height: 7.5rem;
+    margin-top: -6.75rem;
   }
 
   /* Regular markers for non-highlight events */
@@ -205,5 +205,28 @@ const { year, title, description, icon, isHighlight } = Astro.props;
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     font-family: var(--font-body);
+  }
+
+  /* Animation */
+  .timeline-content {
+    opacity: 0;
+    transform: translateX(2rem);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .timeline-content.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-content {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 </style>
