@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { id, label, options, defaultValue } = Astro.props;
-const serializedServiceMap = JSON.stringify(serviceMap);
 
 // Determinar qual opção deve ser selecionada
 const selectedIndex = defaultValue
@@ -180,13 +179,17 @@ const selectedValue = options[finalSelectedIndex];
   }
 </style>
 
-<script is:inline data-service-map={serializedServiceMap}>
+<script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select');
-    const currentScript = document.currentScript;
-    const serviceMapFromData = currentScript
-      ? JSON.parse(currentScript.dataset.serviceMap || "{}")
-      : {};
+
+    // Mapa de serviços (mantido inline para evitar problemas de serialização)
+    const serviceMap = {
+      ftl: "Carga Completa (FTL)",
+      ltl: "Carga Fracionada (LTL)",
+      armazenagem: "Armazenagem",
+      expresso: "Frete Expresso",
+    };
 
     // Obter serviço a partir do parâmetro da URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -200,8 +203,8 @@ const selectedValue = options[finalSelectedIndex];
       const hiddenInput = selectElement.querySelector('input[type="hidden"]');
 
       // Definir valor padrão a partir da URL, se houver
-      if (serviceParam) {
-        const serviceName = serviceMapFromData[serviceParam];
+      if (serviceParam && serviceMap[serviceParam]) {
+        const serviceName = serviceMap[serviceParam];
 
         options.forEach((option) => {
           const optionValue = option.getAttribute('data-value');

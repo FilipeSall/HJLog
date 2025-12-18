@@ -16,10 +16,10 @@ export const footer = {
     {
       title: "Serviços",
       links: [
-        { label: "Carga FTL", href: "#" },
-        { label: "Carga LTL", href: "#" },
-        { label: "Armazenagem", href: "#" },
-        { label: "Frete Expresso", href: "#" },
+        { label: "Carga FTL", href: "/cotacao?servico=ftl" },
+        { label: "Carga LTL", href: "/cotacao?servico=ltl" },
+        { label: "Armazenagem", href: "/cotacao?servico=armazenagem" },
+        { label: "Frete Expresso", href: "/cotacao?servico=expresso" },
       ],
     },
     {

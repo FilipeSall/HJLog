@@ -10,8 +10,8 @@ const url = Astro.url;
 const serviceParam = url.searchParams.get("servico");
 const emailParam = url.searchParams.get("email");
 
-const preselectedService = getServiceNameBySlug(serviceParam);
-const prefilledEmail = emailParam || undefined;
+const preselectedService = getServiceNameBySlug(serviceParam ?? undefined);
+const prefilledEmail = emailParam ?? undefined;
 ---
 
 <MainLayoult>
