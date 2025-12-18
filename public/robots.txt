@@ -1,0 +1,27 @@
+# robots.txt para HJLOG Transportes
+# https://hjlogtransportes.com.br
+
+# Permitir que todos os robôs indexem todo o site
+User-agent: *
+Allow: /
+
+# Googlebot específico
+User-agent: Googlebot
+Allow: /
+
+# Googlebot para imagens
+User-agent: Googlebot-Image
+Allow: /
+
+# Bloquear robôs indesejados (opcionalmente, descomente se necessário)
+# User-agent: AhrefsBot
+# Disallow: /
+
+# User-agent: SemrushBot
+# Disallow: /
+
+# Sitemap - atualize com o domínio real quando disponível
+Sitemap: https://hjlogtransportes.com.br/sitemap.xml
+
+# Crawl-delay (não recomendado para Google, mas pode ser útil para outros bots)
+# Crawl-delay: 1
