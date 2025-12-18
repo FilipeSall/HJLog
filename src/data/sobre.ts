@@ -5,7 +5,7 @@ export const sobre = {
     tagline: "Institucional",
     title: "Sobre Nós",
     description:
-      "Conheça a trajetória da HJLOG, que começou no mercado de eventos e hoje é referência em logística rodoviária, atendendo grandes varejistas como a Magalu.",
+      "Conheça a trajetória da HJLOG!",
   },
   header: {
     tagline: "Quem Somos",

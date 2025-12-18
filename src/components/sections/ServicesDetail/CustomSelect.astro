@@ -1,4 +1,5 @@
 ---
+import { serviceMap } from "../../../enums/services";
 interface Props {
   id: string;
   label: string;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { id, label, options, defaultValue } = Astro.props;
+const serializedServiceMap = JSON.stringify(serviceMap);
 
 // Determinar qual opção deve ser selecionada
 const selectedIndex = defaultValue
@@ -178,32 +180,28 @@ const selectedValue = options[finalSelectedIndex];
   }
 </style>
 
-<script>
+<script is:inline data-service-map={serializedServiceMap}>
   document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select');
+    const currentScript = document.currentScript;
+    const serviceMapFromData = currentScript
+      ? JSON.parse(currentScript.dataset.serviceMap || "{}")
+      : {};
 
     // Obter serviço a partir do parâmetro da URL
     const urlParams = new URLSearchParams(window.location.search);
     const serviceParam = urlParams.get('servico');
 
-    // Mapear slugs dos serviços para nomes dos tipos
-    const serviceMap: Record<string, string> = {
-      'ftl': 'Carga Completa (FTL)',
-      'ltl': 'Carga Fracionada (LTL)',
-      'armazenagem': 'Armazenagem',
-      'expresso': 'Frete Expresso',
-    };
-
     customSelects.forEach((selectElement) => {
-      const trigger = selectElement.querySelector('.custom-select-trigger') as HTMLButtonElement;
-      const dropdown = selectElement.querySelector('.custom-select-dropdown') as HTMLUListElement;
+      const trigger = selectElement.querySelector('.custom-select-trigger');
+      const dropdown = selectElement.querySelector('.custom-select-dropdown');
       const options = selectElement.querySelectorAll('.custom-select-option');
-      const valueDisplay = selectElement.querySelector('.custom-select-value') as HTMLSpanElement;
-      const hiddenInput = selectElement.querySelector('input[type="hidden"]') as HTMLInputElement;
+      const valueDisplay = selectElement.querySelector('.custom-select-value');
+      const hiddenInput = selectElement.querySelector('input[type="hidden"]');
 
       // Definir valor padrão a partir da URL, se houver
-      if (serviceParam && serviceMap[serviceParam]) {
-        const serviceName = serviceMap[serviceParam];
+      if (serviceParam) {
+        const serviceName = serviceMapFromData[serviceParam];
 
         options.forEach((option) => {
           const optionValue = option.getAttribute('data-value');
@@ -213,7 +211,7 @@ const selectedValue = options[finalSelectedIndex];
             // Atualizar campo oculto
             hiddenInput.value = serviceName;
             // Atualizar estado selecionado
-            options.forEach(opt => {
+            options.forEach((opt) => {
               opt.classList.remove('selected');
               opt.setAttribute('aria-selected', 'false');
             });
@@ -229,7 +227,7 @@ const selectedValue = options[finalSelectedIndex];
         const isOpen = selectElement.classList.contains('open');
 
         // Fechar todos os outros selects
-        customSelects.forEach(s => s.classList.remove('open'));
+        customSelects.forEach((s) => s.classList.remove('open'));
 
         // Alternar o dropdown atual
         if (!isOpen) {

@@ -4,20 +4,13 @@ import Header from "../components/layout/Header/Header.astro";
 import Footer from "../components/layout/Footer/Footer.astro";
 import QuoteFormSection from "../components/sections/ServicesDetail/QuoteFormSection.astro";
 import { servicosDetalhes } from "../data/servicos-detalhes";
+import { getServiceNameBySlug } from "../enums/services";
 
 const url = Astro.url;
 const serviceParam = url.searchParams.get("servico");
 const emailParam = url.searchParams.get("email");
 
-// Mapear slugs de serviço para nomes de tipo
-const serviceMap: Record<string, string> = {
-  "ftl": "Carga Completa (FTL)",
-  "ltl": "Carga Fracionada (LTL)",
-  "armazenagem": "Armazenagem",
-  "expresso": "Frete Expresso",
-};
-
-const preselectedService = serviceParam ? serviceMap[serviceParam] : undefined;
+const preselectedService = getServiceNameBySlug(serviceParam);
 const prefilledEmail = emailParam || undefined;
 ---
 
