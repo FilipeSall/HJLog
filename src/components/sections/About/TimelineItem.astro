@@ -14,7 +14,11 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
 ---
 
 <!-- Timeline Marker Column -->
-<div class="timeline-marker-col">
+<div
+  class="timeline-marker-col"
+  data-timeline-marker
+  style={`--delay: ${index * 350}ms;`}
+>
   {
     isHighlight && icon ? (
       // Highlight event with icon (first and last)
@@ -60,6 +64,15 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .timeline-marker-col.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Connector line above 2010 marker */
@@ -67,6 +80,8 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     width: 2px;
     height: 0.5rem;
     background-color: transparent;
+    transform-origin: top;
+    transform: scaleY(0);
   }
 
   /* Icon markers for highlight events */
@@ -80,6 +95,12 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     justify-content: center;
     z-index: 10;
     box-shadow: 0 10px 15px -3px rgba(236, 127, 19, 0.2);
+    transform: scale(0.85);
+    opacity: 0;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+    transition-delay: calc(var(--delay, 0ms) + 120ms);
   }
 
   .marker-icon-trophy {
@@ -110,6 +131,8 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     background: linear-gradient(to bottom, var(--primary), var(--surface-dark));
     flex: 1;
     min-height: 6.25rem;
+    transform-origin: top;
+    transform: scaleY(0);
   }
 
   /* Gradient line above 2023 marker */
@@ -118,6 +141,8 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     background: linear-gradient(to bottom, var(--surface-dark), var(--primary));
     height: 7.5rem;
     margin-top: -6.75rem;
+    transform-origin: bottom;
+    transform: scaleY(0);
   }
 
   /* Regular markers for non-highlight events */
@@ -125,6 +150,8 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     width: 2px;
     height: 2rem;
     background-color: var(--surface-dark);
+    transform-origin: top;
+    transform: scaleY(0);
   }
 
   .marker-line-bottom {
@@ -132,6 +159,8 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     background-color: var(--surface-dark);
     flex: 1;
     min-height: 6.25rem;
+    transform-origin: top;
+    transform: scaleY(0);
   }
 
   .marker-dot {
@@ -144,6 +173,35 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     align-items: center;
     justify-content: center;
     z-index: 10;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+    transition-delay: calc(var(--delay, 0ms) + 150ms);
+  }
+
+  .timeline-marker-col.is-visible .marker-line-connector,
+  .timeline-marker-col.is-visible .marker-line-top,
+  .timeline-marker-col.is-visible .marker-line-bottom,
+  .timeline-marker-col.is-visible .marker-line-gradient {
+    animation: lineGrow 0.75s ease forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  .timeline-marker-col.is-visible .marker-line-top-gradient {
+    animation: lineGrowReverse 0.75s ease forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  .timeline-marker-col.is-visible .marker-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .timeline-marker-col.is-visible .marker-dot {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .dot-inner {
@@ -222,11 +280,43 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     transform: translateX(0);
   }
 
+  @keyframes lineGrow {
+    from {
+      transform: scaleY(0);
+    }
+
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes lineGrowReverse {
+    from {
+      transform: scaleY(0);
+    }
+
+    to {
+      transform: scaleY(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .timeline-marker-col,
+    .timeline-marker-col .marker-icon,
+    .timeline-marker-col .marker-dot,
     .timeline-content {
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    .marker-line-connector,
+    .marker-line-top,
+    .marker-line-bottom,
+    .marker-line-gradient,
+    .marker-line-top-gradient {
+      transform: none;
+      animation: none;
     }
   }
 </style>

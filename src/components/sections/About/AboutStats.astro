@@ -9,7 +9,7 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section class="about-stats-section">
+<section class="about-stats-section" data-stats-section>
   <div class="stats-container">
     <div class="stats-grid">
       {items.map((item) => <AboutStatItem {...item} />)}
@@ -44,3 +44,72 @@ const { items } = Astro.props;
     }
   }
 </style>
+
+<script is:inline>
+  const initStatCounter = () => {
+    const section = document.querySelector("[data-stats-section]");
+    if (!section) return;
+
+    const values = section.querySelectorAll("[data-stat-value]");
+    if (!values.length) return;
+
+    const formatValue = (value, suffix) => {
+      if (suffix === "M") {
+        return `${value.toFixed(1)}M`;
+      }
+
+      if (suffix === "%") {
+        return `${Math.round(value)}%`;
+      }
+
+      return `${Math.round(value)}`;
+    };
+
+    const animateValue = (element) => {
+      const target = Number(element.dataset.targetValue || 0);
+      const suffix = element.dataset.suffix || "";
+      const duration = 1400;
+      const startTime = performance.now();
+
+      const step = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
+
+        const currentValue = target * eased;
+        element.textContent = formatValue(currentValue, suffix);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          element.textContent = formatValue(target, suffix);
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, observerInstance) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          values.forEach((value) => animateValue(value));
+          observerInstance.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(section);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStatCounter, {
+      once: true,
+    });
+  } else {
+    initStatCounter();
+  }
+</script>

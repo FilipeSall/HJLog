@@ -90,6 +90,15 @@ const { title, events } = Astro.props;
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("is-visible");
+
+          const marker = entry.target.previousElementSibling;
+          if (
+            marker instanceof HTMLElement &&
+            marker.dataset.timelineMarker !== undefined
+          ) {
+            marker.classList.add("is-visible");
+          }
+
           observerInstance.unobserve(entry.target);
         });
       },

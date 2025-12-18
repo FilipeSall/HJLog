@@ -5,10 +5,22 @@ interface Props {
 }
 
 const { value, label } = Astro.props;
+
+const numericValue = parseFloat(value.replace(/[^0-9.,]/g, "").replace(",", "."));
+const suffixMatch = value.match(/[^\d.,]+$/);
+const suffix = suffixMatch ? suffixMatch[0] : "";
+const targetValue = isNaN(numericValue) ? 0 : numericValue;
 ---
 
 <div class="stat-item">
-  <span class="stat-value">{value}</span>
+  <span
+    class="stat-value"
+    data-stat-value
+    data-target-value={targetValue}
+    data-suffix={suffix}
+  >
+    {value}
+  </span>
   <span class="stat-label">{label}</span>
 </div>
 

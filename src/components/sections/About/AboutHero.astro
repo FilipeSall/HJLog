@@ -53,6 +53,7 @@ const { tagline, title, description } = Astro.props;
     justify-content: center;
     background-color: var(--background-dark);
     overflow: hidden;
+    border-bottom: 1px solid var(--surface-dark);
   }
 
   /* Background Layer */
@@ -66,6 +67,7 @@ const { tagline, title, description } = Astro.props;
     height: 100%;
     object-fit: cover;
     opacity: 0.4;
+    filter: grayscale(25%);
   }
 
   .hero-gradient-vertical {
