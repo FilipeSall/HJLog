@@ -1,5 +1,4 @@
 ---
-import { serviceMap } from "../../../enums/services";
 interface Props {
   id: string;
   label: string;
@@ -9,7 +8,6 @@ interface Props {
 
 const { id, label, options, defaultValue } = Astro.props;
 
-// Determinar qual opção deve ser selecionada
 const selectedIndex = defaultValue
   ? options.findIndex(opt => opt === defaultValue)
   : 0;
@@ -179,17 +177,11 @@ const selectedValue = options[finalSelectedIndex];
   }
 </style>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const customSelects = document.querySelectorAll('.custom-select');
+  <script is:inline type="module">
+    import { serviceMap } from "../../../enums/services";
 
-    // Mapa de serviços (mantido inline para evitar problemas de serialização)
-    const serviceMap = {
-      ftl: "Carga Completa (FTL)",
-      ltl: "Carga Fracionada (LTL)",
-      armazenagem: "Armazenagem",
-      expresso: "Frete Expresso",
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+    const customSelects = document.querySelectorAll('.custom-select');
 
     // Obter serviço a partir do parâmetro da URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -204,7 +196,7 @@ const selectedValue = options[finalSelectedIndex];
 
       // Definir valor padrão a partir da URL, se houver
       if (serviceParam && serviceMap[serviceParam]) {
-        const serviceName = serviceMap[serviceParam];
+        const serviceName = serviceMapFromData[serviceParam];
 
         options.forEach((option) => {
           const optionValue = option.getAttribute('data-value');
@@ -214,7 +206,7 @@ const selectedValue = options[finalSelectedIndex];
             // Atualizar campo oculto
             hiddenInput.value = serviceName;
             // Atualizar estado selecionado
-            options.forEach((opt) => {
+            options.forEach(opt => {
               opt.classList.remove('selected');
               opt.setAttribute('aria-selected', 'false');
             });
@@ -230,7 +222,7 @@ const selectedValue = options[finalSelectedIndex];
         const isOpen = selectElement.classList.contains('open');
 
         // Fechar todos os outros selects
-        customSelects.forEach((s) => s.classList.remove('open'));
+        customSelects.forEach(s => s.classList.remove('open'));
 
         // Alternar o dropdown atual
         if (!isOpen) {

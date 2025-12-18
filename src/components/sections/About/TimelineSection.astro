@@ -82,24 +82,65 @@ const { title, events } = Astro.props;
 
 <script is:inline>
   const initTimelineObserver = () => {
-    const items = document.querySelectorAll("[data-timeline-item]");
+    const items = Array.from(document.querySelectorAll("[data-timeline-item]"));
     if (!items.length) return;
+    const timelineGrid = document.querySelector(".timeline-grid");
+    let cascadeStarted = false;
+    let cascadeTimeouts = [];
+
+    const revealEntry = (index) => {
+      const item = items[index];
+      if (!item) return;
+      if (item.classList.contains("is-visible")) return;
+      item.classList.add("is-visible");
+
+      const marker = item.previousElementSibling;
+      if (
+        marker instanceof HTMLElement &&
+        marker.dataset.timelineMarker !== undefined
+      ) {
+        marker.classList.add("is-visible");
+      }
+    };
+
+    const revealAll = () => {
+      cascadeTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+      cascadeTimeouts = [];
+      items.forEach((_, index) => revealEntry(index));
+    };
+
+    const scheduleCascade = () => {
+      if (cascadeStarted) return;
+      cascadeStarted = true;
+      const staggerDelay = 200;
+      items.forEach((_, index) => {
+        cascadeTimeouts.push(
+          window.setTimeout(() => revealEntry(index), index * staggerDelay)
+        );
+      });
+
+      if (timelineGrid) {
+        const timelineBottomPosition =
+          window.scrollY + timelineGrid.getBoundingClientRect().bottom;
+
+        const handleScroll = () => {
+          const viewportBottom = window.scrollY + window.innerHeight;
+          if (viewportBottom >= timelineBottomPosition - 50) {
+            revealAll();
+            window.removeEventListener("scroll", handleScroll);
+          }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+      }
+    };
 
     const observer = new IntersectionObserver(
       (entries, observerInstance) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-
-          const marker = entry.target.previousElementSibling;
-          if (
-            marker instanceof HTMLElement &&
-            marker.dataset.timelineMarker !== undefined
-          ) {
-            marker.classList.add("is-visible");
-          }
-
-          observerInstance.unobserve(entry.target);
+          scheduleCascade();
+          observerInstance.disconnect();
         });
       },
       {
