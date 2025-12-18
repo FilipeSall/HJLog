@@ -7,7 +7,7 @@ export const footer = {
     {
       title: "Empresa",
       links: [
-        { label: "Sobre Nós", href: "#" },
+        { label: "Sobre Nós", href: "/sobre" },
         { label: "Motoristas", href: "#" },
         { label: "Segurança", href: "#" },
         { label: "Notícias", href: "#" },

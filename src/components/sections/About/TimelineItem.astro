@@ -1,0 +1,209 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  year: string;
+  title: string;
+  description: string;
+  icon: string | null;
+  isHighlight: boolean;
+}
+
+const { year, title, description, icon, isHighlight } = Astro.props;
+---
+
+<!-- Timeline Marker Column -->
+<div class="timeline-marker-col">
+  {
+    isHighlight && icon ? (
+      // Highlight event with icon (first and last)
+      <>
+        {year === "2010" && (
+          <div class="marker-line-connector" />
+        )}
+        <div class={`marker-icon ${year === "2023" ? "marker-icon-trophy" : ""}`}>
+          <Icon name={`mdi:${icon}`} class="icon" />
+        </div>
+        {year === "2010" && (
+          <div class="marker-line-gradient" />
+        )}
+        {year === "2023" && (
+          <div class="marker-line-top-gradient" />
+        )}
+      </>
+    ) : (
+      // Regular event without icon (middle events)
+      <>
+        <div class="marker-line-top" />
+        <div class="marker-dot">
+          <div class="dot-inner" />
+        </div>
+        <div class="marker-line-bottom" />
+      </>
+    )
+  }
+</div>
+
+<!-- Timeline Content Column -->
+<div class="timeline-content-col">
+  <div class="content-header">
+    <span class={`year ${isHighlight ? "highlight" : ""}`}>{year}</span>
+    <h3 class={`event-title ${isHighlight ? "highlight" : ""}`}>{title}</h3>
+  </div>
+  <p class="event-description">{description}</p>
+</div>
+
+<style>
+  /* Timeline Marker Column */
+  .timeline-marker-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Connector line above 2010 marker */
+  .marker-line-connector {
+    width: 2px;
+    height: 0.5rem;
+    background-color: transparent;
+  }
+
+  /* Icon markers for highlight events */
+  .marker-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 10px 15px -3px rgba(236, 127, 19, 0.2);
+  }
+
+  .marker-icon-trophy {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--surface-dark);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 20px rgba(236, 127, 19, 0.2);
+  }
+
+  .marker-icon .icon {
+    color: var(--text-primary-dark);
+    font-size: 1.125rem;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .marker-icon-trophy .icon {
+    color: var(--primary);
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Gradient line below 2010 marker */
+  .marker-line-gradient {
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--surface-dark));
+    flex: 1;
+    min-height: 6.25rem;
+  }
+
+  /* Gradient line above 2023 marker */
+  .marker-line-top-gradient {
+    width: 2px;
+    background: linear-gradient(to bottom, var(--surface-dark), var(--primary));
+    height: 2rem;
+    margin-bottom: -2rem;
+    order: -1;
+  }
+
+  /* Regular markers for non-highlight events */
+  .marker-line-top {
+    width: 2px;
+    height: 2rem;
+    background-color: var(--surface-dark);
+  }
+
+  .marker-line-bottom {
+    width: 2px;
+    background-color: var(--surface-dark);
+    flex: 1;
+    min-height: 6.25rem;
+  }
+
+  .marker-dot {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0;
+    background-color: var(--surface-dark);
+    border: 2px solid var(--surface-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .dot-inner {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--text-muted-dark);
+    border-radius: 0;
+  }
+
+  /* Timeline Content Column */
+  .timeline-content-col {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--space-12);
+    padding-top: 0.125rem;
+  }
+
+  .content-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  @media (min-width: 768px) {
+    .content-header {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-4);
+    }
+  }
+
+  .year {
+    color: var(--text-muted-dark);
+    font-weight: var(--font-bold);
+    font-size: var(--text-xl);
+    font-family: var(--font-display);
+  }
+
+  .year.highlight {
+    color: var(--primary);
+    font-weight: var(--font-black);
+    font-size: var(--text-2xl);
+  }
+
+  .event-title {
+    color: var(--text-primary-dark);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    font-family: var(--font-display);
+  }
+
+  .event-title.highlight {
+    font-size: var(--text-xl);
+  }
+
+  .event-description {
+    color: var(--text-muted-dark);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    font-family: var(--font-body);
+  }
+</style>

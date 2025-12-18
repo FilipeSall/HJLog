@@ -1,0 +1,75 @@
+---
+import type { LeadershipMember } from "../../../types/components";
+import LeadershipCard from "./LeadershipCard.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  team: LeadershipMember[];
+}
+
+const { title, description, team } = Astro.props;
+---
+
+<section class="leadership-section">
+  <div class="leadership-container">
+    <h2 class="leadership-title">{title}</h2>
+    <p class="leadership-description">{description}</p>
+    <div class="leadership-grid">
+      {team.map((member) => <LeadershipCard {...member} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .leadership-section {
+    padding: 6rem var(--space-4);
+    background-color: var(--background-dark);
+  }
+
+  @media (min-width: 768px) {
+    .leadership-section {
+      padding: 6rem var(--space-20);
+    }
+  }
+
+  .leadership-container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leadership-title {
+    color: var(--text-primary-dark);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: var(--space-4);
+    font-family: var(--font-display);
+  }
+
+  .leadership-description {
+    color: var(--text-muted-dark);
+    text-align: center;
+    max-width: 32rem;
+    margin-bottom: var(--space-16);
+    font-family: var(--font-body);
+  }
+
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    width: 100%;
+    justify-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .leadership-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      max-width: 100%;
+    }
+  }
+</style>

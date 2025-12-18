@@ -1,0 +1,50 @@
+---
+import MainLayoult from "../layouts/MainLayoult.astro";
+import Header from "../components/layout/Header/Header.astro";
+import Footer from "../components/layout/Footer/Footer.astro";
+import AboutHero from "../components/sections/About/AboutHero.astro";
+import AboutHeader from "../components/sections/About/AboutHeader.astro";
+import ValuesSection from "../components/sections/About/ValuesSection.astro";
+import TimelineSection from "../components/sections/About/TimelineSection.astro";
+import AboutStats from "../components/sections/About/AboutStats.astro";
+import LeadershipSection from "../components/sections/About/LeadershipSection.astro";
+import AboutCTA from "../components/sections/About/AboutCTA.astro";
+import { sobre } from "../data/sobre";
+---
+
+<MainLayoult>
+  <Header />
+  <main>
+    <AboutHero
+      tagline={sobre.hero.tagline}
+      title={sobre.hero.title}
+      description={sobre.hero.description}
+    />
+
+    <AboutHeader
+      tagline={sobre.header.tagline}
+      title={sobre.header.title}
+      description={sobre.header.description}
+    />
+
+    <ValuesSection items={sobre.values.items} />
+
+    <TimelineSection title={sobre.timeline.title} events={sobre.timeline.events} />
+
+    <AboutStats items={sobre.stats.items} />
+
+    <LeadershipSection
+      title={sobre.leadership.title}
+      description={sobre.leadership.description}
+      team={sobre.leadership.team}
+    />
+
+    <AboutCTA
+      title={sobre.cta.title}
+      description={sobre.cta.description}
+      primaryButton={sobre.cta.primaryButton}
+      secondaryButton={sobre.cta.secondaryButton}
+    />
+  </main>
+  <Footer />
+</MainLayoult>

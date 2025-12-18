@@ -1,0 +1,46 @@
+---
+import type { StatItemProps } from "../../../types/components";
+import AboutStatItem from "./AboutStatItem.astro";
+
+interface Props {
+  items: StatItemProps[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="about-stats-section">
+  <div class="stats-container">
+    <div class="stats-grid">
+      {items.map((item) => <AboutStatItem {...item} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-stats-section {
+    padding: var(--space-20) 0;
+    background-color: var(--surface-dark);
+    border-top: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  .stats-container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

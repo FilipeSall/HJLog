@@ -1,0 +1,134 @@
+---
+import { Icon } from "astro-icon/components";
+import ButtonLink from "../../shared/buttons/ButtonLink.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  primaryButton: {
+    label: string;
+    href: string;
+  };
+  secondaryButton: {
+    label: string;
+    href: string;
+  };
+}
+
+const { title, description, primaryButton, secondaryButton } = Astro.props;
+---
+
+<section class="about-cta-section">
+  <div class="cta-container">
+    <div class="cta-background-icon">
+      <Icon name="mdi:truck" class="icon" />
+    </div>
+    <div class="cta-content">
+      <div class="cta-text">
+        <h2 class="cta-title">{title}</h2>
+        <p class="cta-description">{description}</p>
+      </div>
+      <div class="cta-buttons">
+        <ButtonLink
+          href={primaryButton.href}
+          label={primaryButton.label}
+          variant="primary"
+        />
+        <ButtonLink
+          href={secondaryButton.href}
+          label={secondaryButton.label}
+          variant="secondary"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-cta-section {
+    padding: var(--space-20) var(--space-4);
+    background-color: var(--background-dark);
+  }
+
+  .cta-container {
+    max-width: 60rem;
+    margin: 0 auto;
+    background-color: var(--surface-dark);
+    border-radius: 0.125rem;
+    padding: 2.5rem;
+    border-left: 8px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (min-width: 768px) {
+    .cta-container {
+      padding: 4rem;
+    }
+  }
+
+  .cta-background-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: var(--space-8);
+    opacity: 0.03;
+  }
+
+  .icon {
+    font-size: 12.5rem;
+    width: 12.5rem;
+    height: 12.5rem;
+    color: var(--text-primary-dark);
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      flex-direction: row;
+    }
+  }
+
+  .cta-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    max-width: 32rem;
+  }
+
+  .cta-title {
+    color: var(--text-primary-dark);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-display);
+  }
+
+  .cta-description {
+    color: var(--text-muted-dark);
+    font-family: var(--font-body);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-buttons {
+      flex-direction: row;
+    }
+  }
+</style>

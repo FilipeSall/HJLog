@@ -1,0 +1,48 @@
+---
+import type { FeatureItemProps } from "../../../types/components";
+import ValueCard from "./ValueCard.astro";
+
+interface Props {
+  items: FeatureItemProps[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="values-section">
+  <div class="values-container">
+    <div class="values-grid">
+      {items.map((item) => <ValueCard {...item} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .values-section {
+    padding: var(--space-16) var(--space-4);
+    background-color: var(--background-dark);
+  }
+
+  @media (min-width: 768px) {
+    .values-section {
+      padding: var(--space-16) var(--space-20);
+    }
+  }
+
+  .values-container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .values-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

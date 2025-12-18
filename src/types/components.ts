@@ -80,3 +80,18 @@ export interface ServiceDetail {
   ctaText: string;
   ctaHref: string;
 }
+
+export interface TimelineEvent {
+  year: string;
+  title: string;
+  description: string;
+  icon: string | null;
+  isHighlight: boolean;
+}
+
+export interface LeadershipMember {
+  name: string;
+  role: string;
+  image: string;
+  alt: string;
+}
