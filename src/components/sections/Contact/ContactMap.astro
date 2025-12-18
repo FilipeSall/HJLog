@@ -18,6 +18,7 @@ const { title, description, linkLabel, embedUrl } = Astro.props;
     referrerpolicy="no-referrer-when-downgrade"
     src={embedUrl}
     width="100%"
+    title={`Mapa: ${title}`}
   ></iframe>
 
   <div class="map-info-card">

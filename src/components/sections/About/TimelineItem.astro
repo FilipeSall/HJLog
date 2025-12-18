@@ -21,7 +21,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
 >
   {
     isHighlight && icon ? (
-      // Highlight event with icon (first and last)
       <>
         {year === "2023" && <div class="marker-line-top-gradient" />}
         {year === "2010" && <div class="marker-line-connector" />}
@@ -59,7 +58,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
 </div>
 
 <style>
-  /* Timeline Marker Column */
   .timeline-marker-col {
     display: flex;
     flex-direction: column;
@@ -75,7 +73,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     transform: translateY(0);
   }
 
-  /* Connector line above 2010 marker */
   .marker-line-connector {
     width: 2px;
     height: 0.5rem;
@@ -84,7 +81,7 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     transform: scaleY(0);
   }
 
-  /* Icon markers for highlight events */
+
   .marker-icon {
     width: 2.5rem;
     height: 2.5rem;
@@ -125,7 +122,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     height: 1.25rem;
   }
 
-  /* Gradient line below 2010 marker */
   .marker-line-gradient {
     width: 2px;
     background: linear-gradient(to bottom, var(--primary), var(--surface-dark));
@@ -135,7 +131,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     transform: scaleY(0);
   }
 
-  /* Gradient line above 2023 marker */
   .marker-line-top-gradient {
     width: 2px;
     background: linear-gradient(to bottom, var(--surface-dark), var(--primary));
@@ -145,7 +140,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     transform: scaleY(0);
   }
 
-  /* Regular markers for non-highlight events */
   .marker-line-top {
     width: 2px;
     height: 2rem;
@@ -211,7 +205,6 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
     border-radius: 0;
   }
 
-  /* Timeline Content Column */
   .timeline-content-col {
     display: flex;
     flex-direction: column;

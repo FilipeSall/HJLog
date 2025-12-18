@@ -79,20 +79,23 @@ import { Icon } from "astro-icon/components";
         <h3 class="contact-form-title">Mensagem Direta</h3>
         <form class="contact-form">
           <div class="contact-form-group">
-            <label class="contact-form-label">Nome</label>
-            <input type="text" class="contact-form-input" />
+            <label class="contact-form-label" for="contact-name">Nome</label>
+            <input id="contact-name" type="text" class="contact-form-input" />
           </div>
           <div class="contact-form-group">
-            <label class="contact-form-label">E-mail</label>
-            <input type="email" class="contact-form-input" />
+            <label class="contact-form-label" for="contact-email">E-mail</label>
+            <input id="contact-email" type="email" class="contact-form-input" />
           </div>
           <div class="contact-form-group">
-            <label class="contact-form-label">Assunto</label>
-            <input type="text" class="contact-form-input" />
+            <label class="contact-form-label" for="contact-subject">Assunto</label>
+            <input id="contact-subject" type="text" class="contact-form-input" />
           </div>
           <div class="contact-form-group">
-            <label class="contact-form-label">Mensagem</label>
-            <textarea rows="4" class="contact-form-input contact-form-textarea"
+            <label class="contact-form-label" for="contact-message">Mensagem</label>
+            <textarea
+              id="contact-message"
+              rows="4"
+              class="contact-form-input contact-form-textarea"
             ></textarea>
           </div>
           <button type="button" class="contact-form-submit">
