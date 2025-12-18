@@ -5,13 +5,42 @@ export const sobre = {
     tagline: "Institucional",
     title: "Sobre Nós",
     description:
-      "Conheça a história e os valores da HJLOG, a parceira estratégica que impulsiona o seu negócio com soluções logísticas de ponta.",
+      "Conheça a trajetória da HJLOG, que começou no mercado de eventos e hoje é referência em logística rodoviária, atendendo grandes varejistas como a Magalu.",
   },
   header: {
     tagline: "Quem Somos",
-    title: "Sobre Nós",
+    title: "Nossa História",
     description:
-      "A HJLOG nasceu com o propósito de transformar a logística rodoviária. Hoje, somos referência em transporte de carga, conectando indústrias e mercados com eficiência e tecnologia de ponta. Mais do que transportar, entregamos compromisso e valor a cada quilômetro rodado.",
+      "A HJLOG nasceu em 2010 com foco em logística para eventos corporativos e culturais. Nossa expertise em prazos apertados e entregas complexas nos tornou especialistas em operações de alta precisão. Em 2020, durante a pandemia, quando o setor de eventos foi paralisado, fizemos uma transformação estratégica: redirecionamos nossa experiência operacional para o transporte de cargas no varejo. Essa decisão nos abriu portas para parcerias com grandes players do e-commerce, como a Magalu, consolidando a HJLOG como referência em logística rodoviária. Hoje, somos mais do que uma transportadora — somos uma parceira estratégica que entrega eficiência, tecnologia e compromisso em cada quilômetro rodado.",
+  },
+  story: {
+    title: "Da Logística de Eventos ao Transporte Nacional",
+    items: [
+      {
+        icon: "mdi:calendar-star",
+        title: "Origem em Eventos",
+        description:
+          "Fundada em 2010, a HJLOG iniciou suas operações atendendo a indústria de eventos, desde shows e feiras até grandes eventos corporativos. Aprendemos a trabalhar com prazos impossíveis e logística de alta complexidade.",
+      },
+      {
+        icon: "mdi:sync",
+        title: "Transformação em 2020",
+        description:
+          "Durante a pandemia, o setor de eventos foi severamente impactado. Com nossa frota parada e uma equipe experiente, tomamos a decisão de pivotar para o mercado de transporte rodoviário de cargas, aplicando nossa expertise em operações críticas ao e-commerce em expansão.",
+      },
+      {
+        icon: "mdi:store",
+        title: "Parceria com a Magalu",
+        description:
+          "Nossa capacidade operacional e compromisso com prazos nos levou a conquistar a confiança de grandes varejistas. Hoje, somos um dos principais parceiros logísticos da Magalu, gerenciando milhares de entregas mensais com pontualidade de 99%.",
+      },
+      {
+        icon: "mdi:chart-line",
+        title: "Crescimento Sustentável",
+        description:
+          "15 anos de mercado, mais de 100 caminhões na frota, e uma operação que conecta todo o Brasil. Nossa trajetória comprova que resiliência, adaptabilidade e excelência operacional constroem negócios sólidos e duradouros.",
+      },
+    ],
   },
   values: {
     title: "Nossos Valores",

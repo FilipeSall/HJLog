@@ -7,22 +7,25 @@ interface Props {
 const { emailPlaceholder, ctaLabel } = Astro.props;
 ---
 
-<form class="cta-form">
+<form class="cta-form" id="cta-form">
   <input
     class="cta-input"
+    id="cta-email"
+    name="email"
     placeholder={emailPlaceholder}
     type="email"
+    required
   />
   <button
     class="cta-button"
-    type="button"
+    type="submit"
   >
     {ctaLabel}
   </button>
 </form>
 
 <style>
-  /* Form */
+  /* Formulário */
   .cta-form {
     display: flex;
     flex-direction: column;
@@ -32,7 +35,7 @@ const { emailPlaceholder, ctaLabel } = Astro.props;
     box-shadow: var(--shadow-2xl);
   }
 
-  /* Form Input */
+  /* Campo do formulário */
   .cta-input {
     flex: 1;
     background-color: var(--background-light);
@@ -55,7 +58,7 @@ const { emailPlaceholder, ctaLabel } = Astro.props;
     outline: none;
   }
 
-  /* Form Button */
+  /* Botão do formulário */
   .cta-button {
     background-color: var(--primary);
     color: var(--background-dark);
@@ -74,10 +77,64 @@ const { emailPlaceholder, ctaLabel } = Astro.props;
     background-color: var(--white);
   }
 
-  /* Responsive Design */
+  /* Design responsivo */
   @media (min-width: 640px) {
     .cta-form {
       flex-direction: row;
     }
   }
+
+  /* Estado de erro */
+  .cta-input.error {
+    background-color: #ffe6e6;
+    border: 2px solid #ff4444;
+  }
+
+  .cta-input.error::placeholder {
+    color: #ff4444;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('cta-form') as HTMLFormElement;
+    const emailInput = document.getElementById('cta-email') as HTMLInputElement;
+
+    if (!form || !emailInput) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+
+      // Validar formato do e-mail
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email) {
+        emailInput.classList.add('error');
+        emailInput.placeholder = 'Por favor, digite seu e-mail';
+        emailInput.focus();
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        emailInput.classList.add('error');
+        emailInput.value = '';
+        emailInput.placeholder = 'Por favor, digite um e-mail válido';
+        emailInput.focus();
+        return;
+      }
+
+      // Remover estado de erro, se presente
+      emailInput.classList.remove('error');
+
+      // Redirecionar para a página de cotação com o parâmetro de e-mail
+      window.location.href = `/cotacao?email=${encodeURIComponent(email)}`;
+    });
+
+    // Remover estado de erro ao digitar
+    emailInput.addEventListener('input', () => {
+      emailInput.classList.remove('error');
+    });
+  });
+</script>

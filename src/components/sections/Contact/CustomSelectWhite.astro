@@ -183,7 +183,7 @@ const { id, label, options } = Astro.props;
       const valueDisplay = selectElement.querySelector('.custom-select-value') as HTMLSpanElement;
       const hiddenInput = selectElement.querySelector('input[type="hidden"]') as HTMLInputElement;
 
-      // Toggle dropdown
+      // Alternar exibição do dropdown
       trigger?.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = selectElement.classList.contains('open');
@@ -191,7 +191,7 @@ const { id, label, options } = Astro.props;
         // Fechar todos os outros selects
         customSelects.forEach(s => s.classList.remove('open'));
 
-        // Toggle atual
+        // Alternar o dropdown atual
         if (!isOpen) {
           selectElement.classList.add('open');
           trigger.setAttribute('aria-expanded', 'true');
@@ -208,13 +208,13 @@ const { id, label, options } = Astro.props;
           const value = option.getAttribute('data-value');
 
           if (value) {
-            // Atualizar display
+            // Atualizar exibição
             valueDisplay.textContent = value;
 
-            // Atualizar hidden input
+            // Atualizar campo oculto
             hiddenInput.value = value;
 
-            // Atualizar selected state
+            // Atualizar estado selecionado
             options.forEach(opt => {
               opt.classList.remove('selected');
               opt.setAttribute('aria-selected', 'false');

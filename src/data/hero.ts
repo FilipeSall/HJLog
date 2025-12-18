@@ -16,7 +16,7 @@ export const hero = {
     },
     secondary: {
       label: "Nossos Serviços",
-      href: "#services",
+      href: "/servicos",
     },
   },
   heroImage: heroImage,

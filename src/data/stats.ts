@@ -19,9 +19,9 @@ export const stats = {
       contexts: ["about"],
     },
     {
-      id: "km",
-      value: "2M+",
-      label: "KM Rodados",
+      id: "years",
+      value: "15",
+      label: "Anos de Mercado",
       contexts: ["about", "homepage"],
     },
     {

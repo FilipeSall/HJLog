@@ -62,7 +62,7 @@ export const servicosDetalhes = {
         },
       ],
       ctaText: "Solicitar Cotação FTL",
-      ctaHref: "#cotacao",
+      ctaHref: "/cotacao?servico=ftl",
     },
     {
       id: "ltl",
@@ -116,7 +116,7 @@ export const servicosDetalhes = {
         },
       ],
       ctaText: "Solicitar Cotação LTL",
-      ctaHref: "#cotacao",
+      ctaHref: "/cotacao?servico=ltl",
     },
     {
       id: "armazenagem",
@@ -161,7 +161,7 @@ export const servicosDetalhes = {
         },
       ],
       ctaText: "Falar sobre Armazenagem",
-      ctaHref: "#cotacao",
+      ctaHref: "/cotacao?servico=armazenagem",
     },
     {
       id: "expresso",
@@ -206,7 +206,7 @@ export const servicosDetalhes = {
         },
       ],
       ctaText: "Solicitar Urgência",
-      ctaHref: "#cotacao",
+      ctaHref: "/cotacao?servico=expresso",
     },
   ],
   quote: {

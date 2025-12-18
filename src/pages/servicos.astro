@@ -4,7 +4,6 @@ import Header from "../components/layout/Header/Header.astro";
 import Footer from "../components/layout/Footer/Footer.astro";
 import ServiceDetailHero from "../components/sections/ServicesDetail/ServiceDetailHero.astro";
 import ServiceDetailSection from "../components/sections/ServicesDetail/ServiceDetailSection.astro";
-import QuoteFormSection from "../components/sections/ServicesDetail/QuoteFormSection.astro";
 import ContactSection from "../components/sections/ServicesDetail/ContactSection.astro";
 import { servicosDetalhes } from "../data/servicos-detalhes";
 ---
@@ -39,13 +38,6 @@ import { servicosDetalhes } from "../data/servicos-detalhes";
         }
       </div>
     </section>
-
-    <QuoteFormSection
-      tagline={servicosDetalhes.quote.tagline}
-      title={servicosDetalhes.quote.title}
-      description={servicosDetalhes.quote.description}
-      serviceTypes={servicosDetalhes.quote.serviceTypes}
-    />
 
     <ContactSection />
   </main>

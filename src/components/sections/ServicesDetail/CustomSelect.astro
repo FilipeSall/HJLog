@@ -3,16 +3,24 @@ interface Props {
   id: string;
   label: string;
   options: string[];
+  defaultValue?: string;
 }
 
-const { id, label, options } = Astro.props;
+const { id, label, options, defaultValue } = Astro.props;
+
+// Determinar qual opção deve ser selecionada
+const selectedIndex = defaultValue
+  ? options.findIndex(opt => opt === defaultValue)
+  : 0;
+const finalSelectedIndex = selectedIndex >= 0 ? selectedIndex : 0;
+const selectedValue = options[finalSelectedIndex];
 ---
 
 <div class="custom-select-wrapper">
   <label for={id} class="custom-select-label">{label}</label>
   <div class="custom-select" data-select={id}>
     <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
-      <span class="custom-select-value">{options[0]}</span>
+      <span class="custom-select-value">{selectedValue}</span>
       <svg class="custom-select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -20,16 +28,16 @@ const { id, label, options } = Astro.props;
     <ul class="custom-select-dropdown" role="listbox">
       {options.map((option, index) => (
         <li
-          class={`custom-select-option ${index === 0 ? 'selected' : ''}`}
+          class={`custom-select-option ${index === finalSelectedIndex ? 'selected' : ''}`}
           role="option"
-          aria-selected={index === 0 ? "true" : "false"}
+          aria-selected={index === finalSelectedIndex ? "true" : "false"}
           data-value={option}
         >
           {option}
         </li>
       ))}
     </ul>
-    <input type="hidden" name={id} id={id} value={options[0]} />
+    <input type="hidden" name={id} id={id} value={selectedValue} />
   </div>
 </div>
 
@@ -174,6 +182,18 @@ const { id, label, options } = Astro.props;
   document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select');
 
+    // Obter serviço a partir do parâmetro da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('servico');
+
+    // Mapear slugs dos serviços para nomes dos tipos
+    const serviceMap: Record<string, string> = {
+      'ftl': 'Carga Completa (FTL)',
+      'ltl': 'Carga Fracionada (LTL)',
+      'armazenagem': 'Armazenagem',
+      'expresso': 'Frete Expresso',
+    };
+
     customSelects.forEach((selectElement) => {
       const trigger = selectElement.querySelector('.custom-select-trigger') as HTMLButtonElement;
       const dropdown = selectElement.querySelector('.custom-select-dropdown') as HTMLUListElement;
@@ -181,7 +201,29 @@ const { id, label, options } = Astro.props;
       const valueDisplay = selectElement.querySelector('.custom-select-value') as HTMLSpanElement;
       const hiddenInput = selectElement.querySelector('input[type="hidden"]') as HTMLInputElement;
 
-      // Toggle dropdown
+      // Definir valor padrão a partir da URL, se houver
+      if (serviceParam && serviceMap[serviceParam]) {
+        const serviceName = serviceMap[serviceParam];
+
+        options.forEach((option) => {
+          const optionValue = option.getAttribute('data-value');
+          if (optionValue === serviceName) {
+            // Atualizar exibição
+            valueDisplay.textContent = serviceName;
+            // Atualizar campo oculto
+            hiddenInput.value = serviceName;
+            // Atualizar estado selecionado
+            options.forEach(opt => {
+              opt.classList.remove('selected');
+              opt.setAttribute('aria-selected', 'false');
+            });
+            option.classList.add('selected');
+            option.setAttribute('aria-selected', 'true');
+          }
+        });
+      }
+
+      // Alternar exibição do dropdown
       trigger?.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = selectElement.classList.contains('open');
@@ -189,7 +231,7 @@ const { id, label, options } = Astro.props;
         // Fechar todos os outros selects
         customSelects.forEach(s => s.classList.remove('open'));
 
-        // Toggle atual
+        // Alternar o dropdown atual
         if (!isOpen) {
           selectElement.classList.add('open');
           trigger.setAttribute('aria-expanded', 'true');
@@ -206,13 +248,13 @@ const { id, label, options } = Astro.props;
           const value = option.getAttribute('data-value');
 
           if (value) {
-            // Atualizar display
+            // Atualizar exibição
             valueDisplay.textContent = value;
 
-            // Atualizar hidden input
+            // Atualizar campo oculto
             hiddenInput.value = value;
 
-            // Atualizar selected state
+            // Atualizar estado selecionado
             options.forEach(opt => {
               opt.classList.remove('selected');
               opt.setAttribute('aria-selected', 'false');

@@ -95,3 +95,9 @@ export interface LeadershipMember {
   image: string;
   alt: string;
 }
+
+export interface StoryItem {
+  icon: string;
+  title: string;
+  description: string;
+}

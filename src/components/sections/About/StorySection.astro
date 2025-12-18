@@ -1,0 +1,186 @@
+---
+import { Icon } from "astro-icon/components";
+import type { StoryItem } from "../../../types/components";
+
+interface Props {
+  title: string;
+  items: StoryItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="story-section">
+  <div class="story-container">
+    <h2 class="story-title">{title}</h2>
+    <div class="story-grid">
+      {
+        items.map((item, index) => (
+          <div class="story-card" data-index={index}>
+            <div class="story-icon-wrapper">
+              <Icon name={item.icon} class="story-icon" />
+            </div>
+            <div class="story-content">
+              <h3 class="story-card-title">{item.title}</h3>
+              <p class="story-card-description">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .story-section {
+    padding: 6rem 0;
+    background-color: var(--background-dark);
+  }
+
+  .story-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .story-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .story-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .story-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    color: var(--text-primary-dark);
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  @media (min-width: 768px) {
+    .story-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .story-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-12);
+    }
+  }
+
+  .story-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .story-card[data-index="0"] {
+    animation-delay: 0.1s;
+  }
+
+  .story-card[data-index="1"] {
+    animation-delay: 0.2s;
+  }
+
+  .story-card[data-index="2"] {
+    animation-delay: 0.3s;
+  }
+
+  .story-card[data-index="3"] {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .story-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 107, 0, 0.05) 100%);
+    border: 2px solid rgba(255, 107, 0, 0.2);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .story-card:hover .story-icon-wrapper {
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.2) 0%, rgba(255, 107, 0, 0.1) 100%);
+    border-color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  .story-icon {
+    font-size: var(--text-3xl);
+    color: var(--primary);
+  }
+
+  .story-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  .story-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .story-card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .story-card-description {
+    font-size: var(--text-base);
+    color: var(--text-secondary-dark);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Add subtle divider line between cards on desktop */
+  @media (min-width: 768px) {
+    .story-card:nth-child(odd) {
+      padding-right: var(--space-6);
+      border-right: 1px solid rgba(255, 107, 0, 0.1);
+    }
+
+    .story-card:nth-child(even) {
+      padding-left: var(--space-6);
+    }
+
+    .story-card:nth-child(n + 3) {
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(255, 107, 0, 0.1);
+    }
+  }
+</style>

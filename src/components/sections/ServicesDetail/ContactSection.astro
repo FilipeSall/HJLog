@@ -14,26 +14,26 @@ import { Icon } from "astro-icon/components";
           Entre em contato pelos canais abaixo.
         </p>
         <div class="contact-channels">
-          <div class="contact-channel-item">
+          <a href="tel:+5511982217679" class="contact-channel-item contact-channel-clickable">
             <div class="contact-channel-icon">
               <Icon name="mdi:phone" />
             </div>
             <div>
               <h4 class="contact-channel-title">Telefone</h4>
-              <a href="tel:+5511982217679" class="contact-channel-link">
+              <p class="contact-channel-link">
                 +55 (11) 98221-7679
-              </a>
+              </p>
               <p class="contact-channel-hours">Seg a Sex: 08h às 18h</p>
             </div>
-          </div>
+          </a>
           <div class="contact-channel-item">
             <div class="contact-channel-icon">
               <Icon name="mdi:email" />
             </div>
             <div>
               <h4 class="contact-channel-title">E-mail</h4>
-              <p class="contact-channel-text">comercial@hjlog.com.br</p>
-              <p class="contact-channel-text">sac@hjlog.com.br</p>
+              <p class="contact-channel-text">adm@hjlogtransportes.com.br</p>
+              <p class="contact-channel-text">comercial@hjlogtransportes.com.br</p>
             </div>
           </div>
           <div class="contact-channel-item">
@@ -42,9 +42,9 @@ import { Icon } from "astro-icon/components";
             </div>
             <div>
               <h4 class="contact-channel-title">Matriz</h4>
-              <p class="contact-channel-text">Rua da Logística, 123</p>
+              <p class="contact-channel-text">Avenida Dep Emilio Carlos 114 Sala 08</p>
               <p class="contact-channel-text">
-                Cidade dos Transportes, SP - 00000-000
+                Limão - São Paulo/SP - 02720-000
               </p>
             </div>
           </div>
@@ -98,7 +98,7 @@ import { Icon } from "astro-icon/components";
               class="contact-form-input contact-form-textarea"
             ></textarea>
           </div>
-          <button type="button" class="contact-form-submit">
+          <button type="submit" class="contact-form-submit">
             Enviar Mensagem
           </button>
         </form>
@@ -106,6 +106,63 @@ import { Icon } from "astro-icon/components";
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact-form') as HTMLFormElement;
+
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+      const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+      const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
+      const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+
+      const name = nameInput?.value.trim();
+      const email = emailInput?.value.trim();
+      const subject = subjectInput?.value.trim();
+      const message = messageInput?.value.trim();
+
+      // Validação básica
+      if (!name || !email || !subject || !message) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      // Validar formato de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Por favor, digite um e-mail válido.');
+        return;
+      }
+
+      // Montar corpo do email formatado
+      const emailBody = `
+Nome: ${name}
+E-mail: ${email}
+Assunto: ${subject}
+
+Mensagem:
+${message}
+
+---
+Mensagem enviada através do formulário de contato do site HJLOG.
+      `.trim();
+
+      // Criar link mailto
+      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`Contato Site - ${subject}`)}&body=${encodeURIComponent(emailBody)}`;
+
+      // Abrir cliente de email
+      window.location.href = mailtoLink;
+
+      // Limpar formulário após envio
+      form.reset();
+    });
+  });
+</script>
 
 <style>
   .contact-section {
@@ -144,7 +201,7 @@ import { Icon } from "astro-icon/components";
     }
   }
 
-  /* Contact Info */
+  /* Informações de contato */
   .contact-info {
     display: flex;
     flex-direction: column;
@@ -184,6 +241,16 @@ import { Icon } from "astro-icon/components";
     display: flex;
     align-items: flex-start;
     gap: var(--space-6);
+  }
+
+  .contact-channel-clickable {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+  }
+
+  .contact-channel-clickable:hover {
+    transform: translateX(4px);
   }
 
   .contact-channel-icon {
@@ -232,7 +299,7 @@ import { Icon } from "astro-icon/components";
     margin-top: var(--space-1);
   }
 
-  /* Social Media */
+  /* Mídias sociais */
   .social-media {
     margin-top: var(--space-12);
   }
@@ -274,7 +341,7 @@ import { Icon } from "astro-icon/components";
     color: var(--background-dark);
   }
 
-  /* Contact Form */
+  /* Formulário de contato */
   .contact-form-wrapper {
     background-color: rgba(42, 42, 42, 0.5);
     padding: var(--space-8);

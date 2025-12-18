@@ -37,7 +37,7 @@ const {
       { "service-detail-grid--reverse": imagePosition === "right" },
     ]}
   >
-    <!-- Highlights Grid -->
+    <!-- Grade de destaques -->
     <div class:list={["highlights-wrapper", { "order-1": imagePosition === "left", "order-2": imagePosition === "right" }]}>
       <div class="highlights-grid">
         {
@@ -73,7 +73,7 @@ const {
       </div>
     </div>
 
-    <!-- Content -->
+    <!-- Conteúdo -->
     <div class:list={["content-wrapper", { "order-2": imagePosition === "left", "order-1": imagePosition === "right" }]}>
       <div class="content-header">
         <div class="content-icon-wrapper">
@@ -148,7 +148,7 @@ const {
     }
   }
 
-  /* Highlights */
+  /* Destaques */
   .highlights-wrapper {
     position: relative;
   }
@@ -257,7 +257,7 @@ const {
     margin-top: var(--space-1);
   }
 
-  /* Content */
+  /* Conteúdo */
   .content-wrapper {
     display: flex;
     flex-direction: column;

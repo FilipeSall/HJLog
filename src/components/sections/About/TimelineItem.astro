@@ -13,7 +13,7 @@ interface Props {
 const { year, title, description, icon, isHighlight, index } = Astro.props;
 ---
 
-<!-- Timeline Marker Column -->
+<!-- Coluna do marcador da linha do tempo -->
 <div
   class="timeline-marker-col"
   data-timeline-marker
@@ -32,7 +32,7 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
         {year === "2010" && <div class="marker-line-gradient" />}
       </>
     ) : (
-      // Regular event without icon (middle events)
+      // Evento regular sem ícone (eventos intermediários)
       <>
         <div class="marker-line-top" />
         <div class="marker-dot">
@@ -44,7 +44,7 @@ const { year, title, description, icon, isHighlight, index } = Astro.props;
   }
 </div>
 
-<!-- Timeline Content Column -->
+<!-- Coluna do conteúdo da linha do tempo -->
 <div
   class="timeline-content-col timeline-content"
   style={`--delay: ${index * 350}ms;`}
