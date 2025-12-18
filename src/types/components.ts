@@ -45,12 +45,6 @@ export interface StatItemProps {
   label: string;
 }
 
-export interface FeatureItemProps {
-  icon: string;
-  title: string;
-  description: string;
-}
-
 export interface TrustBrandProps {
   name: string;
   icon: string;

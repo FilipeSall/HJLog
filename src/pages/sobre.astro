@@ -4,8 +4,6 @@ import Header from "../components/layout/Header/Header.astro";
 import Footer from "../components/layout/Footer/Footer.astro";
 import AboutHero from "../components/sections/About/AboutHero.astro";
 import AboutHeader from "../components/sections/About/AboutHeader.astro";
-import StorySection from "../components/sections/About/StorySection.astro";
-import ValuesSection from "../components/sections/About/ValuesSection.astro";
 import TimelineSection from "../components/sections/About/TimelineSection.astro";
 import AboutStats from "../components/sections/About/AboutStats.astro";
 import LeadershipSection from "../components/sections/About/LeadershipSection.astro";
@@ -27,13 +25,6 @@ import { sobre } from "../data/sobre";
       title={sobre.header.title}
       description={sobre.header.description}
     />
-
-    <StorySection
-      title={sobre.story.title}
-      items={sobre.story.items}
-    />
-
-    <ValuesSection items={sobre.values.items} />
 
     <TimelineSection title={sobre.timeline.title} events={sobre.timeline.events} />
 

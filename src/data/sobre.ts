@@ -42,29 +42,6 @@ export const sobre = {
       },
     ],
   },
-  values: {
-    title: "Nossos Valores",
-    items: [
-      {
-        icon: "lightning-bolt",
-        title: "Agilidade",
-        description:
-          "Processos otimizados e rotas inteligentes para garantir que sua carga chegue no menor tempo possível.",
-      },
-      {
-        icon: "shield-check",
-        title: "Segurança",
-        description:
-          "Monitoramento 24h e frota moderna. Cuidamos da sua mercadoria com protocolos rigorosos de proteção.",
-      },
-      {
-        icon: "handshake",
-        title: "Compromisso",
-        description:
-          "Transparência em cada etapa e dedicação total para construir parcerias duradouras com nossos clientes.",
-      },
-    ],
-  },
   timeline: {
     title: "Nossa Trajetória",
     events: [
