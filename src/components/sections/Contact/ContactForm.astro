@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import CustomSelectWhite from "./CustomSelectWhite.astro";
 
 interface FormFields {
   name: {
@@ -58,10 +59,11 @@ const { title, fields, submitLabel } = Astro.props;
     </div>
 
     <div class="form-field">
-      <label class="form-label" for="subject">{fields.subject.label}</label>
-      <select class="form-select" id="subject" name="subject" required>
-        {fields.subject.options.map((option) => <option value={option}>{option}</option>)}
-      </select>
+      <CustomSelectWhite
+        id="subject"
+        label={fields.subject.label}
+        options={fields.subject.options}
+      />
     </div>
 
     <div class="form-field">
