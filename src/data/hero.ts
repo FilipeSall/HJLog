@@ -5,7 +5,7 @@ export const hero = {
   title: {
     line1: "Movemos o que faz",
     line2: "o espetáculo",
-    line3: "acontecer.",
+    line3: "acontecer",
   },
   description:
     "Há anos conectamos empresas e pessoas com soluções logísticas completas, oferecendo eficiência, segurança e comprometimento em cada transporte.",
