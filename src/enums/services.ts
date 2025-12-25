@@ -1,9 +1,6 @@
-export const serviceMap: Record<string, string> = {
-  ftl: "Carga Completa (FTL)",
-  ltl: "Carga Fracionada (LTL)",
-  armazenagem: "Armazenagem",
-  expresso: "Frete Expresso",
-};
+import serviceMapData from "../data/service-map.json";
+
+export const serviceMap: Record<string, string> = serviceMapData;
 
 export const getServiceNameBySlug = (slug?: string): string | undefined => {
   if (!slug) return undefined;

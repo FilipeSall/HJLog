@@ -215,10 +215,11 @@ export const servicosDetalhes = {
     description:
       "Preencha o formulário abaixo com os detalhes da sua carga e nossa equipe comercial entrará em contato com a melhor proposta logística.",
     serviceTypes: [
-      "Carga Completa (FTL)",
-      "Carga Fracionada (LTL)",
+      "Transporte de Shows e Eventos",
+      "Equipamentos de Palco",
+      "Equipamentos de Gravação",
+      "Logística B2B Magalu",
       "Armazenagem",
-      "Frete Expresso",
       "Outro",
     ],
   },

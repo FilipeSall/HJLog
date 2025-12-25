@@ -20,7 +20,7 @@ export const stats = {
     },
     {
       id: "years",
-      value: "15",
+      value: "+10",
       label: "Anos de Mercado",
       contexts: ["about", "homepage"],
     },

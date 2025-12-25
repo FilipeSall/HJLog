@@ -11,34 +11,34 @@ export const sobre = {
     tagline: "Quem Somos",
     title: "Nossa História",
     description:
-      "A HJLOG nasceu em 2010 com foco em logística para eventos corporativos e culturais. Nossa expertise em prazos apertados e entregas complexas nos tornou especialistas em operações de alta precisão. Em 2020, durante a pandemia, quando o setor de eventos foi paralisado, fizemos uma transformação estratégica: redirecionamos nossa experiência operacional para o transporte de cargas no varejo. Essa decisão nos abriu portas para parcerias com grandes players do e-commerce, como a Magalu, consolidando a HJLOG como referência em logística rodoviária. Hoje, somos mais do que uma transportadora — somos uma parceira estratégica que entrega eficiência, tecnologia e compromisso em cada quilômetro rodado.",
+      "A HJLOG está há mais de 10 anos no mercado, com foco principal em logística para shows e eventos. Transportamos equipamentos de bandas renomadas, estruturas de palco e sistemas de captação de som e imagem. Durante a pandemia, quando o setor de eventos foi paralisado, expandimos nossa atuação para o mercado de varejo. Hoje, atendemos grandes redes como a Magalu, realizando transferências entre Centros de Distribuição e abastecimento de lojas, sempre em operações B2B.",
   },
   story: {
-    title: "Da Logística de Eventos ao Transporte Nacional",
+    title: "Da Logística de Eventos ao Transporte de Varejo",
     items: [
       {
         icon: "mdi:calendar-star",
-        title: "Origem em Eventos",
+        title: "Especialistas em Eventos",
         description:
-          "Fundada em 2010, a HJLOG iniciou suas operações atendendo a indústria de eventos, desde shows e feiras até grandes eventos corporativos. Aprendemos a trabalhar com prazos impossíveis e logística de alta complexidade.",
+          "Há mais de 10 anos transportando equipamentos para shows e eventos pelo Brasil. Trabalhamos com bandas renomadas, transportando equipamentos de palco, som, iluminação e captação audiovisual. Atendemos produtoras e empresas de montagem de estruturas.",
+      },
+      {
+        icon: "mdi:music",
+        title: "Equipamentos Técnicos",
+        description:
+          "Nossa expertise vai além do transporte básico. Há anos movimentamos equipamentos sensíveis de gravação, captação de som e imagem para produções audiovisuais, sempre com o cuidado que esses equipamentos exigem.",
       },
       {
         icon: "mdi:sync",
-        title: "Transformação em 2020",
+        title: "Expansão Durante a Pandemia",
         description:
-          "Durante a pandemia, o setor de eventos foi severamente impactado. Com nossa frota parada e uma equipe experiente, tomamos a decisão de pivotar para o mercado de transporte rodoviário de cargas, aplicando nossa expertise em operações críticas ao e-commerce em expansão.",
+          "Com a paralisação do setor de eventos durante a pandemia, expandimos nossa atuação para o mercado de varejo. Aplicamos nossa experiência em logística complexa para atender grandes redes varejistas.",
       },
       {
         icon: "mdi:store",
         title: "Parceria com a Magalu",
         description:
-          "Nossa capacidade operacional e compromisso com prazos nos levou a conquistar a confiança de grandes varejistas. Hoje, somos um dos principais parceiros logísticos da Magalu, gerenciando milhares de entregas mensais com pontualidade de 99%.",
-      },
-      {
-        icon: "mdi:chart-line",
-        title: "Crescimento Sustentável",
-        description:
-          "15 anos de mercado, mais de 100 caminhões na frota, e uma operação que conecta todo o Brasil. Nossa trajetória comprova que resiliência, adaptabilidade e excelência operacional constroem negócios sólidos e duradouros.",
+          "Hoje operamos transferências entre Centros de Distribuição da Magalu e realizamos abastecimento de lojas. Nossa atuação é 100% B2B - não fazemos entregas porta a porta para cliente final.",
       },
     ],
   },
@@ -46,34 +46,34 @@ export const sobre = {
     title: "Nossa Trajetória",
     events: [
       {
-        year: "2010",
+        year: "2014",
         title: "Fundação",
         description:
-          "Início das operações focada em logística para eventos.",
+          "Início das operações focada em logística para shows e eventos musicais.",
         icon: "flag",
         isHighlight: true,
       },
       {
-        year: "2015",
-        title: "Primeira Expansão",
+        year: "2017",
+        title: "Consolidação no Setor",
         description:
-          "Aquisição de 20 novos caminhões e abertura da primeira filial estratégica em São Paulo.",
+          "Expansão da atuação com bandas renomadas e grandes produtoras de eventos pelo Brasil.",
         icon: null,
         isHighlight: false,
       },
       {
         year: "2020",
-        title: "Pivô Estratégico",
+        title: "Expansão para Varejo",
         description:
-          "Durante a pandemia, a empresa redirecionou seu foco para o mercado de varejo, adaptando-se às novas demandas do e-commerce.",
+          "Durante a pandemia, expandimos para o mercado de varejo, mantendo o foco em eventos e adicionando operações B2B.",
         icon: null,
         isHighlight: false,
       },
       {
-        year: "2023",
-        title: "Liderança Regional",
+        year: "2025",
+        title: "Parceiro Magalu",
         description:
-          "Consolidação como líder de entregas pela Magalu e em eventos em SP.",
+          "Consolidação como parceiro logístico da Magalu, operando transferências entre CDs e abastecimento de lojas.",
         icon: "trophy",
         isHighlight: true,
       },

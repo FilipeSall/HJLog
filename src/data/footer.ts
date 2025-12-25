@@ -10,7 +10,6 @@ export const footer = {
         { label: "Sobre Nós", href: "/sobre" },
         { label: "Motoristas", href: "#" },
         { label: "Segurança", href: "#" },
-        { label: "Notícias", href: "#" },
       ],
     },
     {

@@ -1,26 +1,26 @@
 export const cta = {
   title: "Pronto para transportar?",
   description:
-    "Junte-se a mais de 500 empresas que confiam na HJLOG para suas necessidades de transporte.",
+    "Há mais de 10 anos movendo shows e eventos pelo Brasil. Especialistas em logística para bandas renomadas e grandes varejistas.",
   emailPlaceholder: "Digite seu e-mail corporativo",
   ctaLabel: "Começar Agora",
-  partnersTitle: "Parceiros de Confiança",
+  partnersTitle: "Áreas de Atuação",
   partners: [
     {
-      name: "NACIONAL INC",
-      icon: "mdi:earth",
+      name: "Shows e Eventos",
+      icon: "mdi:music",
     },
     {
-      name: "FAST TRACK",
-      icon: "mdi:lightning-bolt",
+      name: "Equipamentos de Palco",
+      icon: "mdi:lightbulb-on",
     },
     {
-      name: "BOX LOGIC",
-      icon: "mdi:package-variant",
+      name: "Sistemas Audiovisuais",
+      icon: "mdi:video",
     },
     {
-      name: "HIGHWAY EXP",
-      icon: "mdi:highway",
+      name: "Logística B2B Magalu",
+      icon: "mdi:store",
     },
   ],
 };

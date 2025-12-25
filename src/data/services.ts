@@ -29,11 +29,29 @@ const serviceItems: ServiceItem[] = [
   {
     title: "Transporte de Shows e Eventos",
     description:
-      "Transporte de caixas de som, painéis de LED, estruturas e equipamentos técnicos. Atendimento direto a produtoras e empresas do setor.",
+      "Há mais de 10 anos transportando equipamentos de bandas renomadas, estruturas de palco, sistemas de som e captação de imagem. Experiência com produtoras e empresas de montagem.",
     icon: "mdi:truck-delivery",
     image: showsEventsImage,
     imageAlt: "Transporte de estruturas para eventos",
     featured: true,
+  },
+  {
+    title: "Logística para Varejo - Magalu",
+    description:
+      "Transferência entre Centros de Distribuição e abastecimento de lojas da Magalu. Operação B2B sem entrega porta a porta.",
+    icon: "mdi:routes",
+    image: corporateLogisticsImage,
+    imageAlt: "Operação de logística corporativa",
+    featured: true,
+  },
+  {
+    title: "Equipamentos de Gravação",
+    description:
+      "Transporte especializado de equipamentos de captação de som e imagem para produções audiovisuais.",
+    icon: "mdi:package-variant",
+    image: dedicatedLoadImage,
+    imageAlt: "Transporte de equipamentos técnicos",
+    featured: false,
   },
   {
     title: "Armazenagem",
@@ -42,24 +60,6 @@ const serviceItems: ServiceItem[] = [
     icon: "mdi:warehouse",
     image: warehouseImage,
     imageAlt: "Estrutura de armazenagem",
-    featured: false,
-  },
-  {
-    title: "Logística Corporativa",
-    description:
-      "Transferência entre Centros de Distribuição e abastecimento de lojas. Atuação com grandes redes.",
-    icon: "mdi:routes",
-    image: corporateLogisticsImage,
-    imageAlt: "Operação de logística corporativa",
-    featured: false,
-  },
-  {
-    title: "Carga Dedicada",
-    description:
-      "Veículos exclusivos para sua carga com monitoramento dedicado.",
-    icon: "mdi:package-variant",
-    image: dedicatedLoadImage,
-    imageAlt: "Carga dedicada em transporte especializado",
     featured: false,
   },
 ];

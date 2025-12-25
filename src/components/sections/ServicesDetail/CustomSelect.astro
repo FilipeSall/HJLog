@@ -1,4 +1,6 @@
 ---
+import serviceMapData from "../../../data/service-map.json";
+
 interface Props {
   id: string;
   label: string;
@@ -177,11 +179,12 @@ const selectedValue = options[finalSelectedIndex];
   }
 </style>
 
-  <script is:inline type="module">
-    import { serviceMap } from "../../../enums/services";
-
-    document.addEventListener('DOMContentLoaded', () => {
+<script is:inline define:vars={{ serviceMapData }}>
+  document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select');
+
+    // Usando o serviceMap injetado do servidor
+    const serviceMap = serviceMapData;
 
     // Obter serviço a partir do parâmetro da URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -196,7 +199,7 @@ const selectedValue = options[finalSelectedIndex];
 
       // Definir valor padrão a partir da URL, se houver
       if (serviceParam && serviceMap[serviceParam]) {
-        const serviceName = serviceMapFromData[serviceParam];
+        const serviceName = serviceMap[serviceParam];
 
         options.forEach((option) => {
           const optionValue = option.getAttribute('data-value');
