@@ -3,5 +3,8 @@
   "equipamentos-palco": "Equipamentos de Palco",
   "equipamentos-gravacao": "Equipamentos de Gravação",
   "logistica-b2b": "Logística B2B Magalu",
-  "armazenagem": "Armazenagem"
+  "armazenagem": "Armazenagem",
+  "ftl": "Carga Completa (FTL)",
+  "ltl": "Carga Fracionada (LTL)",
+  "expresso": "Frete Expresso"
 }
