@@ -50,14 +50,6 @@ const { image, imageAlt } = Astro.props;
     z-index: 0;
     transform: translateX(0) skewX(-6deg);
     transform-origin: bottom right;
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .hero-image-container {
-      display: block;
-      width: 100%;
-    }
   }
 
   @media (min-width: 1024px) {
@@ -86,8 +78,15 @@ const { image, imageAlt } = Astro.props;
     object-fit: cover;
     object-position: 60% center;
     filter: grayscale(50%);
-    opacity: 0.8;
+    opacity: 0.5;
     transform: skewX(6deg) scale(1.1);
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image {
+      display: block;
+    }
   }
 
   @media (min-width: 900px) {
@@ -99,6 +98,7 @@ const { image, imageAlt } = Astro.props;
   @media (min-width: 1024px) {
     .hero-image {
       object-position: 40% center;
+      opacity: 0.8;
     }
   }
 
