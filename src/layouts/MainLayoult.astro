@@ -124,77 +124,86 @@ import "../styles/tema.css";
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <style is:global>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--background-dark);
+        color: var(--text-primary-dark);
+        overflow-x: hidden;
+      }
+
+      body::selection {
+        background-color: var(--primary);
+        color: var(--background-dark);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      button,
+      nav,
+      .font-display {
+        font-family: var(--font-display);
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: var(--font-display);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .layout-root {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
     <div class="layout-root">
       <slot />
     </div>
+    <script>
+      import { initAnalytics } from "../lib/firebase";
+
+      if (import.meta.env.PROD && typeof window !== "undefined") {
+        window.addEventListener("load", () => {
+          initAnalytics();
+        });
+      }
+    </script>
   </body>
 </html>
-
-<style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-body);
-    background-color: var(--background-dark);
-    color: var(--text-primary-dark);
-    overflow-x: hidden;
-  }
-
-  body::selection {
-    background-color: var(--primary);
-    color: var(--background-dark);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  button,
-  nav,
-  .font-display {
-    font-family: var(--font-display);
-  }
-
-  p {
-    margin: 0;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: var(--font-display);
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .layout-root {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-</style>

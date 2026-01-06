@@ -16,6 +16,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "astro": "^5.15.3",
     "astro-icon": "^1.1.5",
+    "firebase": "^12.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

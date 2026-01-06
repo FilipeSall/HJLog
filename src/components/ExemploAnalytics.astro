@@ -1,0 +1,52 @@
+---
+/**
+ * Componente de exemplo mostrando como rastrear eventos com Firebase Analytics
+ * Este componente pode ser usado como referência para implementar tracking em outros componentes
+ */
+---
+
+<button id="exemplo-btn" class="exemplo-analytics-btn">
+  Clique aqui (exemplo de tracking)
+</button>
+
+<script>
+  import { logEvent } from 'firebase/analytics';
+  import { getFirebaseAnalytics } from '../lib/firebase';
+
+  const button = document.getElementById('exemplo-btn');
+
+  if (button) {
+    button.addEventListener('click', () => {
+      const analytics = getFirebaseAnalytics();
+
+      if (analytics) {
+        // Rastreia o evento de clique
+        logEvent(analytics, 'button_click', {
+          button_name: 'exemplo_analytics',
+          button_location: 'exemplo_component',
+          timestamp: new Date().toISOString()
+        });
+
+        console.log('Evento rastreado no Firebase Analytics!');
+      }
+    });
+  }
+</script>
+
+<style>
+  .exemplo-analytics-btn {
+    padding: 1rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .exemplo-analytics-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+</style>
