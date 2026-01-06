@@ -10,16 +10,73 @@ const { title, description, linkLabel, embedUrl } = Astro.props;
 ---
 
 <section class="contact-map-section">
-  <iframe
-    allowfullscreen
-    class="map-iframe"
-    height="100%"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-    src={embedUrl}
-    width="100%"
-    title={`Mapa: ${title}`}
-  ></iframe>
+  <div class="map-container">
+    <iframe
+      allowfullscreen
+      class="map-iframe"
+      height="100%"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src={embedUrl}
+      width="100%"
+      title={`Mapa: ${title}`}
+      id="google-map-iframe"
+    ></iframe>
+
+    <div class="map-error-overlay" id="map-error-overlay">
+      <div class="map-error-content">
+        <svg
+          class="map-error-icon"
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+          <line x1="3" y1="21" x2="21" y2="3" stroke-width="1.5"></line>
+        </svg>
+        <h4 class="map-error-title">Erro ao carregar o mapa</h4>
+        <p class="map-error-description">
+          Não foi possível carregar o mapa do Google. Por favor, recarregue a página ou tente novamente mais tarde.
+        </p>
+        <button class="map-error-button" id="reload-page-btn">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Recarregar página
+        </button>
+        <a
+          class="map-error-link"
+          href="https://maps.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir no Google Maps
+        </a>
+      </div>
+    </div>
+
+    <div class="map-loading-overlay" id="map-loading-overlay">
+      <div class="map-loading-spinner"></div>
+      <p class="map-loading-text">Carregando mapa...</p>
+    </div>
+  </div>
 
   <div class="map-info-card">
     <h4 class="map-info-title">{title}</h4>
@@ -46,11 +103,144 @@ const { title, description, linkLabel, embedUrl } = Astro.props;
     background-color: var(--surface-dark);
   }
 
+  .map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
   .map-iframe {
     border: 0;
     filter: grayscale(100%) invert(92%) contrast(83%);
   }
 
+  /* ========== Loading Overlay ========== */
+  .map-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--surface-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    z-index: 5;
+    transition: opacity var(--transition-base);
+  }
+
+  .map-loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .map-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-dark);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .map-loading-text {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+  }
+
+  /* ========== Error Overlay ========== */
+  .map-error-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--surface-dark);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .map-error-overlay.visible {
+    display: flex;
+  }
+
+  .map-error-content {
+    text-align: center;
+    padding: var(--space-8);
+    max-width: 28rem;
+  }
+
+  .map-error-icon {
+    color: var(--primary);
+    margin: 0 auto var(--space-6);
+    opacity: 0.8;
+  }
+
+  .map-error-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    margin-bottom: var(--space-3);
+  }
+
+  .map-error-description {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-secondary-dark);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+
+  .map-error-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    background-color: var(--primary);
+    color: var(--background-dark);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-default);
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    margin-bottom: var(--space-4);
+  }
+
+  .map-error-button:hover {
+    background-color: transparent;
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+  }
+
+  .map-error-link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+    text-decoration: underline;
+    transition: color var(--transition-base);
+  }
+
+  .map-error-link:hover {
+    color: var(--primary);
+  }
+
+  /* ========== Info Card ========== */
   .map-info-card {
     position: absolute;
     bottom: var(--space-6);
@@ -62,6 +252,7 @@ const { title, description, linkLabel, embedUrl } = Astro.props;
     padding: var(--space-6);
     max-width: 20rem;
     display: none;
+    z-index: 15;
   }
 
   @media (min-width: 768px) {
@@ -98,3 +289,72 @@ const { title, description, linkLabel, embedUrl } = Astro.props;
     color: var(--white);
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const iframe = document.getElementById("google-map-iframe") as HTMLIFrameElement | null;
+    const loadingOverlay = document.getElementById("map-loading-overlay");
+    const errorOverlay = document.getElementById("map-error-overlay");
+    const reloadBtn = document.getElementById("reload-page-btn");
+
+    let hasLoaded = false;
+
+    function showError() {
+      if (hasLoaded) return;
+
+      if (loadingOverlay) {
+        loadingOverlay.classList.add("hidden");
+      }
+      if (errorOverlay) {
+        errorOverlay.classList.add("visible");
+      }
+
+      console.error("[HJLOG Map] Falha ao carregar o Google Maps. Possíveis causas: bloqueio de conteúdo externo, timeout de rede, ou problemas com a API do Google Maps.");
+    }
+
+    function hideLoading() {
+      hasLoaded = true;
+      clearTimeout(loadTimeout);
+
+      if (loadingOverlay) {
+        loadingOverlay.classList.add("hidden");
+      }
+    }
+
+    const loadTimeout = setTimeout(() => {
+      showError();
+    }, 10000);
+
+    // Listener para quando o iframe carregar com sucesso
+    if (iframe) {
+      iframe.addEventListener("load", () => {
+        try {
+          setTimeout(() => {
+            hideLoading();
+          }, 1000);
+        } catch (error) {
+          console.error("[HJLOG Map] Erro ao verificar carregamento:", error);
+          showError();
+        }
+      });
+
+      iframe.addEventListener("error", () => {
+        console.error("[HJLOG Map] Erro no carregamento do iframe");
+        showError();
+      });
+    }
+
+    if (reloadBtn) {
+      reloadBtn.addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
+
+    // Fallback
+    setTimeout(() => {
+      if (!hasLoaded && loadingOverlay && !loadingOverlay.classList.contains("hidden")) {
+        showError();
+      }
+    }, 15000);
+  }
+</script>
