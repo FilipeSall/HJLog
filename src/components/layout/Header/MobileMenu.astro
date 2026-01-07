@@ -31,6 +31,14 @@ const isActive = (href: string) => {
       ))
     }
   </div>
+
+  <button
+    type="button"
+    class="mobile-area-cliente-btn"
+    id="open-area-cliente-mobile"
+  >
+    Área do Cliente
+  </button>
 </div>
 
 <style>
@@ -78,6 +86,28 @@ const isActive = (href: string) => {
     color: var(--text-primary-dark);
   }
 
+  .mobile-area-cliente-btn {
+    width: 100%;
+    height: 2.75rem;
+    background-color: var(--primary);
+    color: var(--background-dark);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-area-cliente-btn:hover {
+    background-color: var(--white);
+    color: var(--background-dark);
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -96,3 +126,28 @@ const isActive = (href: string) => {
     }
   }
 </style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const mobileAreaClienteBtn = document.getElementById('open-area-cliente-mobile');
+
+    mobileAreaClienteBtn?.addEventListener('click', () => {
+      const modal = document.getElementById('area-cliente-modal');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuButton = document.querySelector('.menu-button');
+
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Fecha o menu mobile
+        if (mobileMenu) {
+          mobileMenu.classList.remove('mobile-menu--open');
+        }
+        if (menuButton) {
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  }
+</script>
