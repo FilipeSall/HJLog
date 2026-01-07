@@ -67,18 +67,6 @@ import MobileMenu from "./MobileMenu.astro";
       menuButton.addEventListener("click", () => {
         const isOpen = mobileMenu.classList.toggle("mobile-menu--open");
         menuButton.setAttribute("aria-expanded", String(isOpen));
-        const iconSvg = menuButton.querySelector("svg");
-        if (iconSvg) {
-          const useElement = iconSvg.querySelector("use");
-          if (useElement) {
-            const currentHref = useElement.getAttribute("href") || "";
-            if (isOpen) {
-              useElement.setAttribute("href", currentHref.replace("mdi:menu", "mdi:close"));
-            } else {
-              useElement.setAttribute("href", currentHref.replace("mdi:close", "mdi:menu"));
-            }
-          }
-        }
       });
     }
   }

@@ -23,7 +23,8 @@ const { ctaHref, ctaLabel } = Astro.props;
     aria-expanded="false"
     aria-controls="mobile-menu"
   >
-    <Icon name="mdi:menu" />
+    <Icon name="mdi:menu" class="menu-icon menu-icon-open" aria-hidden="true" />
+    <Icon name="mdi:close" class="menu-icon menu-icon-close" aria-hidden="true" />
   </button>
 </div>
 
@@ -61,11 +62,25 @@ const { ctaHref, ctaLabel } = Astro.props;
     color: var(--text-primary-dark);
     display: inline-flex;
     font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .menu-button svg {
     width: 1em;
     height: 1em;
+  }
+
+  .menu-icon-close {
+    display: none;
+  }
+
+  .menu-button[aria-expanded="true"] .menu-icon-open {
+    display: none;
+  }
+
+  .menu-button[aria-expanded="true"] .menu-icon-close {
+    display: inline-flex;
   }
 
   /* Consultas de mídia */
