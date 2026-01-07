@@ -1,5 +1,6 @@
 ---
 import "../styles/tema.css";
+import AreaClienteModal from "../components/shared/AreaClienteModal.astro";
 ---
 
 <html class="dark" lang="pt-BR">
@@ -196,6 +197,10 @@ import "../styles/tema.css";
     <div class="layout-root">
       <slot />
     </div>
+
+    <!-- Modal Área do Cliente -->
+    <AreaClienteModal />
+
     <script>
       import { initAnalytics } from "../lib/firebase";
 

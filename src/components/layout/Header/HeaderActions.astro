@@ -10,12 +10,13 @@ const { ctaHref, ctaLabel } = Astro.props;
 ---
 
 <div class="header-actions">
-  <a
-    href={ctaHref}
+  <button
+    type="button"
     class="cta-button"
+    id="open-area-cliente"
   >
     {ctaLabel}
-  </a>
+  </button>
   <button
     class="menu-button"
     type="button"
@@ -47,6 +48,9 @@ const { ctaHref, ctaLabel } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
   }
 
   .cta-button:hover {
@@ -77,3 +81,17 @@ const { ctaHref, ctaLabel } = Astro.props;
     }
   }
 </style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const areaClienteBtn = document.getElementById('open-area-cliente');
+
+    areaClienteBtn?.addEventListener('click', () => {
+      const modal = document.getElementById('area-cliente-modal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  }
+</script>
