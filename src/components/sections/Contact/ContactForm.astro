@@ -305,21 +305,52 @@ const { title, fields, submitLabel } = Astro.props;
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
 
-      // Montar corpo do email formatado
-      const emailBody = `
-Nome: ${name}
-E-mail: ${email}
-Assunto: ${subject}
+      // Obter data e hora atual formatada
+      const now = new Date();
+      const dataHora = now.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
 
-Mensagem:
+      // Montar corpo do email formatado e estruturado
+      const emailBody = `
+═══════════════════════════════════════════════════════
+          NOVO CONTATO RECEBIDO VIA SITE
+═══════════════════════════════════════════════════════
+
+TIPO: Contato Geral
+
+DADOS DO CLIENTE:
+  • Nome: ${name}
+  • E-mail: ${email}
+  • Assunto: ${subject}
+
+DATA/HORA:
+  ${dataHora}
+
+───────────────────────────────────────────────────────
+MENSAGEM:
+───────────────────────────────────────────────────────
+
 ${message}
 
----
-Mensagem enviada através do formulário de contato do site HJLOG.
+───────────────────────────────────────────────────────
+
+AÇÕES RECOMENDADAS:
+→ Responder para: ${email}
+→ Prioridade: ${subject.toLowerCase().includes('urgente') ? 'ALTA' : 'Normal'}
+
+═══════════════════════════════════════════════════════
+Este email foi gerado automaticamente pelo formulário
+de contato do site www.hjlogtransportes.com.br
+═══════════════════════════════════════════════════════
       `.trim();
 
-      // Criar link mailto
-      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`Contato Site - ${subject}`)}&body=${encodeURIComponent(emailBody)}`;
+      // Criar link mailto com assunto mais descritivo
+      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`[CONTATO SITE] ${subject} - ${name}`)}&body=${encodeURIComponent(emailBody)}`;
 
       // Abrir cliente de email
       window.location.href = mailtoLink;

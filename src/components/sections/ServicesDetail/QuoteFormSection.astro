@@ -100,7 +100,7 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
             rows="4"
             class="form-input form-textarea"></textarea>
         </div>
-        <button type="button" class="form-submit">
+        <button type="submit" class="form-submit">
           Enviar Solicitação de Cotação
         </button>
       </form>
@@ -262,15 +262,133 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Obter e-mail a partir do parâmetro da URL
     const urlParams = new URLSearchParams(window.location.search);
-    const email = urlParams.get('email');
+    const emailParam = urlParams.get('email');
 
-    if (email) {
-      const emailInput = document.getElementById('email') as HTMLInputElement;
-      if (emailInput) {
-        emailInput.value = decodeURIComponent(email);
-      }
+    const form = document.querySelector('.quote-form') as HTMLFormElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const companyInput = document.getElementById('company') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const phoneInput = document.getElementById('phone') as HTMLInputElement;
+    const originInput = document.getElementById('origin') as HTMLInputElement;
+    const destinationInput = document.getElementById('destination') as HTMLInputElement;
+    const cargoDetailsInput = document.getElementById('cargo-details') as HTMLTextAreaElement;
+
+    if (emailParam && emailInput) {
+      emailInput.value = decodeURIComponent(emailParam);
     }
+
+    if (!form) return;
+
+    // Validação de campo
+    const validateField = (input: HTMLInputElement | HTMLTextAreaElement): boolean => {
+      const value = input.value.trim();
+
+      if (!value) {
+        input.style.borderColor = '#ef4444';
+        return false;
+      }
+
+      if (input.type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          input.style.borderColor = '#ef4444';
+          return false;
+        }
+      }
+
+      input.style.borderColor = '';
+      return true;
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Obter valor do select customizado
+      const serviceTypeHiddenInput = document.querySelector('input[name="service-type"]') as HTMLInputElement;
+      const serviceType = serviceTypeHiddenInput?.value || '';
+
+      // Validar campos
+      const isNameValid = validateField(nameInput);
+      const isCompanyValid = validateField(companyInput);
+      const isEmailValid = validateField(emailInput);
+      const isPhoneValid = validateField(phoneInput);
+      const isOriginValid = validateField(originInput);
+      const isDestinationValid = validateField(destinationInput);
+      const isCargoDetailsValid = validateField(cargoDetailsInput);
+
+      if (!isNameValid || !isCompanyValid || !isEmailValid || !isPhoneValid ||
+          !isOriginValid || !isDestinationValid || !isCargoDetailsValid || !serviceType) {
+        return;
+      }
+
+      const name = nameInput.value.trim();
+      const company = companyInput.value.trim();
+      const email = emailInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const origin = originInput.value.trim();
+      const destination = destinationInput.value.trim();
+      const cargoDetails = cargoDetailsInput.value.trim();
+
+      // Obter data e hora atual formatada
+      const now = new Date();
+      const dataHora = now.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      // Montar corpo do email formatado e estruturado
+      const emailBody = `
+═══════════════════════════════════════════════════════
+       SOLICITAÇÃO DE COTAÇÃO RECEBIDA VIA SITE
+═══════════════════════════════════════════════════════
+
+TIPO: Solicitação de Cotação
+
+DADOS DO CLIENTE:
+  • Nome: ${name}
+  • Empresa: ${company}
+  • E-mail: ${email}
+  • Telefone/WhatsApp: ${phone}
+
+INFORMAÇÕES DO SERVIÇO:
+  • Tipo de Serviço: ${serviceType}
+  • Origem: ${origin}
+  • Destino: ${destination}
+
+DATA/HORA DA SOLICITAÇÃO:
+  ${dataHora}
+
+───────────────────────────────────────────────────────
+DETALHES DA CARGA:
+───────────────────────────────────────────────────────
+
+${cargoDetails}
+
+───────────────────────────────────────────────────────
+
+AÇÕES RECOMENDADAS:
+→ Responder para: ${email}
+→ Contato via WhatsApp: ${phone}
+→ Preparar cotação para: ${origin} → ${destination}
+→ Prioridade: ${serviceType.toLowerCase().includes('expres') || serviceType.toLowerCase().includes('urgente') ? 'ALTA' : 'Normal'}
+
+═══════════════════════════════════════════════════════
+Este email foi gerado automaticamente pelo formulário
+de cotação do site www.hjlogtransportes.com.br
+═══════════════════════════════════════════════════════
+      `.trim();
+
+      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`[COTAÇÃO] ${serviceType} - ${company}`)}&body=${encodeURIComponent(emailBody)}`;
+
+      window.location.href = mailtoLink;
+
+      setTimeout(() => {
+        form.reset();
+      }, 500);
+    });
   });
 </script>
