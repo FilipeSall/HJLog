@@ -1,9 +1,4 @@
 export const cta = {
-  title: "Pronto para transportar?",
-  description:
-    "Há mais de 10 anos movendo shows e eventos pelo Brasil. Especialistas em logística para bandas renomadas e grandes varejistas.",
-  emailPlaceholder: "Digite seu e-mail corporativo",
-  ctaLabel: "Começar Agora",
   partnersTitle: "Áreas de Atuação",
   partners: [
     {
@@ -19,7 +14,7 @@ export const cta = {
       icon: "mdi:video",
     },
     {
-      name: "Logística B2B Magalu",
+      name: "Logística para Varejo",
       icon: "mdi:store",
     },
   ],

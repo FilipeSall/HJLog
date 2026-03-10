@@ -16,8 +16,6 @@ export interface ServiceItem {
 interface ServicesHeading {
   tagline: string;
   title: string;
-  ctaLabel: string;
-  ctaHref: string;
 }
 
 export interface ServicesData {
@@ -36,9 +34,9 @@ const serviceItems: ServiceItem[] = [
     featured: true,
   },
   {
-    title: "Logística para Varejo - Magalu",
+    title: "Logística para Varejo",
     description:
-      "Transferência entre Centros de Distribuição e abastecimento de lojas da Magalu. Operação B2B sem entrega porta a porta.",
+      "Transferência entre Centros de Distribuição e abastecimento de lojas do varejo. Operação B2B sem entrega porta a porta.",
     icon: "mdi:routes",
     image: corporateLogisticsImage,
     imageAlt: "Operação de logística corporativa",
@@ -54,12 +52,12 @@ const serviceItems: ServiceItem[] = [
     featured: false,
   },
   {
-    title: "Armazenagem",
+    title: "Entrega e Distribuição",
     description:
-      "Instalações seguras e climatizadas para otimizar sua distribuição.",
-    icon: "mdi:warehouse",
+      "Operação dedicada para entregas programadas, com roteirização inteligente e acompanhamento até o destino.",
+    icon: "mdi:truck-fast",
     image: warehouseImage,
-    imageAlt: "Estrutura de armazenagem",
+    imageAlt: "Veículo de entrega em operação",
     featured: false,
   },
 ];
@@ -68,8 +66,6 @@ export const services: ServicesData = {
   heading: {
     tagline: "O que fazemos",
     title: "Soluções de Transporte",
-    ctaLabel: "Ver todos os serviços",
-    ctaHref: "/servicos",
   },
   items: serviceItems,
 };

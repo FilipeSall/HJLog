@@ -5,23 +5,6 @@ export const footer = {
   },
   sections: [
     {
-      title: "Empresa",
-      links: [
-        { label: "Sobre Nós", href: "/sobre" },
-        { label: "Motoristas", href: "#" },
-        { label: "Segurança", href: "#" },
-      ],
-    },
-    {
-      title: "Serviços",
-      links: [
-        { label: "Carga FTL", href: "/cotacao?servico=ftl" },
-        { label: "Carga LTL", href: "/cotacao?servico=ltl" },
-        { label: "Armazenagem", href: "/cotacao?servico=armazenagem" },
-        { label: "Frete Expresso", href: "/cotacao?servico=expresso" },
-      ],
-    },
-    {
       title: "Contato",
       contact: {
         address: "Avenida Dep Emilio Carlos 114 Sala 08\nLimão - São Paulo/SP - 02720-000",

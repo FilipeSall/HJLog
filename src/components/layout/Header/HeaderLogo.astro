@@ -11,8 +11,8 @@ import { Image } from "astro:assets";
       class="logo-img"
       loading="eager"
       decoding="async"
-      width={100}
-      height={40}
+      width={220}
+      height={88}
     />
   </a>
 </div>
@@ -31,7 +31,13 @@ import { Image } from "astro:assets";
   }
 
   .logo-img {
-    height: 2.5rem;
+    height: 3.75rem;
     width: auto;
+  }
+
+  @media (min-width: 768px) {
+    .logo-img {
+      height: 4.5rem;
+    }
   }
 </style>

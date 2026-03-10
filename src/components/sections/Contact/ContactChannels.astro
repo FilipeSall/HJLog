@@ -1,6 +1,5 @@
 ---
 import ContactChannelItem from "./ContactChannelItem.astro";
-import ContactSocialMedia from "./ContactSocialMedia.astro";
 
 interface ChannelItem {
   icon: string;
@@ -9,23 +8,13 @@ interface ChannelItem {
   subtitle?: string;
 }
 
-interface SocialLink {
-  label: string;
-  icon: string;
-  href: string;
-}
-
 interface Props {
   title: string;
   description: string;
   items: ChannelItem[];
-  socialMedia: {
-    title: string;
-    links: SocialLink[];
-  };
 }
 
-const { title, description, items, socialMedia } = Astro.props;
+const { title, description, items } = Astro.props;
 ---
 
 <div class="contact-channels">
@@ -46,8 +35,6 @@ const { title, description, items, socialMedia } = Astro.props;
       ))
     }
   </div>
-
-  <ContactSocialMedia title={socialMedia.title} links={socialMedia.links} />
 </div>
 
 <style>

@@ -15,75 +15,224 @@ const { title, partners } = Astro.props;
 ---
 
 <div class="cta-partners-section">
-  <p class="cta-partners-title">
-    {title}
-  </p>
+  <div class="cta-partners-shell">
+    <div class="cta-partners-header">
+      <p class="cta-partners-kicker">Especialidades HJLOG</p>
+      <h3 class="cta-partners-title">{title}</h3>
+      <p class="cta-partners-description">
+        Operações B2B com prioridade para cargas sensíveis, janelas críticas
+        e distribuição nacional.
+      </p>
+    </div>
 
-  <div class="cta-partners-grid">
-    {
-      partners.map((partner) => (
-        <div class="cta-partner-item">
-          <Icon name={partner.icon} />{" "}
-          {partner.name}
-        </div>
-      ))
-    }
+    <div class="cta-partners-grid">
+      {
+        partners.map((partner, index) => (
+          <article class="cta-partner-item">
+            <span class="cta-partner-index">{String(index + 1).padStart(2, "0")}</span>
+            <span class="cta-partner-icon-wrap">
+              <Icon name={partner.icon} class="cta-partner-icon" />
+            </span>
+            <span class="cta-partner-name">{partner.name}</span>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </div>
 
 <style>
-  /* Seção de parceiros */
   .cta-partners-section {
-    padding-top: var(--space-8);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: var(--space-2);
   }
 
-  .cta-partners-title {
+  .cta-partners-shell {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: clamp(1.5rem, 2vw, 2.25rem);
+    background:
+      linear-gradient(
+        130deg,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(34, 34, 34, 0.9) 38%,
+        rgba(17, 17, 17, 0.95) 100%
+      );
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  }
+
+  .cta-partners-shell::before,
+  .cta-partners-shell::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+  }
+
+  .cta-partners-shell::before {
+    width: 18rem;
+    height: 18rem;
+    top: -10rem;
+    right: -4rem;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.32) 0%, rgba(255, 107, 0, 0) 72%);
+  }
+
+  .cta-partners-shell::after {
+    width: 14rem;
+    height: 14rem;
+    bottom: -8rem;
+    left: -5rem;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 68%);
+  }
+
+  .cta-partners-header {
+    position: relative;
+    z-index: 1;
+    max-width: 42rem;
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-partners-kicker {
+    margin: 0 0 var(--space-2);
     font-size: var(--text-xs);
-    font-weight: var(--font-bold);
+    font-weight: var(--font-semibold);
     color: var(--text-secondary-dark);
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    margin-bottom: var(--space-8);
     font-family: var(--font-display);
   }
 
-  /* Grade de parceiros */
+  .cta-partners-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: var(--font-bold);
+    color: var(--text-primary-dark);
+    line-height: var(--leading-tight);
+    font-family: var(--font-display);
+  }
+
+  .cta-partners-description {
+    margin: var(--space-3) 0 0;
+    color: var(--text-secondary-dark);
+    line-height: var(--leading-relaxed);
+    max-width: 36rem;
+  }
+
   .cta-partners-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-8);
-    opacity: 0.4;
-    filter: grayscale(100%);
-    transition: all var(--transition-slow);
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
-  .cta-partners-grid:hover {
-    opacity: 0.4;
-    filter: grayscale(0%);
-  }
-
-  /* Item de parceiro */
   .cta-partner-item {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    color: var(--text-primary-dark);
-    font-weight: var(--font-bold);
-    font-size: var(--text-lg);
+    gap: var(--space-4);
+    min-height: 4rem;
+    padding: var(--space-4) var(--space-5);
+    padding-right: 3.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-default);
+    background:
+      linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.11) 0%,
+        rgba(255, 255, 255, 0.04) 100%
+      );
+    transition:
+      transform var(--transition-base),
+      border-color var(--transition-base),
+      background var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  .cta-partner-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-border);
+    background:
+      linear-gradient(
+        120deg,
+        rgba(255, 107, 0, 0.28) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+      );
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.32);
+  }
+
+  .cta-partner-index {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-3);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wider);
+    color: rgba(255, 255, 255, 0.36);
     font-family: var(--font-display);
   }
 
-  .cta-partner-item svg {
-    width: 1.5rem;
-    height: 1.5rem;
+  .cta-partner-icon-wrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition:
+      transform var(--transition-base),
+      background-color var(--transition-base);
   }
 
-  /* Design responsivo */
-  @media (min-width: 768px) {
+  .cta-partner-item:hover .cta-partner-icon-wrap {
+    transform: scale(1.08);
+    background-color: rgba(255, 107, 0, 0.28);
+  }
+
+  .cta-partner-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--primary);
+  }
+
+  .cta-partner-name {
+    color: var(--text-primary-dark);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-base);
+    font-family: var(--font-display);
+    line-height: var(--leading-tight);
+  }
+
+  @media (min-width: 640px) {
     .cta-partners-grid {
-      gap: var(--space-16);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .cta-partners-shell {
+      padding: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-partners-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-partner-item,
+    .cta-partner-icon-wrap {
+      transition: none;
+    }
+
+    .cta-partner-item:hover {
+      transform: none;
     }
   }
 </style>

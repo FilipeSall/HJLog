@@ -11,7 +11,7 @@ export const sobre = {
     tagline: "Quem Somos",
     title: "Nossa História",
     description:
-      "A HJLOG está há mais de 10 anos no mercado, com foco principal em logística para shows e eventos. Transportamos equipamentos de bandas renomadas, estruturas de palco e sistemas de captação de som e imagem. Durante a pandemia, quando o setor de eventos foi paralisado, expandimos nossa atuação para o mercado de varejo. Hoje, atendemos grandes redes como a Magalu, realizando transferências entre Centros de Distribuição e abastecimento de lojas, sempre em operações B2B.",
+      "A HJLOG está há mais de 10 anos no mercado, com foco principal em logística para shows e eventos. Transportamos equipamentos de bandas renomadas, estruturas de palco e sistemas de captação de som e imagem. Durante a pandemia, quando o setor de eventos foi paralisado, expandimos nossa atuação para o mercado de varejo. Hoje, atendemos grandes redes varejistas, realizando transferências entre Centros de Distribuição e abastecimento de lojas, sempre em operações B2B.",
   },
   story: {
     title: "Da Logística de Eventos ao Transporte de Varejo",
@@ -36,9 +36,9 @@ export const sobre = {
       },
       {
         icon: "mdi:store",
-        title: "Parceria com a Magalu",
+        title: "Logística para Varejo",
         description:
-          "Hoje operamos transferências entre Centros de Distribuição da Magalu e realizamos abastecimento de lojas. Nossa atuação é 100% B2B - não fazemos entregas porta a porta para cliente final.",
+          "Hoje operamos transferências entre Centros de Distribuição e realizamos abastecimento de lojas. Nossa atuação é 100% B2B - não fazemos entregas porta a porta para cliente final.",
       },
     ],
   },
@@ -71,9 +71,9 @@ export const sobre = {
       },
       {
         year: "2025",
-        title: "Parceiro Magalu",
+        title: "Expansão no Varejo",
         description:
-          "Consolidação como parceiro logístico da Magalu, operando transferências entre CDs e abastecimento de lojas.",
+          "Consolidação da operação logística para varejo, com transferências entre CDs e abastecimento de lojas.",
         icon: "trophy",
         isHighlight: true,
       },

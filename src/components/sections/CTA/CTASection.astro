@@ -1,24 +1,33 @@
 ---
 import { cta } from "../../../data/cta";
+import { contato } from "../../../data/contato";
 import CTABackground from "./CTABackground.astro";
-import CTAHeader from "./CTAHeader.astro";
-import CTAForm from "./CTAForm.astro";
 import CTAPartners from "./CTAPartners.astro";
+import ContactChannels from "../Contact/ContactChannels.astro";
+import ContactForm from "../Contact/ContactForm.astro";
 ---
 
 <section class="cta-section">
   <CTABackground />
 
   <div class="cta-container">
-    <CTAHeader
-      title={cta.title}
-      description={cta.description}
-    />
+    <section class="contact-content-section">
+      <div class="contact-content-container">
+        <div class="contact-grid">
+          <ContactChannels
+            title={contato.channels.title}
+            description={contato.channels.description}
+            items={contato.channels.items}
+          />
 
-    <CTAForm
-      emailPlaceholder={cta.emailPlaceholder}
-      ctaLabel={cta.ctaLabel}
-    />
+          <ContactForm
+            title={contato.form.title}
+            fields={contato.form.fields}
+            submitLabel={contato.form.submitLabel}
+          />
+        </div>
+      </div>
+    </section>
 
     <CTAPartners
       title={cta.partnersTitle}
@@ -38,11 +47,42 @@ import CTAPartners from "./CTAPartners.astro";
 
   /* Container principal */
   .cta-container {
-    max-width: 56rem;
+    max-width: 80rem;
     margin: 0 auto;
     padding: 0 var(--space-4);
-    text-align: center;
     position: relative;
     z-index: 10;
+  }
+
+  @media (min-width: 640px) {
+    .cta-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .contact-content-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .contact-content-container {
+    margin: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>
