@@ -44,12 +44,22 @@ const { image, imageAlt } = Astro.props;
   .hero-image-container {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 50%;
     height: 100%;
-    width: 100%;
+    width: 130%;
     z-index: 0;
-    transform: translateX(0) skewX(-6deg);
-    transform-origin: bottom right;
+    transform: translateX(-50%);
+    transform-origin: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image-container {
+      left: auto;
+      right: 0;
+      width: 100%;
+      transform: translateX(0) skewX(-6deg);
+      transform-origin: bottom right;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -64,28 +74,34 @@ const { image, imageAlt } = Astro.props;
     background: linear-gradient(
       270deg,
       transparent,
-      rgba(17, 17, 17, 0.2),
+      rgba(17, 17, 17, 0.12),
       var(--background-dark)
     );
     z-index: 10;
-    transform: skewX(6deg) scale(1.1);
     pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image-overlay {
+      transform: skewX(6deg) scale(1.1);
+    }
   }
 
   .hero-image {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: 60% center;
-    filter: grayscale(50%);
-    opacity: 0.5;
-    transform: skewX(6deg) scale(1.1);
-    display: none;
+    object-position: center center;
+    filter: grayscale(30%);
+    opacity: 0.7;
   }
 
   @media (min-width: 768px) {
     .hero-image {
-      display: block;
+      object-position: 60% center;
+      filter: grayscale(50%);
+      opacity: 0.5;
+      transform: skewX(6deg) scale(1.1);
     }
   }
 
@@ -113,22 +129,45 @@ const { image, imageAlt } = Astro.props;
     inset: 0;
     background: linear-gradient(
         90deg,
-        rgba(14, 14, 14, 0.95),
-        rgba(14, 14, 14, 0.5),
+        rgba(14, 14, 14, 0.85),
+        rgba(14, 14, 14, 0.38),
         transparent 50%
       ),
       linear-gradient(
         180deg,
-        rgba(14, 14, 14, 0.9),
-        rgba(14, 14, 14, 0.45),
+        rgba(14, 14, 14, 0.78),
+        rgba(14, 14, 14, 0.34),
         transparent 50%
       ),
       linear-gradient(
         0deg,
-        rgba(14, 14, 14, 0.9),
-        rgba(14, 14, 14, 0.4),
+        rgba(14, 14, 14, 0.78),
+        rgba(14, 14, 14, 0.32),
         transparent 60%
       );
     z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    .hero-gradient-overlay {
+      background: linear-gradient(
+          90deg,
+          rgba(14, 14, 14, 0.95),
+          rgba(14, 14, 14, 0.5),
+          transparent 50%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(14, 14, 14, 0.9),
+          rgba(14, 14, 14, 0.45),
+          transparent 50%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(14, 14, 14, 0.9),
+          rgba(14, 14, 14, 0.4),
+          transparent 60%
+        );
+    }
   }
 </style>
