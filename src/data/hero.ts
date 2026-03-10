@@ -15,8 +15,8 @@ export const hero = {
       href: "https://wa.me/5511982217679",
     },
     secondary: {
-      label: "Nossos Serviços",
-      href: "#services",
+      label: "Nossa Galeria",
+      href: "/galeria",
     },
   },
   heroImage: heroImage,

@@ -11,6 +11,7 @@ interface Props {
 
 const { links } = Astro.props;
 const currentPath = Astro.url.pathname;
+const isGalleryPage = currentPath.startsWith("/galeria");
 
 const isActive = (href: string) => {
   if (!href.startsWith("/")) return false;
@@ -22,6 +23,13 @@ const isActive = (href: string) => {
 
 <div id="mobile-menu" class="mobile-menu">
   <div class="mobile-menu-links">
+    {
+      isGalleryPage && (
+        <a href="/" class="nav-link">
+          Início
+        </a>
+      )
+    }
     {
       links.map((link) => (
         <a
@@ -58,12 +66,14 @@ const isActive = (href: string) => {
     display: flex;
   }
 
-  .nav-link {
+  .nav-link,
+  .nav-link:visited {
     font-size: 0.875rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
     transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-secondary-dark);
   }
 
   .nav-link-active {
@@ -72,10 +82,6 @@ const isActive = (href: string) => {
 
   .nav-link-active:hover {
     color: var(--primary);
-  }
-
-  .nav-link:not(.nav-link-active) {
-    color: var(--text-secondary-dark);
   }
 
   .nav-link:not(.nav-link-active):hover {
