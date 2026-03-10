@@ -56,12 +56,6 @@ import Footer from "../components/layout/Footer/Footer.astro";
           </a>
         </div>
 
-        <div class="error-links">
-          <p class="error-links-title">Links úteis:</p>
-          <ul class="error-links-list">
-            <li><a href="/">Início</a></li>
-          </ul>
-        </div>
       </div>
     </div>
   </main>
@@ -215,58 +209,6 @@ import Footer from "../components/layout/Footer/Footer.astro";
     border-color: var(--primary);
     color: var(--primary);
     transform: translateY(-2px);
-  }
-
-  /* ========== Links úteis ========== */
-  .error-links {
-    padding-top: var(--space-12);
-    border-top: 1px solid var(--surface-dark);
-  }
-
-  .error-links-title {
-    font-family: var(--font-display);
-    font-size: var(--text-sm);
-    font-weight: var(--font-semibold);
-    color: var(--text-secondary-dark);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    margin-bottom: var(--space-4);
-  }
-
-  .error-links-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-6);
-    justify-content: center;
-    list-style: none;
-  }
-
-  .error-links-list a {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--text-secondary-dark);
-    text-decoration: none;
-    transition: color var(--transition-base);
-    position: relative;
-  }
-
-  .error-links-list a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary);
-    transition: width var(--transition-base);
-  }
-
-  .error-links-list a:hover {
-    color: var(--primary);
-  }
-
-  .error-links-list a:hover::after {
-    width: 100%;
   }
 
   /* ========== Responsividade ========== */
