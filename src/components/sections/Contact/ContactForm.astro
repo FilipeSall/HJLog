@@ -78,8 +78,21 @@ const { title, fields, submitLabel } = Astro.props;
       ></textarea>
     </div>
 
+    <div class="form-honeypot" aria-hidden="true">
+      <label for="website">Website</label>
+      <input
+        id="website"
+        name="website"
+        type="text"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
+    <p class="form-feedback" aria-live="polite"></p>
+
     <button class="form-submit" type="submit">
-      {submitLabel}
+      <span class="submit-label">{submitLabel}</span>
       <Icon name="mdi:send" size={20} class="submit-icon" />
     </button>
   </form>
@@ -209,6 +222,31 @@ const { title, fields, submitLabel } = Astro.props;
     resize: none;
   }
 
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-feedback {
+    min-height: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+    margin-top: calc(var(--space-2) * -1);
+  }
+
+  .form-feedback.is-success {
+    color: #10b981;
+  }
+
+  .form-feedback.is-error {
+    color: #ef4444;
+  }
+
   .form-submit {
     margin-top: var(--space-4);
     width: 100%;
@@ -228,6 +266,11 @@ const { title, fields, submitLabel } = Astro.props;
     gap: var(--space-2);
   }
 
+  .form-submit:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
   .form-submit:hover {
     background-color: var(--white);
   }
@@ -242,13 +285,37 @@ const { title, fields, submitLabel } = Astro.props;
 </style>
 
 <script>
+  import { sendLeadEmail } from '../../../lib/email';
+
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form') as HTMLFormElement;
     const nameInput = document.getElementById('name') as HTMLInputElement;
     const emailInput = document.getElementById('email') as HTMLInputElement;
     const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+    const honeypotInput = document.getElementById('website') as HTMLInputElement;
+    const submitButton = form?.querySelector('.form-submit') as HTMLButtonElement;
+    const submitLabelElement = submitButton?.querySelector('.submit-label') as HTMLSpanElement;
+    const feedbackElement = form?.querySelector('.form-feedback') as HTMLParagraphElement;
+    const originalSubmitLabel = submitLabelElement?.textContent?.trim() || 'Enviar';
 
     if (!form) return;
+
+    const setFeedback = (message: string, state: 'success' | 'error' | 'neutral' = 'neutral') => {
+      if (!feedbackElement) return;
+
+      feedbackElement.textContent = message;
+      feedbackElement.classList.remove('is-success', 'is-error');
+
+      if (state === 'success') feedbackElement.classList.add('is-success');
+      if (state === 'error') feedbackElement.classList.add('is-error');
+    };
+
+    const setSubmitting = (isSubmitting: boolean) => {
+      if (submitButton) submitButton.disabled = isSubmitting;
+      if (submitLabelElement) {
+        submitLabelElement.textContent = isSubmitting ? 'Enviando...' : originalSubmitLabel;
+      }
+    };
 
     const validateField = (input: HTMLInputElement | HTMLTextAreaElement): boolean => {
       const value = input.value.trim();
@@ -286,10 +353,11 @@ const { title, fields, submitLabel } = Astro.props;
     if (emailInput) addBlurValidation(emailInput);
     if (messageInput) addBlurValidation(messageInput);
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      setFeedback('');
 
-      const subjectHiddenInput = document.querySelector('input[name="subject"]') as HTMLInputElement;
+      const subjectHiddenInput = form.querySelector('input[name="subject"]') as HTMLInputElement;
       const subject = subjectHiddenInput?.value || '';
 
       const isNameValid = validateField(nameInput);
@@ -298,67 +366,55 @@ const { title, fields, submitLabel } = Astro.props;
 
 
       if (!isNameValid || !isEmailValid || !isMessageValid || !subject) {
+        setFeedback('Preencha todos os campos obrigatórios corretamente.', 'error');
         return;
       }
 
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
+      const details = `
+Tipo: Contato Geral
+Assunto: ${subject}
 
-      // Obter data e hora atual formatada
-      const now = new Date();
-      const dataHora = now.toLocaleString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      // Montar corpo do email formatado e estruturado
-      const emailBody = `
-═══════════════════════════════════════════════════════
-          NOVO CONTATO RECEBIDO VIA SITE
-═══════════════════════════════════════════════════════
-
-TIPO: Contato Geral
-
-DADOS DO CLIENTE:
-  • Nome: ${name}
-  • E-mail: ${email}
-  • Assunto: ${subject}
-
-DATA/HORA:
-  ${dataHora}
-
-───────────────────────────────────────────────────────
-MENSAGEM:
-───────────────────────────────────────────────────────
-
+Mensagem:
 ${message}
-
-───────────────────────────────────────────────────────
-
-AÇÕES RECOMENDADAS:
-→ Responder para: ${email}
-→ Prioridade: ${subject.toLowerCase().includes('urgente') ? 'ALTA' : 'Normal'}
-
-═══════════════════════════════════════════════════════
-Este email foi gerado automaticamente pelo formulário
-de contato do site www.hjlogtransportes.com.br
-═══════════════════════════════════════════════════════
       `.trim();
 
-      // Criar link mailto com assunto mais descritivo
-      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`[CONTATO SITE] ${subject} - ${name}`)}&body=${encodeURIComponent(emailBody)}`;
+      setSubmitting(true);
 
-      // Abrir cliente de email
-      window.location.href = mailtoLink;
+      const result = await sendLeadEmail(
+        {
+          name,
+          email,
+          subject: `[CONTATO SITE] ${subject} - ${name}`,
+          message: details,
+          source: 'contact-form'
+        },
+        {
+          honeypot: honeypotInput?.value ?? ''
+        }
+      );
 
-      // Limpar formulário após envio
+      setSubmitting(false);
+
+      if (!result.ok) {
+        if (result.errorCode === 'rate_limited') {
+          setFeedback('Aguarde 1 minuto antes de enviar novamente.', 'error');
+          return;
+        }
+
+        if (result.errorCode === 'spam_detected') {
+          setFeedback('Não foi possível processar o envio.', 'error');
+          return;
+        }
+
+        setFeedback('Falha ao enviar. Tente novamente em instantes.', 'error');
+        return;
+      }
+
+      setFeedback('Mensagem enviada com sucesso. Nossa equipe retornará em breve.', 'success');
       form.reset();
-
-      // Remover classes de erro após reset
       nameInput.classList.remove('error');
       emailInput.classList.remove('error');
       messageInput.classList.remove('error');

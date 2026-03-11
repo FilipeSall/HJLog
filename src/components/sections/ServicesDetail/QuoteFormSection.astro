@@ -100,6 +100,17 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
             rows="4"
             class="form-input form-textarea"></textarea>
         </div>
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="quote-website">Website</label>
+          <input
+            id="quote-website"
+            name="website"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        <p class="form-feedback" aria-live="polite"></p>
         <button type="submit" class="form-submit">
           Enviar Solicitação de Cotação
         </button>
@@ -238,6 +249,31 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
     resize: vertical;
   }
 
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-feedback {
+    min-height: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+    margin-top: calc(var(--space-3) * -1);
+  }
+
+  .form-feedback.is-success {
+    color: #10b981;
+  }
+
+  .form-feedback.is-error {
+    color: #ef4444;
+  }
+
   .form-submit {
     width: 100%;
     background-color: var(--primary);
@@ -254,6 +290,11 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
     font-family: var(--font-display);
   }
 
+  .form-submit:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
   .form-submit:hover {
     background-color: var(--white);
     color: var(--background-dark);
@@ -261,6 +302,8 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
 </style>
 
 <script>
+  import { sendLeadEmail } from '../../../lib/email';
+
   document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const emailParam = urlParams.get('email');
@@ -273,12 +316,32 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
     const originInput = document.getElementById('origin') as HTMLInputElement;
     const destinationInput = document.getElementById('destination') as HTMLInputElement;
     const cargoDetailsInput = document.getElementById('cargo-details') as HTMLTextAreaElement;
+    const honeypotInput = document.getElementById('quote-website') as HTMLInputElement;
+    const submitButton = form?.querySelector('.form-submit') as HTMLButtonElement;
+    const feedbackElement = form?.querySelector('.form-feedback') as HTMLParagraphElement;
+    const originalButtonLabel = submitButton?.textContent?.trim() || 'Enviar Solicitação de Cotação';
 
     if (emailParam && emailInput) {
       emailInput.value = decodeURIComponent(emailParam);
     }
 
     if (!form) return;
+
+    const setFeedback = (message: string, state: 'success' | 'error' | 'neutral' = 'neutral') => {
+      if (!feedbackElement) return;
+
+      feedbackElement.textContent = message;
+      feedbackElement.classList.remove('is-success', 'is-error');
+
+      if (state === 'success') feedbackElement.classList.add('is-success');
+      if (state === 'error') feedbackElement.classList.add('is-error');
+    };
+
+    const setSubmitting = (isSubmitting: boolean) => {
+      if (!submitButton) return;
+      submitButton.disabled = isSubmitting;
+      submitButton.textContent = isSubmitting ? 'Enviando...' : originalButtonLabel;
+    };
 
     // Validação de campo
     const validateField = (input: HTMLInputElement | HTMLTextAreaElement): boolean => {
@@ -301,11 +364,12 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
       return true;
     };
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      setFeedback('');
 
       // Obter valor do select customizado
-      const serviceTypeHiddenInput = document.querySelector('input[name="service-type"]') as HTMLInputElement;
+      const serviceTypeHiddenInput = form.querySelector('input[name="service-type"]') as HTMLInputElement;
       const serviceType = serviceTypeHiddenInput?.value || '';
 
       // Validar campos
@@ -319,6 +383,7 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
 
       if (!isNameValid || !isCompanyValid || !isEmailValid || !isPhoneValid ||
           !isOriginValid || !isDestinationValid || !isCargoDetailsValid || !serviceType) {
+        setFeedback('Preencha todos os campos obrigatórios corretamente.', 'error');
         return;
       }
 
@@ -330,65 +395,53 @@ const { tagline, title, description, serviceTypes, preselectedService, prefilled
       const destination = destinationInput.value.trim();
       const cargoDetails = cargoDetailsInput.value.trim();
 
-      // Obter data e hora atual formatada
-      const now = new Date();
-      const dataHora = now.toLocaleString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+      const details = `
+Tipo: Solicitação de Cotação
+Tipo de Serviço: ${serviceType}
+Origem: ${origin}
+Destino: ${destination}
+Telefone/WhatsApp: ${phone}
 
-      // Montar corpo do email formatado e estruturado
-      const emailBody = `
-═══════════════════════════════════════════════════════
-       SOLICITAÇÃO DE COTAÇÃO RECEBIDA VIA SITE
-═══════════════════════════════════════════════════════
-
-TIPO: Solicitação de Cotação
-
-DADOS DO CLIENTE:
-  • Nome: ${name}
-  • Empresa: ${company}
-  • E-mail: ${email}
-  • Telefone/WhatsApp: ${phone}
-
-INFORMAÇÕES DO SERVIÇO:
-  • Tipo de Serviço: ${serviceType}
-  • Origem: ${origin}
-  • Destino: ${destination}
-
-DATA/HORA DA SOLICITAÇÃO:
-  ${dataHora}
-
-───────────────────────────────────────────────────────
-DETALHES DA CARGA:
-───────────────────────────────────────────────────────
-
+Detalhes da Carga:
 ${cargoDetails}
-
-───────────────────────────────────────────────────────
-
-AÇÕES RECOMENDADAS:
-→ Responder para: ${email}
-→ Contato via WhatsApp: ${phone}
-→ Preparar cotação para: ${origin} → ${destination}
-→ Prioridade: ${serviceType.toLowerCase().includes('expres') || serviceType.toLowerCase().includes('urgente') ? 'ALTA' : 'Normal'}
-
-═══════════════════════════════════════════════════════
-Este email foi gerado automaticamente pelo formulário
-de cotação do site www.hjlogtransportes.com.br
-═══════════════════════════════════════════════════════
       `.trim();
 
-      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`[COTAÇÃO] ${serviceType} - ${company}`)}&body=${encodeURIComponent(emailBody)}`;
+      setSubmitting(true);
 
-      window.location.href = mailtoLink;
+      const result = await sendLeadEmail(
+        {
+          name,
+          email,
+          company,
+          phone,
+          subject: `[COTAÇÃO] ${serviceType} - ${company}`,
+          message: details,
+          source: 'quote-form'
+        },
+        {
+          honeypot: honeypotInput?.value ?? ''
+        }
+      );
 
-      setTimeout(() => {
-        form.reset();
-      }, 500);
+      setSubmitting(false);
+
+      if (!result.ok) {
+        if (result.errorCode === 'rate_limited') {
+          setFeedback('Aguarde 1 minuto antes de enviar novamente.', 'error');
+          return;
+        }
+
+        if (result.errorCode === 'spam_detected') {
+          setFeedback('Não foi possível processar o envio.', 'error');
+          return;
+        }
+
+        setFeedback('Falha ao enviar solicitação. Tente novamente em instantes.', 'error');
+        return;
+      }
+
+      setFeedback('Solicitação enviada com sucesso. Retornaremos em breve.', 'success');
+      form.reset();
     });
   });
 </script>

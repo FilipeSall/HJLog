@@ -9,6 +9,10 @@ interface ImportMetaEnv {
   readonly PUBLIC_FIREBASE_MESSAGING_SENDER_ID: string;
   readonly PUBLIC_FIREBASE_APP_ID: string;
   readonly PUBLIC_FIREBASE_MEASUREMENT_ID: string;
+  readonly PUBLIC_EMAILJS_SERVICE_ID: string;
+  readonly PUBLIC_EMAILJS_TEMPLATE_ID: string;
+  readonly PUBLIC_EMAILJS_PUBLIC_KEY: string;
+  readonly PUBLIC_RECAPTCHA_SITE_KEY: string;
 }
 
 interface ImportMeta {

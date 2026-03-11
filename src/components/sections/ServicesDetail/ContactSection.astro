@@ -102,6 +102,17 @@ import { Icon } from "astro-icon/components";
               class="contact-form-input contact-form-textarea"
             ></textarea>
           </div>
+          <div class="contact-form-honeypot" aria-hidden="true">
+            <label for="contact-website">Website</label>
+            <input
+              id="contact-website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+          <p class="contact-form-feedback" aria-live="polite"></p>
           <button type="submit" class="contact-form-submit">
             Enviar Mensagem
           </button>
@@ -112,6 +123,8 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { sendLeadEmail } from '../../../lib/email';
+
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form') as HTMLFormElement;
     const emailTrigger = document.getElementById('email-trigger') as HTMLButtonElement;
@@ -142,6 +155,26 @@ import { Icon } from "astro-icon/components";
     const emailInput = document.getElementById('contact-email') as HTMLInputElement;
     const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
     const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+    const honeypotInput = document.getElementById('contact-website') as HTMLInputElement;
+    const submitButton = form.querySelector('.contact-form-submit') as HTMLButtonElement;
+    const feedbackElement = form.querySelector('.contact-form-feedback') as HTMLParagraphElement;
+    const originalButtonLabel = submitButton?.textContent?.trim() || 'Enviar Mensagem';
+
+    const setFeedback = (message: string, state: 'success' | 'error' | 'neutral' = 'neutral') => {
+      if (!feedbackElement) return;
+
+      feedbackElement.textContent = message;
+      feedbackElement.classList.remove('is-success', 'is-error');
+
+      if (state === 'success') feedbackElement.classList.add('is-success');
+      if (state === 'error') feedbackElement.classList.add('is-error');
+    };
+
+    const setSubmitting = (isSubmitting: boolean) => {
+      if (!submitButton) return;
+      submitButton.disabled = isSubmitting;
+      submitButton.textContent = isSubmitting ? 'Enviando...' : originalButtonLabel;
+    };
 
     // Função para validar um campo individual
     const validateField = (input: HTMLInputElement | HTMLTextAreaElement): boolean => {
@@ -186,8 +219,9 @@ import { Icon } from "astro-icon/components";
     if (subjectInput) addBlurValidation(subjectInput);
     if (messageInput) addBlurValidation(messageInput);
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      setFeedback('');
 
       // Validar todos os campos
       const isNameValid = validateField(nameInput);
@@ -197,6 +231,7 @@ import { Icon } from "astro-icon/components";
 
       // Se algum campo estiver inválido, não enviar
       if (!isNameValid || !isEmailValid || !isSubjectValid || !isMessageValid) {
+        setFeedback('Preencha todos os campos obrigatórios corretamente.', 'error');
         return;
       }
 
@@ -205,55 +240,48 @@ import { Icon } from "astro-icon/components";
       const subject = subjectInput.value.trim();
       const message = messageInput.value.trim();
 
-      const now = new Date();
-      const dataHora = now.toLocaleString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+      const details = `
+Tipo: Contato Geral (Detalhe de Serviço)
+Assunto: ${subject}
 
-      const emailBody = `
-═══════════════════════════════════════════════════════
-          NOVO CONTATO RECEBIDO VIA SITE
-═══════════════════════════════════════════════════════
-
-TIPO: Contato Geral
-
-DADOS DO CLIENTE:
-  • Nome: ${name}
-  • E-mail: ${email}
-  • Assunto: ${subject}
-
-DATA/HORA:
-  ${dataHora}
-
-───────────────────────────────────────────────────────
-MENSAGEM:
-───────────────────────────────────────────────────────
-
+Mensagem:
 ${message}
-
-───────────────────────────────────────────────────────
-
-AÇÕES RECOMENDADAS:
-→ Responder para: ${email}
-→ Prioridade: ${subject.toLowerCase().includes('urgente') ? 'ALTA' : 'Normal'}
-
-═══════════════════════════════════════════════════════
-Este email foi gerado automaticamente pelo formulário
-de contato do site www.hjlogtransportes.com.br
-═══════════════════════════════════════════════════════
       `.trim();
 
+      setSubmitting(true);
 
-      const mailtoLink = `mailto:adm@hjlogtransportes.com.br?subject=${encodeURIComponent(`[CONTATO SITE] ${subject} - ${name}`)}&body=${encodeURIComponent(emailBody)}`;
+      const result = await sendLeadEmail(
+        {
+          name,
+          email,
+          subject: `[CONTATO SITE] ${subject} - ${name}`,
+          message: details,
+          source: 'service-contact-form'
+        },
+        {
+          honeypot: honeypotInput?.value ?? ''
+        }
+      );
 
-      window.location.href = mailtoLink;
+      setSubmitting(false);
 
+      if (!result.ok) {
+        if (result.errorCode === 'rate_limited') {
+          setFeedback('Aguarde 1 minuto antes de enviar novamente.', 'error');
+          return;
+        }
+
+        if (result.errorCode === 'spam_detected') {
+          setFeedback('Não foi possível processar o envio.', 'error');
+          return;
+        }
+
+        setFeedback('Falha ao enviar. Tente novamente em instantes.', 'error');
+        return;
+      }
+
+      setFeedback('Mensagem enviada com sucesso. Nossa equipe retornará em breve.', 'success');
       form.reset();
-
       nameInput.classList.remove('error');
       emailInput.classList.remove('error');
       subjectInput.classList.remove('error');
@@ -487,6 +515,16 @@ de contato do site www.hjlogtransportes.com.br
     gap: var(--space-6);
   }
 
+  .contact-form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .contact-form-group {
     display: flex;
     flex-direction: column;
@@ -533,6 +571,21 @@ de contato do site www.hjlogtransportes.com.br
     resize: vertical;
   }
 
+  .contact-form-feedback {
+    min-height: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--text-secondary-dark);
+    margin-top: calc(var(--space-2) * -1);
+  }
+
+  .contact-form-feedback.is-success {
+    color: #10b981;
+  }
+
+  .contact-form-feedback.is-error {
+    color: #ef4444;
+  }
+
   .contact-form-submit {
     width: 100%;
     background-color: var(--white);
@@ -547,6 +600,11 @@ de contato do site www.hjlogtransportes.com.br
     cursor: pointer;
     border: none;
     font-family: var(--font-display);
+  }
+
+  .contact-form-submit:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
   }
 
   .contact-form-submit:hover {

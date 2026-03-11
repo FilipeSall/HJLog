@@ -151,6 +151,37 @@ Ao fazer deploy, certifique-se de configurar as variáveis de ambiente no seu pr
 - Netlify: Configure em "Site settings > Environment variables"
 - Firebase Hosting: Use o arquivo `.env.production`
 
+### Variáveis para Envio de E-mail (EmailJS + reCAPTCHA)
+
+Além das variáveis do Firebase, configure também:
+
+```env
+PUBLIC_EMAILJS_SERVICE_ID=...
+PUBLIC_EMAILJS_TEMPLATE_ID=...
+PUBLIC_EMAILJS_PUBLIC_KEY=...
+PUBLIC_RECAPTCHA_SITE_KEY=...
+```
+
+Essas variáveis são públicas (prefixo `PUBLIC_`) e usadas no cliente para envio via EmailJS.
+
+### Configuração do Template EmailJS
+
+O template do EmailJS deve aceitar os seguintes parâmetros:
+
+- `to_email`
+- `source`
+- `submitted_at`
+- `customer_name`
+- `customer_email`
+- `customer_phone`
+- `customer_company`
+- `subject`
+- `message`
+- `reply_to`
+- `recaptcha_token`
+
+O destino padrão deve ser `adm@hjlogtransportes.com.br`.
+
 ### Firebase Hosting (Opcional)
 
 Se quiser fazer deploy usando Firebase Hosting:
