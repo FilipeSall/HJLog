@@ -43,10 +43,10 @@ const { image, imageAlt } = Astro.props;
 
   .hero-image-container {
     position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    width: 130%;
+    top: 4%;
+    left: 56%;
+    height: 92%;
+    width: 112%;
     z-index: 0;
     transform: translateX(-50%);
     transform-origin: center;
@@ -91,9 +91,11 @@ const { image, imageAlt } = Astro.props;
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: 62% center;
     filter: grayscale(30%);
-    opacity: 0.7;
+    opacity: 0.78;
+    transform: scale(0.86);
+    transform-origin: center;
   }
 
   @media (min-width: 768px) {
