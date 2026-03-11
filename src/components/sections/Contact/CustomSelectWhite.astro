@@ -44,8 +44,8 @@ const { id, label, options } = Astro.props;
     font-size: var(--text-xs);
     font-weight: var(--font-bold);
     text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    color: var(--text-secondary-dark);
+    letter-spacing: 0.09em;
+    color: rgba(242, 242, 242, 0.72);
   }
 
   .custom-select {
@@ -55,14 +55,15 @@ const { id, label, options } = Astro.props;
 
   .custom-select-trigger {
     width: 100%;
-    background-color: var(--background-light);
-    color: #374151;
-    border: 2px solid transparent;
-    padding: var(--space-3) var(--space-4);
+    background: rgba(12, 12, 12, 0.68);
+    color: var(--text-primary-dark);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 0;
+    padding: 0.85rem 1rem;
     outline: none;
     font-weight: var(--font-medium);
     font-family: var(--font-body);
-    transition: all var(--transition-base);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base), transform var(--transition-fast);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -71,27 +72,28 @@ const { id, label, options } = Astro.props;
   }
 
   .custom-select-trigger:hover {
-    ring: 2px;
-    ring-color: var(--primary);
+    border-color: rgba(255, 107, 0, 0.42);
+    background-color: rgba(16, 16, 16, 0.85);
   }
 
   .custom-select-trigger:focus,
   .custom-select.open .custom-select-trigger {
-    ring: 2px;
-    ring-color: var(--primary);
-    border-color: transparent;
+    border-color: rgba(255, 107, 0, 0.75);
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.22);
+    background-color: rgba(15, 15, 15, 0.9);
+    transform: translateY(-1px);
   }
 
-  /* Estado de erro - borda vermelha */
   .custom-select.error .custom-select-trigger {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 1px #ef4444;
+    border-color: rgba(239, 68, 68, 0.9);
+    background-color: rgba(59, 18, 18, 0.6);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
   }
 
   .custom-select.error .custom-select-trigger:focus,
   .custom-select.error.open .custom-select-trigger {
-    border-color: #ef4444;
-    ring-color: #ef4444;
+    border-color: rgba(248, 113, 113, 0.95);
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.26);
   }
 
   .custom-select-value {
@@ -104,7 +106,7 @@ const { id, label, options } = Astro.props;
   .custom-select-arrow {
     flex-shrink: 0;
     margin-left: var(--space-2);
-    color: #6b7280;
+    color: rgba(242, 242, 242, 0.52);
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms;
   }
 
@@ -115,13 +117,14 @@ const { id, label, options } = Astro.props;
 
   .custom-select-dropdown {
     position: absolute;
-    top: calc(100% + 0.25rem);
+    top: calc(100% + 0.45rem);
     left: 0;
     right: 0;
-    background-color: var(--background-light);
-    border: 1px solid #e5e7eb;
+    background: linear-gradient(180deg, rgba(24, 24, 24, 0.97), rgba(10, 10, 10, 0.99));
+    border: 1px solid rgba(255, 107, 0, 0.2);
+    border-radius: 0;
     list-style: none;
-    padding: 0;
+    padding: var(--space-2);
     margin: 0;
     max-height: 0;
     overflow: hidden;
@@ -132,55 +135,63 @@ const { id, label, options } = Astro.props;
                 opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
                 transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 16px 30px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
 
   .custom-select.open .custom-select-dropdown {
-    max-height: 15rem;
+    max-height: 16rem;
     opacity: 1;
     transform: scaleY(1);
     overflow-y: auto;
   }
 
   .custom-select-option {
-    padding: var(--space-3) var(--space-4);
-    color: #374151;
+    padding: 0.7rem var(--space-3);
+    border-radius: 0;
+    color: rgba(242, 242, 242, 0.84);
     cursor: pointer;
-    transition: background-color 200ms, color 200ms;
-    border-bottom: 1px solid #f3f4f6;
-  }
-
-  .custom-select-option:last-child {
-    border-bottom: none;
+    transition: background-color 200ms, color 200ms, transform 200ms;
   }
 
   .custom-select-option:hover {
-    background-color: rgba(255, 107, 0, 0.1);
-    color: var(--primary);
+    background-color: rgba(255, 107, 0, 0.16);
+    color: #ffd5b5;
+    transform: translateX(2px);
   }
 
   .custom-select-option.selected {
-    background-color: rgba(255, 107, 0, 0.15);
-    color: var(--primary);
+    background-color: rgba(255, 107, 0, 0.2);
+    color: #ffb07a;
     font-weight: var(--font-bold);
   }
 
-  /* Scrollbar para a lista */
   .custom-select-dropdown::-webkit-scrollbar {
     width: 6px;
   }
 
   .custom-select-dropdown::-webkit-scrollbar-track {
-    background: #f9fafb;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
   }
 
   .custom-select-dropdown::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 3px;
+    background: rgba(255, 107, 0, 0.65);
+    border-radius: 999px;
   }
 
   .custom-select-dropdown::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
+    background: rgba(255, 107, 0, 0.9);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .custom-select-trigger,
+    .custom-select-arrow,
+    .custom-select-dropdown,
+    .custom-select-option {
+      transition: none;
+    }
   }
 </style>
 
