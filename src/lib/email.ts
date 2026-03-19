@@ -1,4 +1,5 @@
 import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
+import { siteConfig } from "../config/site";
 
 export interface EmailPayload {
   name: string;
@@ -32,7 +33,7 @@ declare global {
   }
 }
 
-const ADMIN_EMAIL = "adm@hjlogtransportes.com.br";
+const ADMIN_EMAIL = siteConfig.contactEmail;
 const RECAPTCHA_SCRIPT_ID = "hjlog-recaptcha-script";
 const DEFAULT_THROTTLE_MS = 60_000;
 

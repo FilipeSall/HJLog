@@ -2,6 +2,15 @@ import "../.astro/types.d.ts";
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
+  readonly PUBLIC_SITE_URL: string;
+  readonly PUBLIC_SITE_NAME: string;
+  readonly PUBLIC_CONTACT_EMAIL: string;
+  readonly PUBLIC_CONTACT_PHONE_DISPLAY: string;
+  readonly PUBLIC_CONTACT_PHONE_E164: string;
+  readonly PUBLIC_INSTAGRAM_URL: string;
+  readonly PUBLIC_FACEBOOK_URL: string;
+  readonly PUBLIC_WHATSAPP_URL: string;
+  readonly PUBLIC_SEO_OG_IMAGE_PATH: string;
   readonly PUBLIC_FIREBASE_API_KEY: string;
   readonly PUBLIC_FIREBASE_AUTH_DOMAIN: string;
   readonly PUBLIC_FIREBASE_PROJECT_ID: string;

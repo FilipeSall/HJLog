@@ -1,6 +1,252 @@
 ---
 import "../styles/tema.css";
 import AreaClienteModal from "../components/shared/AreaClienteModal.astro";
+import defaultOgImage from "../images/herosection.jpg";
+import logoImage from "../images/logo.png";
+import { buildAssetUrl, buildSiteUrl, siteConfig } from "../config/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  pathname?: string;
+  imagePath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "HJLOG - Transporte e Logística | FTL, LTL, Shows e Eventos em São Paulo",
+  description = "HJLOG: +10 anos de experiência em transporte rodoviário. Carga Completa (FTL), Carga Fracionada (LTL), Frete Expresso, Transporte de Shows e Eventos, Logística para Varejo B2B. Frota com +100 caminhões, 99% de pontualidade, rastreamento 24/7. São Paulo e todo o Brasil.",
+  pathname = "/",
+  imagePath,
+  noindex = false,
+} = Astro.props;
+
+const pageUrl = buildSiteUrl(pathname);
+const resolvedImagePath = imagePath || siteConfig.ogImagePath || defaultOgImage.src;
+const imageUrl = buildAssetUrl(resolvedImagePath);
+const logoUrl = buildAssetUrl(logoImage.src);
+const robotsContent = noindex
+  ? "noindex, nofollow, noarchive"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+const sameAsLinks = [siteConfig.instagramUrl, siteConfig.facebookUrl];
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.siteName,
+  url: siteConfig.siteUrl,
+  logo: {
+    "@type": "ImageObject",
+    url: logoUrl,
+    width: 200,
+    height: 60,
+  },
+  description:
+    "Empresa de transporte rodoviário com mais de 10 anos de experiência. Especializada em transporte de shows e eventos, carga completa (FTL), carga fracionada (LTL), frete expresso e logística para varejo B2B. Frota com mais de 100 caminhões, rastreamento 24/7 e 99% de pontualidade.",
+  foundingDate: "2014",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Avenida Dep Emilio Carlos 114 Sala 08",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    postalCode: "02720-000",
+    addressCountry: "BR",
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+55-11-98221-7679",
+      email: siteConfig.contactEmail,
+      contactType: "customer service",
+      areaServed: "BR",
+      availableLanguage: "Portuguese",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+55-11-98221-7679",
+      contactType: "sales",
+      areaServed: "BR",
+      availableLanguage: "Portuguese",
+    },
+  ],
+  areaServed: {
+    "@type": "Country",
+    name: "Brasil",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Serviços de Transporte e Logística",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Transporte de Shows e Eventos",
+          description:
+            "Transporte especializado de equipamentos para shows, bandas renomadas, estruturas de palco, sistemas de som e captação de imagem. Mais de 10 anos de experiência com produtoras e empresas de montagem.",
+          serviceType: "Transporte Rodoviário",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Carga Completa (FTL - Full Truck Load)",
+          description:
+            "Serviço de carga completa com veículo dedicado, rota direta sem paradas, seguro RCTR-C e RCF-DC, capacidade de até 74 toneladas e monitoramento em tempo real.",
+          serviceType: "Transporte Rodoviário FTL",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Carga Fracionada (LTL - Less than Truck Load)",
+          description:
+            "Serviço de carga fracionada com consolidação inteligente, cobertura nacional em mais de 500 cidades, a partir de 1 palete, com economia de até 40% no frete.",
+          serviceType: "Transporte Rodoviário LTL",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Frete Expresso",
+          description:
+            "Transporte urgente com veículos dedicados e dupla de motoristas. Operação 24h incluindo finais de semana e feriados, rastreamento prioritário hora a hora.",
+          serviceType: "Frete Expresso Urgente",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Logística para Varejo B2B",
+          description:
+            "Transferência entre Centros de Distribuição e abastecimento de lojas do varejo. Operação B2B sem entrega porta a porta.",
+          serviceType: "Logística B2B",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Transporte de Equipamentos de Gravação",
+          description:
+            "Transporte especializado de equipamentos de captação de som e imagem para produções audiovisuais.",
+          serviceType: "Transporte Especializado",
+          areaServed: "Brasil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Entrega e Distribuição Programada",
+          description:
+            "Operação de entregas com roteirização inteligente, janelas de entrega programadas, comprovante digital (POD) e rastreamento em tempo real.",
+          serviceType: "Distribuição e Entrega",
+          areaServed: "Brasil",
+        },
+      },
+    ],
+  },
+  sameAs: sameAsLinks,
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "MovingCompany",
+  name: siteConfig.siteName,
+  image: imageUrl,
+  "@id": siteConfig.siteUrl,
+  url: siteConfig.siteUrl,
+  telephone: "+55-11-98221-7679",
+  email: siteConfig.contactEmail,
+  priceRange: "$$",
+  description:
+    "Transportadora especializada em shows e eventos, FTL, LTL, frete expresso e logística para varejo. Mais de 10 anos de mercado, frota com +100 caminhões e 99% de pontualidade.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Avenida Dep Emilio Carlos 114 Sala 08",
+    addressLocality: "São Paulo",
+    addressRegion: "SP",
+    postalCode: "02720-000",
+    addressCountry: "BR",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -23.504914,
+    longitude: -46.691264,
+  },
+  hasMap: "https://www.google.com/maps?q=-23.504914,-46.691264",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
+  sameAs: sameAsLinks,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Quais serviços de transporte a HJLOG oferece?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A HJLOG oferece: Transporte de Shows e Eventos, Carga Completa (FTL), Carga Fracionada (LTL), Frete Expresso, Logística para Varejo B2B, Transporte de Equipamentos de Gravação e Entrega e Distribuição Programada.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "A HJLOG faz transporte de equipamentos para shows e eventos?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sim. A HJLOG tem mais de 10 anos de experiência no transporte de equipamentos para shows e eventos, incluindo estruturas de palco, sistemas de som, iluminação e equipamentos de bandas renomadas em todo o Brasil.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "A HJLOG atende todo o Brasil?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sim. A HJLOG atende todo o território nacional com cobertura em mais de 500 cidades, partindo de São Paulo com rastreamento em tempo real 24/7.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "O que é FTL e LTL?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "FTL (Full Truck Load) é carga completa: o caminhão é dedicado exclusivamente à sua carga, ideal para grandes volumes. LTL (Less than Truck Load) é carga fracionada: você paga apenas pelo espaço utilizado, com cargas consolidadas, cobertura em mais de 500 cidades e economia de até 40%.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "A HJLOG tem serviço de frete expresso ou urgente?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sim. O Frete Expresso da HJLOG opera 24h por dia, 7 dias por semana, com veículos dedicados, dupla de motoristas e rastreamento prioritário a cada hora.",
+      },
+    },
+  ],
+};
 ---
 
 <html class="dark" lang="pt-BR">
@@ -9,34 +255,34 @@ import AreaClienteModal from "../components/shared/AreaClienteModal.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Meta Tags -->
-    <title>HJLOG - Transporte e Logística | FTL, LTL, Shows e Eventos em São Paulo</title>
-    <meta name="description" content="HJLOG: +10 anos de experiência em transporte rodoviário. Carga Completa (FTL), Carga Fracionada (LTL), Frete Expresso, Transporte de Shows e Eventos, Logística para Varejo B2B. Frota com +100 caminhões, 99% de pontualidade, rastreamento 24/7. São Paulo e todo o Brasil." />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="keywords" content="transporte rodoviário São Paulo, logística de shows e eventos, carga completa FTL, carga fracionada LTL, frete expresso urgente, transporte de equipamentos de palco, transporte de equipamentos audiovisuais, transporte de equipamentos de gravação, logística para varejo, logística B2B, distribuição entre centros de distribuição, transporte de bandas, transporte de estruturas de palco, transporte de som e iluminação, rastreamento de carga, caminhão dedicado, RCTR-C RCF-DC, empresa de transporte SP, HJLOG, transportadora São Paulo, entrega programada, distribuição nacional" />
-    <meta name="author" content="HJLOG Transportes" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
+    <meta name="author" content={siteConfig.siteName} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
     <meta name="theme-color" content="#FF6B00" />
-    <meta name="application-name" content="HJLOG Transportes" />
+    <meta name="application-name" content={siteConfig.siteName} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hjlogtransportes.com.br/" />
-    <meta property="og:title" content="HJLOG - Transporte e Logística | FTL, LTL, Shows e Eventos em São Paulo" />
-    <meta property="og:description" content="+10 anos transportando equipamentos para shows, bandas e eventos pelo Brasil. Carga Completa (FTL), Carga Fracionada (LTL), Frete Expresso e Logística para Varejo B2B. Frota com +100 caminhões e 99% de pontualidade." />
-    <meta property="og:image" content="https://hjlogtransportes.com.br/og-image.jpg" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="HJLOG Transportes - Frota de caminhões para logística de eventos e varejo" />
+    <meta property="og:image:alt" content={`${siteConfig.siteName} - Frota de caminhões para logística de eventos e varejo`} />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="HJLOG Transportes" />
+    <meta property="og:site_name" content={siteConfig.siteName} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://hjlogtransportes.com.br/" />
-    <meta name="twitter:title" content="HJLOG - Transporte e Logística | FTL, LTL, Shows e Eventos em SP" />
-    <meta name="twitter:description" content="+10 anos transportando equipamentos para shows e eventos. FTL, LTL, Frete Expresso e Logística B2B. +100 caminhões, 99% de pontualidade." />
-    <meta name="twitter:image" content="https://hjlogtransportes.com.br/og-image.jpg" />
-    <meta name="twitter:image:alt" content="HJLOG Transportes - Logística para shows, eventos e varejo" />
+    <meta name="twitter:url" content={pageUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={`${siteConfig.siteName} - Logística para shows, eventos e varejo`} />
 
     <!-- Geolocalização e Negócio Local -->
     <meta name="geo.region" content="BR-SP" />
@@ -45,7 +291,7 @@ import AreaClienteModal from "../components/shared/AreaClienteModal.astro";
     <meta name="ICBM" content="-23.504914, -46.691264" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://hjlogtransportes.com.br/" />
+    <link rel="canonical" href={pageUrl} />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -55,221 +301,13 @@ import AreaClienteModal from "../components/shared/AreaClienteModal.astro";
     <link rel="shortcut icon" href="/favicon.ico" />
 
     <!-- Structured Data - Organization -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "HJLOG Transportes",
-        "url": "https://hjlogtransportes.com.br",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://hjlogtransportes.com.br/logo.png",
-          "width": 200,
-          "height": 60
-        },
-        "description": "Empresa de transporte rodoviário com mais de 10 anos de experiência. Especializada em transporte de shows e eventos, carga completa (FTL), carga fracionada (LTL), frete expresso e logística para varejo B2B. Frota com mais de 100 caminhões, rastreamento 24/7 e 99% de pontualidade.",
-        "foundingDate": "2014",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Avenida Dep Emilio Carlos 114 Sala 08",
-          "addressLocality": "São Paulo",
-          "addressRegion": "SP",
-          "postalCode": "02720-000",
-          "addressCountry": "BR"
-        },
-        "contactPoint": [
-          {
-            "@type": "ContactPoint",
-            "telephone": "+55-11-98221-7679",
-            "email": "adm@hjlogtransportes.com.br",
-            "contactType": "customer service",
-            "areaServed": "BR",
-            "availableLanguage": "Portuguese"
-          },
-          {
-            "@type": "ContactPoint",
-            "telephone": "+55-11-98221-7679",
-            "contactType": "sales",
-            "areaServed": "BR",
-            "availableLanguage": "Portuguese"
-          }
-        ],
-        "areaServed": {
-          "@type": "Country",
-          "name": "Brasil"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Serviços de Transporte e Logística",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Transporte de Shows e Eventos",
-                "description": "Transporte especializado de equipamentos para shows, bandas renomadas, estruturas de palco, sistemas de som e captação de imagem. Mais de 10 anos de experiência com produtoras e empresas de montagem.",
-                "serviceType": "Transporte Rodoviário",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Carga Completa (FTL - Full Truck Load)",
-                "description": "Serviço de carga completa com veículo dedicado, rota direta sem paradas, seguro RCTR-C e RCF-DC, capacidade de até 74 toneladas e monitoramento em tempo real.",
-                "serviceType": "Transporte Rodoviário FTL",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Carga Fracionada (LTL - Less than Truck Load)",
-                "description": "Serviço de carga fracionada com consolidação inteligente, cobertura nacional em mais de 500 cidades, a partir de 1 palete, com economia de até 40% no frete.",
-                "serviceType": "Transporte Rodoviário LTL",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Frete Expresso",
-                "description": "Transporte urgente com veículos dedicados e dupla de motoristas. Operação 24h incluindo finais de semana e feriados, rastreamento prioritário hora a hora.",
-                "serviceType": "Frete Expresso Urgente",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Logística para Varejo B2B",
-                "description": "Transferência entre Centros de Distribuição e abastecimento de lojas do varejo. Operação B2B sem entrega porta a porta.",
-                "serviceType": "Logística B2B",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Transporte de Equipamentos de Gravação",
-                "description": "Transporte especializado de equipamentos de captação de som e imagem para produções audiovisuais.",
-                "serviceType": "Transporte Especializado",
-                "areaServed": "Brasil"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Entrega e Distribuição Programada",
-                "description": "Operação de entregas com roteirização inteligente, janelas de entrega programadas, comprovante digital (POD) e rastreamento em tempo real.",
-                "serviceType": "Distribuição e Entrega",
-                "areaServed": "Brasil"
-              }
-            }
-          ]
-        },
-        "sameAs": [
-          "https://www.instagram.com/hjlogtransportes/",
-          "https://www.facebook.com/hjlogtransportes"
-        ]
-      }
-    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)}></script>
 
     <!-- Structured Data - Local Business -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "MovingCompany",
-        "name": "HJLOG Transportes",
-        "image": "https://hjlogtransportes.com.br/og-image.jpg",
-        "@id": "https://hjlogtransportes.com.br",
-        "url": "https://hjlogtransportes.com.br",
-        "telephone": "+55-11-98221-7679",
-        "email": "adm@hjlogtransportes.com.br",
-        "priceRange": "$$",
-        "description": "Transportadora especializada em shows e eventos, FTL, LTL, frete expresso e logística para varejo. Mais de 10 anos de mercado, frota com +100 caminhões e 99% de pontualidade.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Avenida Dep Emilio Carlos 114 Sala 08",
-          "addressLocality": "São Paulo",
-          "addressRegion": "SP",
-          "postalCode": "02720-000",
-          "addressCountry": "BR"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": -23.504914,
-          "longitude": -46.691264
-        },
-        "hasMap": "https://www.google.com/maps?q=-23.504914,-46.691264",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "00:00",
-          "closes": "23:59"
-        },
-        "sameAs": [
-          "https://www.instagram.com/hjlogtransportes/",
-          "https://www.facebook.com/hjlogtransportes"
-        ]
-      }
-    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(localBusinessSchema)}></script>
 
     <!-- Structured Data - FAQ -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Quais serviços de transporte a HJLOG oferece?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A HJLOG oferece: Transporte de Shows e Eventos, Carga Completa (FTL), Carga Fracionada (LTL), Frete Expresso, Logística para Varejo B2B, Transporte de Equipamentos de Gravação e Entrega e Distribuição Programada."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "A HJLOG faz transporte de equipamentos para shows e eventos?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sim. A HJLOG tem mais de 10 anos de experiência no transporte de equipamentos para shows e eventos, incluindo estruturas de palco, sistemas de som, iluminação e equipamentos de bandas renomadas em todo o Brasil."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "A HJLOG atende todo o Brasil?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sim. A HJLOG atende todo o território nacional com cobertura em mais de 500 cidades, partindo de São Paulo com rastreamento em tempo real 24/7."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "O que é FTL e LTL?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "FTL (Full Truck Load) é carga completa: o caminhão é dedicado exclusivamente à sua carga, ideal para grandes volumes. LTL (Less than Truck Load) é carga fracionada: você paga apenas pelo espaço utilizado, com cargas consolidadas, cobertura em mais de 500 cidades e economia de até 40%."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "A HJLOG tem serviço de frete expresso ou urgente?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sim. O Frete Expresso da HJLOG opera 24h por dia, 7 dias por semana, com veículos dedicados, dupla de motoristas e rastreamento prioritário a cada hora."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)}></script>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

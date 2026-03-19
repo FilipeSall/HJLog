@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "../../../config/site";
 ---
 
 <section class="contact-section">
@@ -14,14 +15,14 @@ import { Icon } from "astro-icon/components";
           Entre em contato pelos canais abaixo.
         </p>
         <div class="contact-channels">
-          <a href="tel:+5511982217679" class="contact-channel-item contact-channel-clickable">
+          <a href={`tel:${siteConfig.contactPhoneE164}`} class="contact-channel-item contact-channel-clickable">
             <div class="contact-channel-icon">
               <Icon name="mdi:phone" />
             </div>
             <div>
               <h4 class="contact-channel-title">Telefone</h4>
               <p class="contact-channel-link">
-                +55 (11) 98221-7679
+                {siteConfig.contactPhoneDisplay}
               </p>
               <p class="contact-channel-hours">Seg a Sex: 08h às 18h</p>
             </div>
@@ -32,11 +33,11 @@ import { Icon } from "astro-icon/components";
             </div>
             <div>
               <h4 class="contact-channel-title">E-mail</h4>
-              <p class="contact-channel-text">adm@hjlogtransportes.com.br</p>
+              <p class="contact-channel-text">{siteConfig.contactEmail}</p>
             </div>
           </button>
           <a
-            href="https://www.google.com/maps/place/Av.+Dep.+Emilio+Carlos,+114+-+Lim%C3%A3o,+S%C3%A3o+Paulo+-+SP,+02720-000"
+            href={siteConfig.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="contact-channel-item contact-channel-clickable"
@@ -57,7 +58,7 @@ import { Icon } from "astro-icon/components";
           <h5 class="social-media-title">Siga-nos</h5>
           <div class="social-media-links">
             <a
-              href="https://facebook.com/hjlog"
+              href={siteConfig.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
               class="social-link"
@@ -66,7 +67,7 @@ import { Icon } from "astro-icon/components";
               <Icon name="mdi:facebook" />
             </a>
             <a
-              href="https://instagram.com/hjlog"
+              href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               class="social-link"

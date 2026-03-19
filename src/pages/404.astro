@@ -4,7 +4,12 @@ import Header from "../components/layout/Header/Header.astro";
 import Footer from "../components/layout/Footer/Footer.astro";
 ---
 
-<MainLayoult>
+<MainLayoult
+  pathname="/404"
+  title="404 | Página não encontrada | HJLOG Transportes"
+  description="A página solicitada não foi encontrada no site da HJLOG Transportes."
+  noindex={true}
+>
   <Header />
   <main class="error-page">
     <div class="error-container">

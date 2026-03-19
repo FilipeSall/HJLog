@@ -1,3 +1,5 @@
+import { siteConfig } from "../config/site";
+
 export const contato = {
   header: {
     tagline: "Atendimento",
@@ -27,7 +29,7 @@ export const contato = {
       {
         icon: "mdi:email",
         title: "E-mail",
-        content: ["adm@hjlogtransportes.com.br"],
+        content: [siteConfig.contactEmail],
       },
     ],
   },
@@ -37,12 +39,12 @@ export const contato = {
       {
         label: "Instagram",
         icon: "mdi:instagram",
-        href: "https://www.instagram.com/hjlogtransportes/",
+        href: siteConfig.instagramUrl,
       },
       {
         label: "Facebook",
         icon: "mdi:facebook",
-        href: "https://www.facebook.com/hjlogtransportes",
+        href: siteConfig.facebookUrl,
       },
     ],
   },

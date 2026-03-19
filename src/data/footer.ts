@@ -1,3 +1,5 @@
+import { siteConfig } from "../config/site";
+
 export const footer = {
   company: {
     description:
@@ -9,7 +11,7 @@ export const footer = {
       contact: {
         address: "Avenida Dep Emilio Carlos 114 Sala 08\nLimão - São Paulo/SP - 02720-000",
         phone: "(11) 98221 7679",
-        email: "adm@hjlogtransportes.com.br",
+        email: siteConfig.contactEmail,
       },
     },
   ],

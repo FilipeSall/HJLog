@@ -1,20 +1,22 @@
+import { siteConfig } from "../config/site";
+
 export const navigation = {
   links: [
     {
       label: "Facebook",
-      href: "https://www.facebook.com/hjlogtransportes/",
+      href: siteConfig.facebookUrl,
       external: true,
       icon: "mdi:facebook",
     },
     {
       label: "Instagram",
-      href: "https://www.instagram.com/hjlogtransportes/",
+      href: siteConfig.instagramUrl,
       external: true,
       icon: "mdi:instagram",
     },
     {
       label: "WhatsApp",
-      href: "https://wa.me/5511982217679",
+      href: siteConfig.whatsappUrl,
       external: true,
       icon: "mdi:whatsapp",
     },

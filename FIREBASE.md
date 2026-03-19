@@ -156,6 +156,7 @@ Ao fazer deploy, certifique-se de configurar as variáveis de ambiente no seu pr
 Além das variáveis do Firebase, configure também:
 
 ```env
+PUBLIC_CONTACT_EMAIL=adm@hjlogtransportes.com.br
 PUBLIC_EMAILJS_SERVICE_ID=...
 PUBLIC_EMAILJS_TEMPLATE_ID=...
 PUBLIC_EMAILJS_PUBLIC_KEY=...
@@ -180,7 +181,7 @@ O template do EmailJS deve aceitar os seguintes parâmetros:
 - `reply_to`
 - `recaptcha_token`
 
-O destino padrão deve ser `adm@hjlogtransportes.com.br`.
+O destino padrão do template deve usar o valor definido em `PUBLIC_CONTACT_EMAIL`.
 
 ### Firebase Hosting (Opcional)
 
