@@ -10,6 +10,7 @@ const DEFAULT_SHARE_TITLE =
   "HJLOG Transportes | Soluções em Transporte e Logística";
 const DEFAULT_SHARE_DESCRIPTION =
   "Transporte rodoviário com operação segura, ágil e confiável para cargas, eventos e logística empresarial em todo o Brasil.";
+const DEFAULT_OG_IMAGE_PATH = "/social-share.jpg";
 const DEFAULT_GOOGLE_MAPS_URL =
   "https://www.google.com/maps/place/Av.+Dep.+Emilio+Carlos,+114+-+Lim%C3%A3o,+S%C3%A3o+Paulo+-+SP,+02720-000";
 
@@ -46,7 +47,8 @@ export const siteConfig = {
   shareDescription:
     trim(import.meta.env.PUBLIC_SITE_SHARE_DESCRIPTION) ||
     DEFAULT_SHARE_DESCRIPTION,
-  ogImagePath: trim(import.meta.env.PUBLIC_SEO_OG_IMAGE_PATH),
+  ogImagePath:
+    trim(import.meta.env.PUBLIC_SEO_OG_IMAGE_PATH) || DEFAULT_OG_IMAGE_PATH,
   googleMapsUrl: DEFAULT_GOOGLE_MAPS_URL,
 };
 

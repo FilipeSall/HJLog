@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import demoAreaLogada from "../../images/demo-area-logada.jpg";
 ---
 
 <div id="area-cliente-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -24,8 +22,8 @@ import demoAreaLogada from "../../images/demo-area-logada.jpg";
 
       <!-- Preview da Interface -->
       <div class="modal-preview">
-        <Image
-          src={demoAreaLogada}
+        <img
+          src="/area-cliente-preview.png"
           alt="Preview da Área do Cliente - Painel de gerenciamento de cargas"
           class="preview-image"
           loading="lazy"
