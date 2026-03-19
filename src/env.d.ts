@@ -10,6 +10,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_INSTAGRAM_URL: string;
   readonly PUBLIC_FACEBOOK_URL: string;
   readonly PUBLIC_WHATSAPP_URL: string;
+  readonly PUBLIC_SITE_SHARE_TITLE: string;
+  readonly PUBLIC_SITE_SHARE_DESCRIPTION: string;
   readonly PUBLIC_SEO_OG_IMAGE_PATH: string;
   readonly PUBLIC_FIREBASE_API_KEY: string;
   readonly PUBLIC_FIREBASE_AUTH_DOMAIN: string;

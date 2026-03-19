@@ -183,6 +183,23 @@ O template do EmailJS deve aceitar os seguintes parâmetros:
 
 O destino padrão do template deve usar o valor definido em `PUBLIC_CONTACT_EMAIL`.
 
+### Checklist de Migração de Domínio
+
+Ao publicar em `https://hjlogtransportes.com.br`, revise também:
+
+1. EmailJS
+   - Se a allowlist de origens estiver habilitada, adicione `https://hjlogtransportes.com.br`.
+   - Durante a transição, mantenha o domínio antigo temporariamente na allowlist se ele ainda receber tráfego.
+   - Confirme que o template segue enviando para `PUBLIC_CONTACT_EMAIL`.
+
+2. Google reCAPTCHA
+   - Adicione `hjlogtransportes.com.br` na lista de domínios permitidos da chave usada em `PUBLIC_RECAPTCHA_SITE_KEY`.
+   - Se o domínio antigo ainda estiver em uso, mantenha os dois domínios cadastrados durante a migração.
+
+3. DNS e hospedagem
+   - A troca de domínio no EmailJS não exige criar `CNAME` por causa do SDK.
+   - O redirecionamento 301 do domínio antigo para o novo deve ser configurado no provedor DNS/hosting do domínio antigo.
+
 ### Firebase Hosting (Opcional)
 
 Se quiser fazer deploy usando Firebase Hosting:

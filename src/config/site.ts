@@ -6,6 +6,10 @@ const DEFAULT_PHONE_E164 = "+5511982217679";
 const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/hjlogtransportes/";
 const DEFAULT_FACEBOOK_URL = "https://www.facebook.com/hjlogtransportes";
 const DEFAULT_WHATSAPP_URL = "https://wa.me/5511982217679";
+const DEFAULT_SHARE_TITLE =
+  "HJLOG Transportes | Soluções em Transporte e Logística";
+const DEFAULT_SHARE_DESCRIPTION =
+  "Transporte rodoviário com operação segura, ágil e confiável para cargas, eventos e logística empresarial em todo o Brasil.";
 const DEFAULT_GOOGLE_MAPS_URL =
   "https://www.google.com/maps/place/Av.+Dep.+Emilio+Carlos,+114+-+Lim%C3%A3o,+S%C3%A3o+Paulo+-+SP,+02720-000";
 
@@ -37,6 +41,11 @@ export const siteConfig = {
     trim(import.meta.env.PUBLIC_FACEBOOK_URL) || DEFAULT_FACEBOOK_URL,
   whatsappUrl:
     trim(import.meta.env.PUBLIC_WHATSAPP_URL) || DEFAULT_WHATSAPP_URL,
+  shareTitle:
+    trim(import.meta.env.PUBLIC_SITE_SHARE_TITLE) || DEFAULT_SHARE_TITLE,
+  shareDescription:
+    trim(import.meta.env.PUBLIC_SITE_SHARE_DESCRIPTION) ||
+    DEFAULT_SHARE_DESCRIPTION,
   ogImagePath: trim(import.meta.env.PUBLIC_SEO_OG_IMAGE_PATH),
   googleMapsUrl: DEFAULT_GOOGLE_MAPS_URL,
 };
